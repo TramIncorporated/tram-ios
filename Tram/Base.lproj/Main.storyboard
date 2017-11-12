@@ -20,11 +20,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="" image="icons8-past-filled" id="acW-dT-cKf">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="-335"/>
+            <point key="canvasLocation" x="780" y="-335.08245877061472"/>
         </scene>
         <!--Search-->
         <scene sceneID="wg7-f3-ORb">
@@ -36,7 +38,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="" image="icons8-search-filled" id="cPa-gy-q4n">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,7 +56,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9bU-Fe-sC3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="d3O-5R-ZZ7"/>
+                    <tabBarItem key="tabBarItem" title="" image="icons8-cat-profile-filled" id="d3O-5R-ZZ7">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6m-GR-0LP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -79,7 +85,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="icons8-cat-profile-filled" width="33" height="33"/>
+        <image name="icons8-past-filled" width="33" height="33"/>
+        <image name="icons8-search-filled" width="33" height="33"/>
     </resources>
 </document>
