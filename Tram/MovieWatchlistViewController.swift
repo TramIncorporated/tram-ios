@@ -1,5 +1,5 @@
 //
-//  ReleasedViewController.swift
+//  MovieWatchlistViewController.swift
 //  Tram
 //
 //  Created by Roman Abuzyarov on 11.11.2017.
@@ -9,8 +9,9 @@
 import UIKit
 
 
-class ReleasedViewController: UIViewController {
-
+class MovieWatchlistViewController: UIViewController {
+    @IBOutlet weak var categoriesSegmentedControl: UISegmentedControl!
+    
     override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
