@@ -9,9 +9,7 @@
 import UIKit
 
 
-class MovieWatchlistViewController: UIViewController {
-    @IBOutlet weak var categoriesSegmentedControl: UISegmentedControl!
-    
+class MovieWatchlistViewController: UIViewController {    
     override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
