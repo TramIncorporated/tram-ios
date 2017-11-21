@@ -1,5 +1,5 @@
 //
-//  SearchTableViewCell.swift
+//  SearchCollectionViewCell.swift
 //  Tram
 //
 //  Created by Roman Abuzyarov on 19.11.2017.
@@ -8,22 +8,19 @@
 
 import UIKit
 
-class SearchTableViewCell: UITableViewCell {
+class SearchCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var starsLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        posterImageView.layer.cornerRadius = 15
+        posterImageView.layer.cornerRadius = 5
         posterImageView.clipsToBounds = true
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
