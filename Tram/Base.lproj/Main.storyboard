@@ -159,7 +159,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXu-eI-j8b" userLabel="backContentView">
-                                                    <rect key="frame" x="-0.5" y="0.0" width="375.5" height="100"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heg-qN-EdX" userLabel="Add">
                                                             <rect key="frame" x="317.5" y="25" width="50" height="50"/>
@@ -286,7 +286,6 @@
                             <constraint firstItem="56J-4t-8Cv" firstAttribute="leading" secondItem="hzi-Fq-9KI" secondAttribute="leading" id="4mP-lh-bv5"/>
                             <constraint firstItem="nhc-Ue-MGV" firstAttribute="bottom" secondItem="hzi-Fq-9KI" secondAttribute="bottom" id="aVq-Hb-mzR"/>
                             <constraint firstItem="nhc-Ue-MGV" firstAttribute="trailing" secondItem="hzi-Fq-9KI" secondAttribute="trailing" id="dqA-Od-q2y"/>
-                            <constraint firstItem="nhc-Ue-MGV" firstAttribute="top" secondItem="56J-4t-8Cv" secondAttribute="bottom" id="g1J-QH-7ov"/>
                             <constraint firstItem="56J-4t-8Cv" firstAttribute="top" secondItem="hzi-Fq-9KI" secondAttribute="top" id="mDX-sx-SJh"/>
                             <constraint firstItem="nhc-Ue-MGV" firstAttribute="leading" secondItem="hzi-Fq-9KI" secondAttribute="leading" id="wLO-uO-3h0"/>
                             <constraint firstItem="nhc-Ue-MGV" firstAttribute="top" secondItem="56J-4t-8Cv" secondAttribute="bottom" id="yEO-b1-chd"/>
@@ -302,20 +301,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhl-Mp-81p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2085.5999999999999" y="-3.1484257871064472"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="AAA-s2-u2n">
-            <objects>
-                <viewController id="Hqz-12-BKE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="g4F-pB-Wxy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="s0i-pf-vGx"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WIH-jR-fRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

@@ -11,7 +11,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    var ar = [(title: "Blade", year: "(1998)", perc: "71%", stars: "Wesley Snipes, Stephen Dorff", file: "/Users/romanabuzyarov/Downloads/Blade_movie.jpg")]
+    var ar = [(title: "Blade", year: "(1998)", perc: "71%", stars: "Wesley Snipes, Stephen Dorff", file: "/Users/romanabuzyarov/Downloads/Blade_movie.jpg"),
+        (title: "Blade Runner", year: "(1982)", perc: "82%", stars: "Harrison Ford, Rutger Hauer",
+         file: "/Users/romanabuzyarov/Downloads/blade_runner.jpg"),
+        (title: "Blade Runner 2049", year: "(2017)", perc: "84%", stars: "Harrison Ford, Ryan Gosling",
+         file: "/Users/romanabuzyarov/Downloads/blade_runner_2049.jpg")]
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
