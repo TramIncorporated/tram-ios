@@ -16,6 +16,10 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
+    @IBOutlet weak var leftSideConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var rightSideConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
