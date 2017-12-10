@@ -10,13 +10,7 @@ import UIKit
 
 
 class SearchViewController: UIViewController {
-    
-    var ar = [(title: "Blade", year: "(1998)", perc: "71%", stars: "Wesley Snipes, Stephen Dorff", file: "/Users/romanabuzyarov/Downloads/Blade_movie.jpg"),
-        (title: "Blade Runner", year: "(1982)", perc: "82%", stars: "Harrison Ford, Rutger Hauer",
-         file: "/Users/romanabuzyarov/Downloads/blade_runner.jpg"),
-        (title: "Blade Runner 2049", year: "(2017)", perc: "84%", stars: "Harrison Ford, Ryan Gosling",
-         file: "/Users/romanabuzyarov/Downloads/blade_runner_2049.jpg")]
-    
+    var results = Movies.Instance.movies
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
@@ -84,20 +78,35 @@ extension SearchViewController : UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ar.count
+        return results.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCollectionViewCell
         
         // Configure the cell
-        cell.titleLabel.text = ar[indexPath.row].title
-        cell.yearLabel.text = ar[indexPath.row].year
+        cell.titleLabel.text = results[indexPath.row].Title
+        if let year = results[indexPath.row].Year{
+            cell.yearLabel.text = "\(year)"
+        }
+        cell.ratingLabel.text = results[indexPath.row].HeartRating
+        cell.starsLabel.text = results[indexPath.row].Cast.keys.flatMap({ (cm) -> String? in
+            cm.toString()
+        }).joined(separator: ", ")
         
-        cell.ratingLabel.text = ar[indexPath.row].perc
-        cell.starsLabel.text = ar[indexPath.row].stars
-        
-        cell.posterImageView.image = UIImage(named: ar[indexPath.row].file)
+        cell.posterImageView.image = results[indexPath.row].Image
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailsController = segue.destination as! MediaPageViewController
+        let cell = sender as! SearchCollectionViewCell
+        
+        let indexPath = collectionView.indexPath(for: cell)
+        detailsController.myMovie = results[(indexPath?.row)!]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "searchMovieDetails", sender: collectionView.cellForItem(at: indexPath))
     }
 }
