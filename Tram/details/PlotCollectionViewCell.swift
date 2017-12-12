@@ -9,7 +9,7 @@
 import UIKit
 
 class PlotCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var sectionTitle: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var plotField: UITextView!
     
 }

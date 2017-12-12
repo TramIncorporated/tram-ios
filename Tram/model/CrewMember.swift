@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class CrewMember : Hashable{
     var hashValue: Int = 0
@@ -17,6 +18,7 @@ class CrewMember : Hashable{
     
     var Name : String? = nil
     var Surname : String? = nil
+    var Image : UIImage? = nil
     
     func toString() -> String{
         if let name = Name{

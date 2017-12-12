@@ -14,22 +14,27 @@ class Movies{
         let harrisonFord = CrewMember()
         harrisonFord.Name = "Harrison"
         harrisonFord.Surname = "Ford"
+        harrisonFord.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
         
         let wesleySnipes = CrewMember()
         wesleySnipes.Name = "Wesley"
         wesleySnipes.Surname = "Snipes"
+        wesleySnipes.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
         
         let stephenDorff = CrewMember()
         stephenDorff.Name = "Stephen"
         stephenDorff.Surname = "Dorff"
+        stephenDorff.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
         
         let rutgerHauer = CrewMember()
         rutgerHauer.Name = "Rutger"
         rutgerHauer.Surname = "Hauer"
+        rutgerHauer.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
         
         let ryanGosling = CrewMember()
         ryanGosling.Name = "Ryan"
         ryanGosling.Surname = "Gosling"
+        ryanGosling.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
         
         var m = Movie()
         m.Title = "Blade"
@@ -39,8 +44,8 @@ class Movies{
         m.HeartRating = "71%"
         m.StarRating = "70%"
         m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
-        m.Cast[stephenDorff] = "role1"
-        m.Cast[wesleySnipes] = "role2"
+        m.Cast.append((person: stephenDorff, role: "role1"))
+        m.Cast.append((wesleySnipes, "role2"))
         movies.append(m)
         
         m = Movie()
@@ -51,8 +56,8 @@ class Movies{
         m.HeartRating = "84%"
         m.StarRating = "50%"
         m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade_runner_2049.jpg")
-        m.Cast[harrisonFord] = "Rick Deckard"
-        m.Cast[ryanGosling] = "K"
+        m.Cast.append((harrisonFord,"Rick Deckard"))
+        m.Cast.append((ryanGosling, "K"))
         movies.append(m)
         
         m = Movie()
@@ -63,8 +68,8 @@ class Movies{
         m.HeartRating = "82%"
         m.StarRating = "70%"
         m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade_runner.jpg")
-        m.Cast[harrisonFord] = "Rick Deckard"
-        m.Cast[rutgerHauer] = "role1"
+        m.Cast.append((harrisonFord, "Rick Deckard"))
+        m.Cast.append((rutgerHauer, "role1"))
         movies.append(m)
     }
     var movies : [Movie] = []

@@ -89,8 +89,8 @@ extension SearchViewController : UICollectionViewDataSource, UICollectionViewDel
             cell.yearLabel.text = "\(year)"
         }
         cell.ratingLabel.text = results[indexPath.row].HeartRating
-        cell.starsLabel.text = results[indexPath.row].Cast.keys.flatMap({ (cm) -> String? in
-            cm.toString()
+        cell.starsLabel.text = results[indexPath.row].Cast.map({ (pair) -> String in
+            return pair.person.toString()
         }).joined(separator: ", ")
         
         cell.posterImageView.image = results[indexPath.row].Image

@@ -22,8 +22,9 @@ class Movie : MediaEntry{
     var Genres : [String] = []
     var HeartRating : String? = nil
     var StarRating : String? = nil
+    var Plot : String? = nil
     
     var Image : UIImage? = nil
-    var Crew : [CrewMember : String] = [:]
-    var Cast : [CrewMember : String] = [:]
+    var Crew : [(person: CrewMember, role: String)] = []
+    var Cast : [(person: CrewMember, role: String)] = []
 }
