@@ -38,7 +38,7 @@ class Movies{
         m.Genres = ["dicke", "bals"]
         m.HeartRating = "71%"
         m.StarRating = "70%"
-        m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/TramProjects/posters/blade.jpg")
+        m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade.jpg")
         m.Cast[stephenDorff] = "role1"
         m.Cast[wesleySnipes] = "role2"
         movies.append(m)
@@ -50,7 +50,7 @@ class Movies{
         m.Genres = ["Mystery", "Sci-Fi", "Thriller"]
         m.HeartRating = "84%"
         m.StarRating = "50%"
-        m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/TramProjects/posters/blade_runner_2049.jpg")
+        m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade_runner_2049.jpg")
         m.Cast[harrisonFord] = "Rick Deckard"
         m.Cast[ryanGosling] = "K"
         movies.append(m)
@@ -62,7 +62,7 @@ class Movies{
         m.Genres = ["1", "2"]
         m.HeartRating = "82%"
         m.StarRating = "70%"
-        m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/TramProjects/posters/blade_runner.jpg")
+        m.Image = UIImage(named: "/Users/romanabuzyarov/Projects/Tram/posters/blade_runner.jpg")
         m.Cast[harrisonFord] = "Rick Deckard"
         m.Cast[rutgerHauer] = "role1"
         movies.append(m)

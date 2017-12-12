@@ -71,7 +71,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController : UICollectionViewDataSource, UICollectionViewDelegate{
+extension SearchViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -108,5 +108,13 @@ extension SearchViewController : UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "searchMovieDetails", sender: collectionView.cellForItem(at: indexPath))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        let height : CGFloat = 100
+        return CGSize(width: width, height: height)
     }
 }
