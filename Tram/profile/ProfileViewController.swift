@@ -8,7 +8,46 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.row{
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nameCell", for: indexPath) as! NameCollectionViewCell
+            
+            cell.imageView.image = #imageLiteral(resourceName: "dacre")
+            cell.handleLabel.text = "@dacre"
+            cell.nameLabel.text = "Dacre Montgomery"
+            
+            return cell
+            
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "statsCell", for: indexPath) as! StatsCollectionViewCell
+            
+            
+            return cell
+            
+        default: return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        var height : CGFloat
+        switch indexPath.row{
+        case 0: height = 150
+        case 1: height = 280
+        default: height = 40
+        }
+        return CGSize(width: width, height: height)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

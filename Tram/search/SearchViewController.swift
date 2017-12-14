@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var results = Movies.Instance.movies
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -30,48 +30,17 @@ class SearchViewController: UIViewController {
         self.collectionView.addGestureRecognizer(swipeRightRecognizer)
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool){
+        if let cell = movedCell{
+            move(cell:cell, to: .right)
+        }
+    }
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-}
-
-@objc extension SearchViewController : UIGestureRecognizerDelegate{
-    
-    @objc func handleSwipe(gesture: UISwipeGestureRecognizer) {
-        let point = gesture.location(in: self.collectionView)
-        if (gesture.state == UIGestureRecognizerState.ended) {
-            if let indexPath = collectionView.indexPathForItem(at: point) {
-                if let cell = self.collectionView.cellForItem(at: indexPath) as! SearchCollectionViewCell?{
-                    switch gesture.direction {
-                    case .left:
-                        if cell.leftSideConstraint.constant == 0{
-                            cell.leftSideConstraint.constant = -124
-                        }
-                        if cell.rightSideConstraint.constant == 0{
-                            cell.rightSideConstraint.constant = 124
-                        }
-                    default:
-                        if cell.leftSideConstraint.constant == -124{
-                            cell.leftSideConstraint.constant = 0
-                        }
-                        if cell.rightSideConstraint.constant == 124{
-                            cell.rightSideConstraint.constant = 0
-                        }
-                    }
-                    UIView.animate(withDuration: 0.2) {
-                        cell.layoutIfNeeded()
-                    }
-                }
-                
-            }
-        }
-    }
-}
-
-extension SearchViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -99,6 +68,10 @@ extension SearchViewController : UICollectionViewDataSource, UICollectionViewDel
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cell = movedCell{
+            move(cell: cell, to: .right)
+        }
+        
         let detailsController = segue.destination as! MediaPageViewController
         let cell = sender as! SearchCollectionViewCell
         
@@ -107,7 +80,7 @@ extension SearchViewController : UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "searchMovieDetails", sender: collectionView.cellForItem(at: indexPath))
+        self.performSegue(withIdentifier: "detailsSegue", sender: collectionView.cellForItem(at: indexPath))
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -116,5 +89,57 @@ extension SearchViewController : UICollectionViewDataSource, UICollectionViewDel
         let width = collectionView.bounds.width
         let height : CGFloat = 100
         return CGSize(width: width, height: height)
+    }
+    
+    private var movedCell : SearchCollectionViewCell? = nil
+}
+
+@objc extension SearchViewController : UIGestureRecognizerDelegate{
+    
+    @objc func handleSwipe(gesture: UISwipeGestureRecognizer) {
+        let point = gesture.location(in: self.collectionView)
+        
+        if (gesture.state == UIGestureRecognizerState.ended) {
+            if let indexPath = collectionView.indexPathForItem(at: point) {
+                if let cell = self.collectionView.cellForItem(at: indexPath) as! SearchCollectionViewCell?{
+                    move(cell: cell, to: gesture.direction)
+                    
+                    if let pCell = self.movedCell{
+                        move(cell: pCell, to: .right)
+                    }
+                    
+                    UIView.animate(withDuration: 0.2) {
+                        cell.layoutIfNeeded()
+                        self.movedCell?.layoutIfNeeded()
+                    }
+                    
+                    self.movedCell = cell
+                    
+                    if gesture.direction == .right{
+                        self.movedCell = nil
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    func move(cell: SearchCollectionViewCell, to direction : UISwipeGestureRecognizerDirection){
+        switch direction {
+        case .left:
+            if cell.leftSideConstraint.constant == 0{
+                cell.leftSideConstraint.constant = -124
+            }
+            if cell.rightSideConstraint.constant == 0{
+                cell.rightSideConstraint.constant = 124
+            }
+        default:
+            if cell.leftSideConstraint.constant == -124{
+                cell.leftSideConstraint.constant = 0
+            }
+            if cell.rightSideConstraint.constant == 124{
+                cell.rightSideConstraint.constant = 0
+            }
+        }
     }
 }
