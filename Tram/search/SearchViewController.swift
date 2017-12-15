@@ -8,11 +8,11 @@
 
 import UIKit
 
-
 class SearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var results = Movies.Instance.movies
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -53,16 +53,12 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCollectionViewCell
         
         // Configure the cell
-        cell.titleLabel.text = results[indexPath.row].Title
-        if let year = results[indexPath.row].Year{
-            cell.yearLabel.text = "\(year)"
-        }
-        cell.ratingLabel.text = results[indexPath.row].HeartRating
-        cell.starsLabel.text = results[indexPath.row].Cast.map({ (pair) -> String in
-            return pair.person.toString()
-        }).joined(separator: ", ")
+        cell.titleLabel.text = results[indexPath.row].title
+        cell.yearLabel.text = results[indexPath.row].year
+        cell.ratingLabel.text = results[indexPath.row].rating
+        cell.starsLabel.text = "Not available"
         
-        cell.posterImageView.image = results[indexPath.row].Image
+        cell.posterImageView.image = results[indexPath.row].image
         
         return cell
     }
@@ -141,5 +137,14 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
                 cell.rightSideConstraint.constant = 0
             }
         }
+    }
+}
+
+extension SearchViewController : UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        self.results = Movies.Instance.movies.filter {(m)->Bool in
+            m.title.contains(" \(searchText)") || m.title.hasPrefix(searchText)
+        }
+        self.collectionView.reloadSections([0])
     }
 }

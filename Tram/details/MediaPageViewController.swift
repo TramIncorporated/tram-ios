@@ -46,21 +46,19 @@ class MediaPageViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func getTitleCell(for movie: Movie?, in cell : TitleCollectionViewCell, of collectionView : UICollectionView) -> TitleCollectionViewCell{
-        cell.titleLabel.text = movie?.Title
-        cell.genreLabel.text = movie?.Genres.joined(separator: ", ")
-        cell.heartLabel.text = movie?.HeartRating!
-        cell.starLabel.text = movie?.StarRating!
-        cell.lengthLabel.text = movie?.Length!
-        cell.posterView.image = movie?.Image!
+        cell.titleLabel.text = movie?.title
+        cell.genreLabel.text = movie?.genres.map {(g)->String in g.name}.joined(separator: ", ")
+        cell.heartLabel.text = movie?.rating
+        cell.starLabel.text = "Not available"
+        cell.lengthLabel.text = movie?.length
+        cell.posterView.image = movie?.image
         
         cell.imageTrailingConstraint.constant = collectionView.bounds.width*0.33
         if collectionView.bounds.width<375{
             cell.imageTrailingConstraint.constant = collectionView.bounds.width*0.39
         }
         
-        if let year = movie?.Year{
-            cell.yearLabel.text = "\(year)"
-        }
+        cell.yearLabel.text = movie?.year
         
         return cell
     }
@@ -69,9 +67,7 @@ class MediaPageViewController: UIViewController, UICollectionViewDelegate, UICol
         
         cell.titleLabel.text = "Plot"
         
-        if let plot = movie?.Plot{
-            cell.plotField.text = plot
-        }
+        cell.plotField.text = movie?.overview
         
         return cell
     }
@@ -79,10 +75,6 @@ class MediaPageViewController: UIViewController, UICollectionViewDelegate, UICol
     func getCastCell(for movie: Movie?, in cell : PeopleCollectionViewCell, of collectionView : UICollectionView) -> PeopleCollectionViewCell{
         
         cell.titleLabel.text = "Cast"
-        cell.data = (movie?.Cast.map({ (pair) -> (CrewMember, String) in
-            return (pair.person, pair.role)
-        }))!
-        
         
         return cell
     }
@@ -90,9 +82,6 @@ class MediaPageViewController: UIViewController, UICollectionViewDelegate, UICol
     func getCrewCell(for movie: Movie?, in cell : PeopleCollectionViewCell, of collectionView : UICollectionView) -> PeopleCollectionViewCell{
         
         cell.titleLabel.text = "Crew"
-        cell.data = (movie?.Crew.map({ (pair) -> (CrewMember, String) in
-            return (pair.person, pair.role)
-        }))!
         
         return cell
     }

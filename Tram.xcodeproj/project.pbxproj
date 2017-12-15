@@ -16,6 +16,21 @@
 		886C884A1FE2B7A5004CDEF9 /* NameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886C88491FE2B7A5004CDEF9 /* NameCollectionViewCell.swift */; };
 		886C884C1FE2C0D8004CDEF9 /* StatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886C884B1FE2C0D8004CDEF9 /* StatsCollectionViewCell.swift */; };
 		886C884E1FE2C0E2004CDEF9 /* BarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886C884D1FE2C0E2004CDEF9 /* BarCollectionViewCell.swift */; };
+		886C88531FE32CEE004CDEF9 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88511FE32CED004CDEF9 /* Bolts.framework */; };
+		886C88541FE32CEE004CDEF9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88521FE32CEE004CDEF9 /* Parse.framework */; };
+		886C88571FE32D27004CDEF9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88561FE32D27004CDEF9 /* AudioToolbox.framework */; };
+		886C88591FE32D37004CDEF9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88581FE32D37004CDEF9 /* CFNetwork.framework */; };
+		886C885B1FE32D3D004CDEF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C885A1FE32D3D004CDEF9 /* CoreGraphics.framework */; };
+		886C885D1FE32D45004CDEF9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C885C1FE32D45004CDEF9 /* CoreLocation.framework */; };
+		886C885F1FE32D4D004CDEF9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C885E1FE32D4D004CDEF9 /* MobileCoreServices.framework */; };
+		886C88611FE32D54004CDEF9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88601FE32D54004CDEF9 /* QuartzCore.framework */; };
+		886C88631FE32D5B004CDEF9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88621FE32D5A004CDEF9 /* Security.framework */; };
+		886C88651FE32D62004CDEF9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88641FE32D62004CDEF9 /* StoreKit.framework */; };
+		886C88671FE32D69004CDEF9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88661FE32D69004CDEF9 /* SystemConfiguration.framework */; };
+		886C88691FE32D73004CDEF9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88681FE32D73004CDEF9 /* libz.tbd */; };
+		886C886B1FE32D79004CDEF9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C886A1FE32D79004CDEF9 /* libsqlite3.tbd */; };
+		886C886D1FE32F0A004CDEF9 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886C886C1FE32F0A004CDEF9 /* Genre.swift */; };
+		886C886F1FE32F4E004CDEF9 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886C886E1FE32F4E004CDEF9 /* Country.swift */; };
 		886E13151FDFDBA500E956AF /* PlotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886E13141FDFDBA500E956AF /* PlotCollectionViewCell.swift */; };
 		88EE43D41FDD754B00F39589 /* PeopleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EE43D31FDD754B00F39589 /* PeopleCollectionViewCell.swift */; };
 		88EE43D61FDD782100F39589 /* CrewMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EE43D51FDD782100F39589 /* CrewMember.swift */; };
@@ -39,6 +54,21 @@
 		886C88491FE2B7A5004CDEF9 /* NameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCollectionViewCell.swift; sourceTree = "<group>"; };
 		886C884B1FE2C0D8004CDEF9 /* StatsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectionViewCell.swift; sourceTree = "<group>"; };
 		886C884D1FE2C0E2004CDEF9 /* BarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCollectionViewCell.swift; sourceTree = "<group>"; };
+		886C88511FE32CED004CDEF9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		886C88521FE32CEE004CDEF9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		886C88561FE32D27004CDEF9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		886C88581FE32D37004CDEF9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		886C885A1FE32D3D004CDEF9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		886C885C1FE32D45004CDEF9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		886C885E1FE32D4D004CDEF9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		886C88601FE32D54004CDEF9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		886C88621FE32D5A004CDEF9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		886C88641FE32D62004CDEF9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		886C88661FE32D69004CDEF9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		886C88681FE32D73004CDEF9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		886C886A1FE32D79004CDEF9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		886C886C1FE32F0A004CDEF9 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		886C886E1FE32F4E004CDEF9 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		886E13141FDFDBA500E956AF /* PlotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotCollectionViewCell.swift; sourceTree = "<group>"; };
 		88EE43D31FDD754B00F39589 /* PeopleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCollectionViewCell.swift; sourceTree = "<group>"; };
 		88EE43D51FDD782100F39589 /* CrewMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewMember.swift; sourceTree = "<group>"; };
@@ -59,6 +89,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886C886B1FE32D79004CDEF9 /* libsqlite3.tbd in Frameworks */,
+				886C88691FE32D73004CDEF9 /* libz.tbd in Frameworks */,
+				886C88671FE32D69004CDEF9 /* SystemConfiguration.framework in Frameworks */,
+				886C88651FE32D62004CDEF9 /* StoreKit.framework in Frameworks */,
+				886C88631FE32D5B004CDEF9 /* Security.framework in Frameworks */,
+				886C88611FE32D54004CDEF9 /* QuartzCore.framework in Frameworks */,
+				886C885F1FE32D4D004CDEF9 /* MobileCoreServices.framework in Frameworks */,
+				886C885D1FE32D45004CDEF9 /* CoreLocation.framework in Frameworks */,
+				886C885B1FE32D3D004CDEF9 /* CoreGraphics.framework in Frameworks */,
+				886C88591FE32D37004CDEF9 /* CFNetwork.framework in Frameworks */,
+				886C88571FE32D27004CDEF9 /* AudioToolbox.framework in Frameworks */,
+				886C88541FE32CEE004CDEF9 /* Parse.framework in Frameworks */,
+				886C88531FE32CEE004CDEF9 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +118,33 @@
 				886E13141FDFDBA500E956AF /* PlotCollectionViewCell.swift */,
 			);
 			path = details;
+			sourceTree = "<group>";
+		};
+		886C88501FE32CD5004CDEF9 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				886C88511FE32CED004CDEF9 /* Bolts.framework */,
+				886C88521FE32CEE004CDEF9 /* Parse.framework */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		886C88551FE32D27004CDEF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				886C886A1FE32D79004CDEF9 /* libsqlite3.tbd */,
+				886C88681FE32D73004CDEF9 /* libz.tbd */,
+				886C88661FE32D69004CDEF9 /* SystemConfiguration.framework */,
+				886C88641FE32D62004CDEF9 /* StoreKit.framework */,
+				886C88621FE32D5A004CDEF9 /* Security.framework */,
+				886C88601FE32D54004CDEF9 /* QuartzCore.framework */,
+				886C885E1FE32D4D004CDEF9 /* MobileCoreServices.framework */,
+				886C885C1FE32D45004CDEF9 /* CoreLocation.framework */,
+				886C885A1FE32D3D004CDEF9 /* CoreGraphics.framework */,
+				886C88581FE32D37004CDEF9 /* CFNetwork.framework */,
+				886C88561FE32D27004CDEF9 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		88FE4AFF1FC1C4C4001DCC85 /* search */ = {
@@ -112,6 +182,8 @@
 				88FE4B051FC1C79D001DCC85 /* Movies.swift */,
 				880AFF561FD94D6200397207 /* Movie.swift */,
 				88EE43D51FDD782100F39589 /* CrewMember.swift */,
+				886C886C1FE32F0A004CDEF9 /* Genre.swift */,
+				886C886E1FE32F4E004CDEF9 /* Country.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -119,8 +191,10 @@
 		9ECDD262EC3CE9CCB74AA255 = {
 			isa = PBXGroup;
 			children = (
+				886C88501FE32CD5004CDEF9 /* Parse */,
 				9ECDD96887E83028ED77C9FD /* Products */,
 				9ECDD3591ACC2BC3F360F75E /* Tram */,
+				886C88551FE32D27004CDEF9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,8 +293,10 @@
 				88FE4B031FC1C513001DCC85 /* SearchCollectionViewCell.swift in Sources */,
 				88EE43D61FDD782100F39589 /* CrewMember.swift in Sources */,
 				881AC0641FD8081200E5D161 /* MediaPageViewController.swift in Sources */,
+				886C886F1FE32F4E004CDEF9 /* Country.swift in Sources */,
 				886C884C1FE2C0D8004CDEF9 /* StatsCollectionViewCell.swift in Sources */,
 				88246D981FB74E0F000F6587 /* ProfileViewController.swift in Sources */,
+				886C886D1FE32F0A004CDEF9 /* Genre.swift in Sources */,
 				881AC0671FD809DB00E5D161 /* TitleCollectionViewCell.swift in Sources */,
 				885B5DCC1FE014550095BDDE /* MemberCollectionViewCell.swift in Sources */,
 				886E13151FDFDBA500E956AF /* PlotCollectionViewCell.swift in Sources */,
@@ -258,6 +334,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Parse",
+				);
 				INFOPLIST_FILE = Tram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tram;
@@ -328,6 +408,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Parse",
+				);
 				INFOPLIST_FILE = Tram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tram;

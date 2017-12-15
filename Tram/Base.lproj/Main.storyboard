@@ -169,16 +169,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZ5-92-9Ye">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g88-pW-Yom" userLabel="sectionTitle">
-                                                    <rect key="frame" x="8" y="8" width="334" height="40"/>
+                                                    <rect key="frame" x="8" y="8" width="350" height="40"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xb5-zF-BjU" userLabel="sectionButton">
-                                                    <rect key="frame" x="350" y="8" width="40" height="40"/>
+                                                    <rect key="frame" x="366" y="8" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Xb5-zF-BjU" secondAttribute="height" multiplier="1:1" id="AZA-cc-rvZ"/>
                                                     </constraints>
@@ -529,6 +529,9 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="56J-4t-8Cv">
                                 <rect key="frame" x="0.0" y="64" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Obg-5p-Tg5" id="hB8-bg-YwO"/>
+                                </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nhc-Ue-MGV">
                                 <rect key="frame" x="0.0" y="120" width="414" height="567"/>
@@ -1134,6 +1137,6 @@
         <image name="trash" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PCX-nw-TgW"/>
+        <segue reference="3sD-ou-XHr"/>
     </inferredMetricsTieBreakers>
 </document>

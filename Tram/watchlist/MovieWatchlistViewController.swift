@@ -14,15 +14,9 @@ class MovieWatchlistViewController: UIViewController, UICollectionViewDataSource
     var reducedSize : Int? = nil
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var transformation = [1, 1]
     @IBAction func sectionButtonPressed(_ sender: Any) {
         if let button = sender as? UIButton{
             if let cell = button.superview?.superview as? HeaderCollectionReusableView{
-                
-                UIView.animate(withDuration: 0.2, animations: {
-                    button.transform = CGAffineTransform(rotationAngle: CGFloat.pi * CGFloat(self.transformation[cell.section]))
-                    self.transformation[cell.section] = (self.transformation[cell.section] + 1) % 2
-                })
                 
                 UIView.animate(withDuration: 0.2, animations: {
                     var i = -1
@@ -38,6 +32,10 @@ class MovieWatchlistViewController: UIViewController, UICollectionViewDataSource
                         self.results = Movies.Instance.movies
                         self.collectionView.insertItems(at: indexes)
                     }
+                })
+                
+                UIView.animate(withDuration: 0.2, animations: {
+                    button.transform = CGAffineTransform(rotationAngle: CGFloat.pi * CGFloat((self.results.count == 0 ? 1 : 0)))
                 })
             }
         }
@@ -79,22 +77,18 @@ class MovieWatchlistViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return results.count
+        return results.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieListCell", for: indexPath) as! SearchCollectionViewCell
         
         // Configure the cell
-        cell.titleLabel.text = results[indexPath.row].Title
-        if let year = results[indexPath.row].Year{
-            cell.yearLabel.text = "\(year)"
-        }
-        cell.ratingLabel.text = results[indexPath.row].HeartRating
-        cell.starsLabel.text = results[indexPath.row].Cast.map({ (pair) -> String in
-            return pair.person.toString()
-        }).joined(separator: ", ")
+        cell.titleLabel.text = results[indexPath.row].title
+        cell.yearLabel.text = results[indexPath.row].year
+        cell.ratingLabel.text = results[indexPath.row].rating
+        cell.starsLabel.text = "Not available"
         
-        cell.posterImageView.image = results[indexPath.row].Image
+        cell.posterImageView.image = results[indexPath.row].image
         
         return cell
     }
