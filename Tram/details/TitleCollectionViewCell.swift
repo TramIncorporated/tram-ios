@@ -17,4 +17,6 @@ class TitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var watchlistButton: UIButton!
+    @IBOutlet weak var watchedButton: UIButton!
 }

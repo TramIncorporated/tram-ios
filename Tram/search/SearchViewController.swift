@@ -56,7 +56,7 @@ class SearchViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.titleLabel.text = results[indexPath.row].title
         cell.yearLabel.text = results[indexPath.row].year
         cell.ratingLabel.text = results[indexPath.row].rating
-        cell.starsLabel.text = "Not available"
+        cell.starsLabel.text = "Stars not available"
         
         cell.posterImageView.image = results[indexPath.row].image
         

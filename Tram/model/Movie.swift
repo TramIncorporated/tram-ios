@@ -29,7 +29,7 @@ class Movie : MediaEntry{
     var voteAverage = 0.0
     var rating : String{
         get{
-            return String(Int(voteAverage*10))
+            return "\(Int(voteAverage*10))%"
         }
     }
     var tagline = ""
@@ -112,9 +112,11 @@ class Movie : MediaEntry{
         
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            DispatchQueue.main.async {
-                if let im = UIImage(data: data!){
-                    self.image = im
+            if let data = data{
+                DispatchQueue.main.async {
+                    if let im = UIImage(data: data){
+                        self.image = im
+                    }
                 }
             }
         }

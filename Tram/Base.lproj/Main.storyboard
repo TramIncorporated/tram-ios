@@ -452,6 +452,9 @@
                         <viewLayoutGuide key="safeArea" id="9bU-Fe-sC3"/>
                     </view>
                     <navigationItem key="navigationItem" id="GcY-F8-634"/>
+                    <connections>
+                        <outlet property="collectionView" destination="V8b-wm-vkW" id="cT5-zK-p8D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6m-GR-0LP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -800,6 +803,9 @@
                                                                     <integer key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="watchedButtonPressed:" destination="FsB-EE-rWr" eventType="touchUpInside" id="iYS-Sb-f9k"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOO-pf-py1">
                                                             <rect key="frame" x="141" y="105" width="210" height="39.666666666666657"/>
@@ -814,6 +820,9 @@
                                                                     <integer key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="watchlistButtonPressed:" destination="FsB-EE-rWr" eventType="touchUpInside" id="Mbj-jA-USi"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -869,6 +878,8 @@
                                             <outlet property="posterView" destination="rAp-ky-x9w" id="0GU-VF-x9r"/>
                                             <outlet property="starLabel" destination="DiQ-ZT-AWn" id="spW-gZ-2Ic"/>
                                             <outlet property="titleLabel" destination="jSe-vi-7Sq" id="EHJ-Sm-zaK"/>
+                                            <outlet property="watchedButton" destination="mPe-du-1PF" id="2JQ-D3-Wyz"/>
+                                            <outlet property="watchlistButton" destination="hOO-pf-py1" id="epZ-cg-P7C"/>
                                             <outlet property="yearLabel" destination="rEA-Yh-SSB" id="n1w-Si-Q46"/>
                                         </connections>
                                     </collectionViewCell>

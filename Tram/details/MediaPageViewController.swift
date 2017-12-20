@@ -12,6 +12,42 @@ class MediaPageViewController: UIViewController, UICollectionViewDelegate, UICol
     var myMovie : Movie? = nil
     @IBOutlet weak var collection: UICollectionView!
     
+    @IBAction func watchlistButtonPressed(_ sender: Any) {
+        if let movie = myMovie{
+            if let button = sender as? UIButton{
+                if Profile.Instance.contains(movie: movie, in: "watchlist"){
+                    Profile.Instance.remove(movie: movie, from: "watchlist")
+                    button.setTitle("Add to watchlist", for: UIControlState.normal)
+                }
+                else{
+                    Profile.Instance.add(movie: movie, to: "watchlist")
+                    button.setTitle("Remove from watchlist", for: UIControlState.normal)
+                }
+            }
+        }
+        //collection.reloadItems(at: [IndexPath(row: 0, section: 0)])
+    }
+    
+    @IBAction func watchedButtonPressed(_ sender: Any) {
+        if let movie = myMovie{
+            if let button = sender as? UIButton{
+                if Profile.Instance.contains(movie: movie, in: "watched"){
+                    Profile.Instance.remove(movie: movie, from: "watched")
+                    button.setTitle("Watch", for: UIControlState.normal)
+                }
+                else{
+                    Profile.Instance.add(movie: movie, to: "watched")
+                    button.setTitle("Unwatch", for: UIControlState.normal)
+                    if Profile.Instance.contains(movie: movie, in: "watchlist"){
+                        Profile.Instance.remove(movie: movie, from: "watchlist")
+                        if let button = (button.superview?.superview as? TitleCollectionViewCell)?.watchlistButton{
+                            button.setTitle("Add to watchlist", for: UIControlState.normal)
+                        }
+                    }
+                }
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         //        if let flow = collection.collectionViewLayout as? UICollectionViewFlowLayout{
@@ -59,6 +95,25 @@ class MediaPageViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
         cell.yearLabel.text = movie?.year
+        
+        
+        if let movie = myMovie{
+            if Profile.Instance.contains(movie: movie, in: "watchlist"){
+                cell.watchlistButton.setTitle("Remove from watchlist", for: UIControlState.normal)
+            }else{
+                cell.watchlistButton.setTitle("Add to watchlist", for: UIControlState.normal)
+            }
+        }
+        
+        if let movie = myMovie{
+            if Profile.Instance.contains(movie: movie, in: "watched"){
+                cell.watchedButton.setTitle("Unwatch", for: UIControlState.normal)
+            }
+            else{
+                cell.watchedButton.setTitle("Watch", for: UIControlState.normal)
+            }
+        }
+        
         
         return cell
     }

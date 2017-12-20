@@ -9,6 +9,13 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let cell = collectionView.cellForItem(at: IndexPath(row: 1, section: 0)) as? StatsCollectionViewCell{
+            cell.collectionView.reloadData()
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -28,6 +35,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "statsCell", for: indexPath) as! StatsCollectionViewCell
             
+            cell.data = []
             
             return cell
             

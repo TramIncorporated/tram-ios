@@ -10,39 +10,48 @@ import UIKit
 
 
 class MovieWatchlistViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    var results = Movies.Instance.movies
+    override func viewWillAppear(_ animated: Bool){
+        sectionButtonPressed(0)
+        sectionButtonPressed(0)
+    }
+    var results = Profile.Instance.watchlist
     var reducedSize : Int? = nil
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func sectionButtonPressed(_ sender: Any) {
-        if let button = sender as? UIButton{
-            if let cell = button.superview?.superview as? HeaderCollectionReusableView{
-                
-                UIView.animate(withDuration: 0.2, animations: {
-                    var i = -1
-                    var indexes = Movies.Instance.movies.map { _ -> IndexPath in
-                        i+=1
-                        return IndexPath(row: i, section: cell.section)
-                    }
-                    if self.results.count>0{
-                        self.results.removeAll()
-                        self.collectionView.deleteItems(at: indexes)
-                    }
-                    else{
-                        self.results = Movies.Instance.movies
-                        self.collectionView.insertItems(at: indexes)
-                    }
-                })
-                
-                UIView.animate(withDuration: 0.2, animations: {
-                    button.transform = CGAffineTransform(rotationAngle: CGFloat.pi * CGFloat((self.results.count == 0 ? 1 : 0)))
-                })
+        var duration = 0.0
+        if let _ = sender as? UIButton{
+            duration = 0.2
+        }
+        
+        UIView.animate(withDuration: duration, animations: {
+            var i = -1
+            let deleteIndexes = self.results.map { _ -> IndexPath in
+                i+=1
+                return IndexPath(row: i, section: 0)
             }
+            i = -1
+            let insertIndexes = Profile.Instance.watchlist.map { _ -> IndexPath in
+                i+=1
+                return IndexPath(row: i, section: 0)
+            }
+            if self.results.count>0{
+                self.results.removeAll()
+                self.collectionView.deleteItems(at: deleteIndexes)
+            }
+            else{
+                self.results = Profile.Instance.watchlist
+                self.collectionView.insertItems(at: insertIndexes)
+            }
+        })
+        
+        if let button = sender as? UIButton{
+            UIView.animate(withDuration: 0.2, animations: {
+                button.transform = CGAffineTransform(rotationAngle: CGFloat.pi * CGFloat((self.results.count == 0 ? 1 : 0)))
+            })
+            
         }
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +95,7 @@ class MovieWatchlistViewController: UIViewController, UICollectionViewDataSource
         cell.titleLabel.text = results[indexPath.row].title
         cell.yearLabel.text = results[indexPath.row].year
         cell.ratingLabel.text = results[indexPath.row].rating
-        cell.starsLabel.text = "Not available"
+        cell.starsLabel.text = "Stars not available"
         
         cell.posterImageView.image = results[indexPath.row].image
         
@@ -118,7 +127,7 @@ class MovieWatchlistViewController: UIViewController, UICollectionViewDataSource
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeaderCell", for: indexPath) as! HeaderCollectionReusableView
         switch indexPath.section {
         case 0:
-            cell.sectionTitle.text = "Currently watching"
+            cell.sectionTitle.text = "Going to watch"
             cell.section = 0
         default:
             cell.sectionTitle.text = "Another section"

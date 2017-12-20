@@ -12,10 +12,10 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
     @IBOutlet weak var collectionView: UICollectionView!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return 1
     }
     
-    let data = [(amount: 15, of: 26, type: "movies"),
+    var data = [(amount: 15, of: 26, type: "movies"),
                 (amount: 30, of: 64, type: "TV series"),
                 (amount: 1, of: 3, type: "games")]
     
@@ -32,11 +32,11 @@ class StatsCollectionViewCell: UICollectionViewCell, UICollectionViewDelegate, U
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "barCell", for: indexPath) as! BarCollectionViewCell
         
-        let piece = data[indexPath.row]
+        //let piece = data[indexPath.row]
         
-        cell.progressBar.progress = Float(piece.amount) / Float(piece.of)
-        cell.progressLabel.text = "\(piece.amount) out of \(piece.of)"
-        cell.typeLabel.text = piece.type
+        cell.progressBar.progress = Float(Profile.Instance.watched.count) / Float(Profile.Instance.watched.count+Profile.Instance.watchlist.count)
+        cell.progressLabel.text = "\(Profile.Instance.watched.count) out of \(Profile.Instance.watched.count+Profile.Instance.watchlist.count)"
+        cell.typeLabel.text = "movies"
         
         cell.progressBar.progressTintColor = progressColors[indexPath.row % progressColors.count]
         cell.progressBar.trackTintColor = trackColors[indexPath.row % trackColors.count]
