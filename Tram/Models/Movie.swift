@@ -1,20 +1,15 @@
 //
-//  MediaEntry.swift
-//  Tram
+//  Movie.swift
+//  tram-clean
 //
-//  Created by Roman Abuzyarov on 07.12.2017.
-//  Copyright © 2017 Tram, inc. All rights reserved.
+//  Created by Roman Abuzyarov on 06.01.2018.
+//  Copyright © 2018 Roman Abuzyarov. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import Parse
 
-protocol MediaEntry{
-    
-}
-
-class Movie : MediaEntry{
+class Movie {
     var objectId = ""
     var budget = 0
     var releaseDate = Date()
@@ -58,7 +53,8 @@ class Movie : MediaEntry{
         }
     }
     
-    var image = UIImage()
+    var crew = [(person: Person, role: String)]()
+    var cast = [(person: Person, role: String)]()
     
     init(pfo : PFObject){
         self.objectId = pfo.objectId!
@@ -107,19 +103,6 @@ class Movie : MediaEntry{
         self.posterUrl = pfo["poster_url"] as! String
         
         dateFormatter.dateFormat = "yyyy"
-        
-        let url = URL(string: imageUrl)
-        
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            if let data = data{
-                DispatchQueue.main.async {
-                    if let im = UIImage(data: data){
-                        self.image = im
-                    }
-                }
-            }
-        }
     }
     
     //    func toPFObject() -> PFObject{
