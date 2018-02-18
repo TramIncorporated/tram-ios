@@ -1,6 +1,6 @@
 //
 //  MovieDetailsPresenter.swift
-//  tram-clean
+//  Tram
 //
 //  Created by Roman Abuzyarov on 06.01.2018.
 //  Copyright (c) 2018 Roman Abuzyarov. All rights reserved.
@@ -15,13 +15,24 @@ import UIKit
 protocol MovieDetailsPresentationLogic
 {
     func fillData(response: MovieDetails.FillData.Response)
+    func presentPeople(response: MovieDetails.LoadPeople.Response)
 }
 
 class MovieDetailsPresenter: MovieDetailsPresentationLogic
 {
     weak var viewController: MovieDetailsDisplayLogic?
     
-    // MARK: Do something
+    func presentPeople(response: MovieDetails.LoadPeople.Response) {
+        let viewModel = MovieDetails.LoadPeople.ViewModel(people: response.people)
+        if let type = response.type{
+            switch type {
+            case .Cast:
+                viewController?.displayCast(viewModel: viewModel)
+            case .Crew:
+                viewController?.displayCrew(viewModel: viewModel)
+            }
+        }
+    }
     
     func fillData(response: MovieDetails.FillData.Response)
     {
@@ -37,12 +48,6 @@ class MovieDetailsPresenter: MovieDetailsPresentationLogic
             starRating: "Not available",
             imageUrl: movie?.imageUrl,
             plot: movie?.overview,
-            cast: (movie?.cast.map { (pair) -> MovieDetails.FillData.ViewModel.Job in
-                return MovieDetails.FillData.ViewModel.Job(name: pair.person.fullName, role: pair.role, imageUrl: pair.person.imageUrl)
-                }) ?? [],
-            crew: (movie?.crew.map { (pair) -> MovieDetails.FillData.ViewModel.Job in
-                return MovieDetails.FillData.ViewModel.Job(name: pair.person.fullName, role: pair.role, imageUrl: pair.person.imageUrl)
-                }) ?? [],
             details: [])
         viewController?.displayFilling(viewModel: viewModel)
     }

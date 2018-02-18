@@ -1,6 +1,6 @@
 //
 //  MovieDetailsInteractor.swift
-//  tram-clean
+//  Tram
 //
 //  Created by Roman Abuzyarov on 06.01.2018.
 //  Copyright (c) 2018 Roman Abuzyarov. All rights reserved.
@@ -15,6 +15,7 @@ import UIKit
 protocol MovieDetailsBusinessLogic
 {
     func fillData(request: MovieDetails.FillData.Request)
+    func loadPeople(request: MovieDetails.LoadPeople.Request)
 }
 
 protocol MovieDetailsDataStore
@@ -28,7 +29,6 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     
     var presenter: MovieDetailsPresentationLogic?
     var worker: MovieDetailsWorker?
-    //var name: String = ""
     
     // MARK: Do something
     
@@ -36,5 +36,21 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     {
         let response = MovieDetails.FillData.Response(movie: movie)
         presenter?.fillData(response: response)
+    }
+    
+    func loadPeople(request: MovieDetails.LoadPeople.Request) {
+        if worker == nil{
+            worker = MovieDetailsWorker()
+        }
+        
+        if let movie = movie, let type = request.type{
+            DispatchQueue.global().async {
+                let people = self.worker?.loadPeople(of: movie, type: type)
+                if let people = people{
+                    let response = MovieDetails.LoadPeople.Response(type: type, people: people)
+                    self.presenter?.presentPeople(response: response)
+                }
+            }
+        }
     }
 }

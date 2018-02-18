@@ -1,14 +1,23 @@
 //
 //  TitleCollectionViewCell.swift
-//  tram-clean
+//  Tram
 //
-//  Created by Roman Abuzyarov on 06.01.2018.
-//  Copyright © 2018 Roman Abuzyarov. All rights reserved.
+//  Created by Roman Abuzyarov on 11.02.2018.
+//  Copyright © 2018 Tram, inc. All rights reserved.
 //
 
 import UIKit
 
 class TitleCollectionViewCell: UICollectionViewCell {
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        let screenWidth = UIScreen.main.bounds.size.width
+        containerWidthConstraint.constant = screenWidth - (8 * 2)
+    }
+    
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,4 +29,6 @@ class TitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var containerWidthConstraint: NSLayoutConstraint!
 }

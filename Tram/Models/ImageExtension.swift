@@ -1,6 +1,6 @@
 //
 //  ImageExtension.swift
-//  tram-clean
+//  Tram
 //
 //  Created by Roman Abuzyarov on 06.01.2018.
 //  Copyright © 2018 Roman Abuzyarov. All rights reserved.
@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+
+//todo add caching
 
 extension UIImageView{
     func setImageInBackground(url: URL?){

@@ -1,6 +1,6 @@
 //
 //  Movie.swift
-//  tram-clean
+//  Tram
 //
 //  Created by Roman Abuzyarov on 06.01.2018.
 //  Copyright © 2018 Roman Abuzyarov. All rights reserved.
@@ -28,6 +28,7 @@ class Movie {
         }
     }
     var tagline = ""
+    var id = 0
     var genres : [Genre] = []
     var status = ""
     var countries : [Country] = []
@@ -49,12 +50,9 @@ class Movie {
     
     var imageUrl : String{
         get{
-            return "http://image.tmdb.org/t/p/w500\(posterUrl)"
+            return "http://image.tmdb.org/t/p/w185\(posterUrl)"
         }
     }
-    
-    var crew = [(person: Person, role: String)]()
-    var cast = [(person: Person, role: String)]()
     
     init(pfo : PFObject){
         self.objectId = pfo.objectId!
@@ -93,6 +91,7 @@ class Movie {
             }
         }
         
+        self.id = pfo["ID"] as! Int
         self.popularity = pfo["popularity"] as! Double
         self.imdbId = pfo["imdb_id"] as! String
         self.title = pfo["title"] as! String

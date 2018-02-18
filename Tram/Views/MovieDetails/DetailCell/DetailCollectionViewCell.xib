@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="detailCell" id="gTV-IL-0wX" customClass="DetailCollectionViewCell" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3r-bo-b92" userLabel="detailView">
+                        <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBy-4O-8O1" userLabel="Name">
+                                <rect key="frame" x="8" y="8" width="143.5" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5J-hf-nBY" userLabel="Value">
+                                <rect key="frame" x="159.5" y="8" width="33" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="N5J-hf-nBY" secondAttribute="trailing" constant="8" id="2RF-g8-UbX"/>
+                            <constraint firstItem="xBy-4O-8O1" firstAttribute="top" secondItem="S3r-bo-b92" secondAttribute="top" constant="8" id="7AN-e1-vw5"/>
+                            <constraint firstItem="xBy-4O-8O1" firstAttribute="width" secondItem="S3r-bo-b92" secondAttribute="width" multiplier="0.4" id="E4N-hv-GhL"/>
+                            <constraint firstItem="N5J-hf-nBY" firstAttribute="leading" secondItem="xBy-4O-8O1" secondAttribute="trailing" constant="8" id="N2c-60-PK7"/>
+                            <constraint firstItem="xBy-4O-8O1" firstAttribute="leading" secondItem="S3r-bo-b92" secondAttribute="leading" constant="8" id="Ugo-t7-zlj"/>
+                            <constraint firstItem="N5J-hf-nBY" firstAttribute="top" secondItem="S3r-bo-b92" secondAttribute="top" constant="8" id="fKd-1l-wcV"/>
+                            <constraint firstAttribute="bottom" secondItem="N5J-hf-nBY" secondAttribute="bottom" constant="8" id="fds-Ts-w2c"/>
+                            <constraint firstAttribute="bottom" secondItem="xBy-4O-8O1" secondAttribute="bottom" constant="8" id="oeJ-ve-p2b"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="S3r-bo-b92" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0z2-vD-BwM"/>
+                <constraint firstAttribute="trailing" secondItem="S3r-bo-b92" secondAttribute="trailing" id="75u-en-bQL"/>
+                <constraint firstAttribute="bottom" secondItem="S3r-bo-b92" secondAttribute="bottom" id="PR4-Bp-hMj"/>
+                <constraint firstItem="S3r-bo-b92" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="a5I-pg-WrI"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="205" height="55"/>
+            <connections>
+                <outlet property="nameLabel" destination="xBy-4O-8O1" id="TbG-PX-QiV"/>
+                <outlet property="valueLabel" destination="N5J-hf-nBY" id="qw4-Ry-pag"/>
+            </connections>
+            <point key="canvasLocation" x="48" y="125"/>
+        </collectionViewCell>
+    </objects>
+</document>

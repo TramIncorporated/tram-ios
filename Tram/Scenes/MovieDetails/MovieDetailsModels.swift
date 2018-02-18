@@ -1,6 +1,6 @@
 //
 //  MovieDetailsModels.swift
-//  tram-clean
+//  Tram
 //
 //  Created by Roman Abuzyarov on 06.01.2018.
 //  Copyright (c) 2018 Roman Abuzyarov. All rights reserved.
@@ -14,8 +14,6 @@ import UIKit
 
 enum MovieDetails
 {
-    // MARK: Use cases
-    
     enum FillData
     {
         struct Request
@@ -27,11 +25,6 @@ enum MovieDetails
         }
         struct ViewModel
         {
-            struct Job{
-                var name: String?
-                var role: String?
-                var imageUrl: String?
-            }
             var title: String?
             var year: String?
             var length: String?
@@ -42,10 +35,27 @@ enum MovieDetails
             
             var plot: String?
             
-            var cast: [Job]
-            var crew: [Job]
-            
             var details: [(key: String?, value: String?)]
+        }
+    }
+    
+    enum LoadPeople{
+        enum JobType{
+            case Crew
+            case Cast
+        }
+        
+        struct Request{
+            var type : JobType?
+        }
+        
+        struct Response{
+            var type: JobType?
+            var people: [Job]
+        }
+        
+        struct ViewModel{
+            var people:[Job]
         }
     }
 }

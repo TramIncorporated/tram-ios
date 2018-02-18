@@ -1,6 +1,6 @@
 //
 //  MovieDetailsViewController.swift
-//  tram-clean
+//  Tram
 //
 //  Created by Roman Abuzyarov on 06.01.2018.
 //  Copyright (c) 2018 Roman Abuzyarov. All rights reserved.
@@ -15,10 +15,13 @@ import UIKit
 protocol MovieDetailsDisplayLogic: class
 {
     func displayFilling(viewModel: MovieDetails.FillData.ViewModel)
+    func displayCrew(viewModel: MovieDetails.LoadPeople.ViewModel)
+    func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel)
 }
 
 class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
 {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var interactor: MovieDetailsBusinessLogic?
     var router: (NSObjectProtocol & MovieDetailsRoutingLogic & MovieDetailsDataPassing)?
@@ -70,7 +73,16 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.collectionView.register(UINib(nibName: "DetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "detailCell")
+        self.collectionView.register(UINib(nibName: "PeopleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "peopleCell")
+        self.collectionView.register(UINib(nibName: "PlotCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "plotCell")
+        self.collectionView.register(UINib(nibName: "TitleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "titleCell")
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+        }
         fillData()
+        loadCast()
+        loadCrew()
     }
     
     // MARK: Do something
@@ -82,28 +94,52 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
         let request = MovieDetails.FillData.Request()
         interactor?.fillData(request: request)
     }
-    var viewModel : MovieDetails.FillData.ViewModel?
+    
+    func loadCrew(){
+        let request = MovieDetails.LoadPeople.Request(type: .Crew)
+        interactor?.loadPeople(request: request)
+    }
+    
+    func loadCast(){
+        let request = MovieDetails.LoadPeople.Request(type: .Cast)
+        interactor?.loadPeople(request: request)
+    }
+    var generalDataStore : MovieDetails.FillData.ViewModel?
+    
     func displayFilling(viewModel: MovieDetails.FillData.ViewModel)
     {
-        self.viewModel = viewModel
+        self.generalDataStore = viewModel
         collectionView.reloadData()
     }
+    func displayCrew(viewModel: MovieDetails.LoadPeople.ViewModel) {
+        crewCell?.people = viewModel.people
+    }
+    
+    func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel) {
+        castCell?.people = viewModel.people
+        
+        //collectionView.reloadItems(at: )
+    }
+    
     @IBAction func topButtonPressed(_ sender: Any) {
     }
     @IBAction func bottomButtonPressed(_ sender: Any) {
     }
+    
+    var castCell: PeopleCollectionViewCell?
+    var crewCell: PeopleCollectionViewCell?
 }
 
 extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
         case 0:
             let titleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath) as! TitleCollectionViewCell
-            if let viewModel = viewModel {
+            if let viewModel = generalDataStore {
                 titleCell.titleLabel.text = viewModel.title
                 titleCell.yearLabel.text = viewModel.year
                 titleCell.lengthLabel.text = viewModel.length
@@ -115,6 +151,32 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             }
             
             return titleCell
+            
+        case 1:
+            let plotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "plotCell", for: indexPath) as! PlotCollectionViewCell
+            
+            if let viewModel = generalDataStore{
+                plotCell.sectionTitleLabel.text = "Plot"
+                plotCell.textView.text = viewModel.plot
+            }
+            return plotCell
+            
+        case 2:
+            let castCell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as! PeopleCollectionViewCell
+            
+            castCell.sectionTitleLabel.text = "Cast"
+            
+            self.castCell = castCell
+            return castCell
+            
+        case 3:
+            let crewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as! PeopleCollectionViewCell
+            
+            crewCell.sectionTitleLabel.text = "Crew"
+            
+            self.crewCell = crewCell
+            return crewCell
+            
         default:
             return UICollectionViewCell()
         }

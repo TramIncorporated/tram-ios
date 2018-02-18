@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="plotCell" id="gTV-IL-0wX" customClass="PlotCollectionViewCell" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vW8-7G-CGf" userLabel="PlotView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtq-kr-xJj" userLabel="SectionTitle">
+                                <rect key="frame" x="8" y="8" width="398" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-pv-vRb" userLabel="Plot">
+                                <rect key="frame" x="8" y="40" width="398" height="202"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Xtq-kr-xJj" firstAttribute="leading" secondItem="vW8-7G-CGf" secondAttribute="leading" constant="8" id="9pM-B7-pld"/>
+                            <constraint firstAttribute="trailing" secondItem="Xtq-kr-xJj" secondAttribute="trailing" constant="8" id="Bn1-0t-5pE"/>
+                            <constraint firstAttribute="width" constant="414" id="Haq-4b-sQi"/>
+                            <constraint firstAttribute="bottom" secondItem="TTs-pv-vRb" secondAttribute="bottom" constant="8" id="J9R-eN-Nhm"/>
+                            <constraint firstItem="Xtq-kr-xJj" firstAttribute="top" secondItem="vW8-7G-CGf" secondAttribute="top" constant="8" id="Y2H-DT-u7F"/>
+                            <constraint firstItem="TTs-pv-vRb" firstAttribute="top" secondItem="Xtq-kr-xJj" secondAttribute="bottom" constant="8" id="fqT-cI-wM8"/>
+                            <constraint firstItem="TTs-pv-vRb" firstAttribute="leading" secondItem="vW8-7G-CGf" secondAttribute="leading" constant="8" id="iQ7-LC-7Th"/>
+                            <constraint firstAttribute="trailing" secondItem="TTs-pv-vRb" secondAttribute="trailing" constant="8" id="mSc-Dd-w5w"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="vW8-7G-CGf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="AfJ-WF-BY4"/>
+                <constraint firstAttribute="bottom" secondItem="vW8-7G-CGf" secondAttribute="bottom" id="MAo-am-3g3"/>
+                <constraint firstItem="vW8-7G-CGf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ePg-sy-3nj"/>
+                <constraint firstAttribute="trailing" secondItem="vW8-7G-CGf" secondAttribute="trailing" id="y4z-Pb-yev"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="358" height="94"/>
+            <connections>
+                <outlet property="containerWidthConstraint" destination="Haq-4b-sQi" id="VYB-fz-4Dr"/>
+                <outlet property="sectionTitleLabel" destination="Xtq-kr-xJj" id="lR2-rW-Fiy"/>
+                <outlet property="textView" destination="TTs-pv-vRb" id="T5Q-Yy-hTC"/>
+            </connections>
+            <point key="canvasLocation" x="58" y="111"/>
+        </collectionViewCell>
+    </objects>
+</document>
