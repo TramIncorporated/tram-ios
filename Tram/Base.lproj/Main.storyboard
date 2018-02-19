@@ -96,7 +96,7 @@
                     <connections>
                         <outlet property="collectionView" destination="nhc-Ue-MGV" id="o5g-9K-k7J"/>
                         <outlet property="searchBar" destination="56J-4t-8Cv" id="nWb-Av-NJH"/>
-                        <segue destination="TVj-Wh-F4m" kind="custom" identifier="movieDetailsSegue" id="DnO-hZ-wKl"/>
+                        <segue destination="TVj-Wh-F4m" kind="showDetail" identifier="MovieDetails" id="8jm-FE-njb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhl-Mp-81p" userLabel="First Responder" sceneMemberID="firstResponder"/>

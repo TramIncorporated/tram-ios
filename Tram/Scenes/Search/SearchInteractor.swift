@@ -19,12 +19,12 @@ protocol SearchBusinessLogic
 
 protocol SearchDataStore
 {
-    var movie: Movie? { get set }
+    var movies : [Movie]? {get}
 }
 
 class SearchInteractor: SearchBusinessLogic, SearchDataStore
 {
-    var movie: Movie?
+    var movies: [Movie]?
     
     var presenter: SearchPresentationLogic?
     var worker: SearchWorker?
@@ -35,6 +35,7 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore
     {
         worker = SearchWorker()
         worker?.searchMovies(query: request.query, onSuccess: { (movies) in
+            self.movies = movies
             let response = Search.SearchMovies.Response(movies: movies)
             self.presenter?.presentMovies(response: response)
         })

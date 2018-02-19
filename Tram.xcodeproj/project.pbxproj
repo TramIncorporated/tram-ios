@@ -350,6 +350,11 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = "Tram, inc.";
+				TargetAttributes = {
+					9ECDD09FA59DAD88FEF62E04 = {
+						DevelopmentTeam = NM569ANC7R;
+					};
+				};
 			};
 			buildConfigurationList = 9ECDDF5819579052217DF8AF /* Build configuration list for PBXProject "Tram" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -446,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NM569ANC7R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Parse",
@@ -520,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NM569ANC7R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Parse",

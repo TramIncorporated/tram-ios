@@ -19,7 +19,7 @@ import UIKit
 
 protocol SearchDataPassing
 {
-    var dataStore: SearchDataStore? { get set }
+    var dataStore: SearchDataStore? { get }
 }
 
 class SearchRouter: NSObject, SearchRoutingLogic, SearchDataPassing
@@ -55,6 +55,7 @@ class SearchRouter: NSObject, SearchRoutingLogic, SearchDataPassing
     
     func passDataToMovieDetails(source: SearchDataStore, destination: inout MovieDetailsDataStore)
     {
-        destination.movie = source.movie
+        let row = viewController?.collectionView.indexPathsForSelectedItems?.first?.row
+        destination.movie = source.movies?[row!]
     }
 }

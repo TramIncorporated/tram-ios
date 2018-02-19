@@ -127,7 +127,6 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        router?.dataStore?.movie = (collectionView.cellForItem(at: indexPath) as? MovieCollectionViewCell)?.movie // todo overlook get set in data passing
         router?.routeToMovieDetails(segue: nil)
     }
 }
