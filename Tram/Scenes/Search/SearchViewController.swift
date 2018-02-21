@@ -74,7 +74,6 @@ class SearchViewController: UIViewController, SearchDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         self.collectionView.register(UINib(nibName: "MovieCollectionCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
     }
     

@@ -19,8 +19,7 @@ class SearchWorker
     {
         var movies = [Movie]()
         
-        let query = PFQuery(className: "Movie").whereKey("title",
-                                                         matchesRegex: "( \(query).*)|(\(query).*)")
+        let query = PFQuery(className: "Movie").whereKey("title", hasPrefix: query)
         
         query.cachePolicy = .networkElseCache
         query.findObjectsInBackground { (objects, error) -> Void in
