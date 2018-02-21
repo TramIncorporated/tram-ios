@@ -160,15 +160,18 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             titleCell.topButton.addTarget(self, action: #selector(self.topButtonPressed(_:)), for: .touchUpInside)
             titleCell.bottomButton.addTarget(self, action: #selector(self.bottomButtonPressed(_:)), for: .touchUpInside)
             
-            if let viewModel = generalDataStore {
-                titleCell.titleLabel.text = viewModel.title
-                titleCell.yearLabel.text = viewModel.year
-                titleCell.lengthLabel.text = viewModel.length
-                titleCell.heartLabel.text = viewModel.heartRating
-                titleCell.starLabel.text = viewModel.starRating
-                if let imageUrl = viewModel.imageUrl {
-                    titleCell.imageView.setImageInBackground(url: URL(string: imageUrl))
-                }
+            if let movie = generalDataStore?.movie {
+                titleCell.titleLabel.text = movie.title
+                titleCell.yearLabel.text = movie.year
+                titleCell.lengthLabel.text = movie.length
+                titleCell.heartLabel.text = movie.rating
+                titleCell.starLabel.text = "Not available"
+                titleCell.imageView.setImageInBackground(url: URL(string: movie.imageUrl))
+                movie.getGenres(onSuccess: { (genres) in
+                    titleCell.genresLabel.text = genres.flatMap({ (g) -> String? in
+                        g.name
+                    }).joined(separator: ", ")
+                })
             }
             self.titleCell = titleCell
             
@@ -179,9 +182,9 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
         case 1:
             let plotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "plotCell", for: indexPath) as! PlotCollectionViewCell
             
-            if let viewModel = generalDataStore{
+            if let movie = generalDataStore?.movie{
                 plotCell.sectionTitleLabel.text = "Plot"
-                plotCell.textView.text = viewModel.plot
+                plotCell.textView.text = movie.overview
             }
             
             self.plotCell = plotCell

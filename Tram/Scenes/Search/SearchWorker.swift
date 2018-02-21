@@ -21,6 +21,7 @@ class SearchWorker
         
         let query = PFQuery(className: "Movie").whereKey("title",
                                                          matchesRegex: "( \(query).*)|(\(query).*)")
+        
         query.cachePolicy = .networkElseCache
         query.findObjectsInBackground { (objects, error) -> Void in
             if let error = error{
@@ -30,7 +31,8 @@ class SearchWorker
             
             if let objects = objects{
                 for (_, object) in objects.enumerated(){
-                    movies.append(Movie(pfo: object))
+                    let movie = Movie(pfo: object)
+                    movies.append(movie)
                 }
                 
                 onSuccess(movies)

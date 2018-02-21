@@ -14,14 +14,32 @@ import UIKit
 extension UIImageView{
     func setImageInBackground(url: URL?){
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            if let data = data{
-                DispatchQueue.main.async {
-                    if let im = UIImage(data: data){
-                        self.image = im
+            if let url = url{
+                
+                if let image = ImageCache.Instance.images[url]{
+                    DispatchQueue.main.async {
+                        self.image = image
+                    }
+                    return
+                }
+                
+                let data = try? Data(contentsOf: url) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                if let data = data{
+                    DispatchQueue.main.async {
+                        if let im = UIImage(data: data){
+                            ImageCache.Instance.images[url] = im
+                            self.image = im
+                        }
                     }
                 }
+                
             }
         }
     }
+}
+
+class ImageCache{
+    private init(){}
+    static let Instance = ImageCache()
+    var images : [URL : UIImage] = [:]
 }

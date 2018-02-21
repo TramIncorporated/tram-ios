@@ -25,25 +25,11 @@ enum MovieDetails
         }
         struct ViewModel
         {
-            var title: String?
-            var year: String?
-            var length: String?
-            var genres: String?
-            var heartRating: String?
-            var starRating: String?
-            var imageUrl: String?
-            
-            var plot: String?
-            
-            var details: [(key: String?, value: String?)]
+            var movie : Movie?
         }
     }
     
     enum LoadPeople{
-        enum JobType{
-            case Crew
-            case Cast
-        }
         
         struct Request{
             var type : JobType

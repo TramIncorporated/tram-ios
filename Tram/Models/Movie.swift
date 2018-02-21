@@ -29,9 +29,7 @@ class Movie {
     }
     var tagline = ""
     var id = 0
-    var genres : [Genre] = []
     var status = ""
-    var countries : [Country] = []
     var popularity = 0.0
     var imdbId = ""
     var title = ""
@@ -47,6 +45,76 @@ class Movie {
     var voteCount = 0
     var revenue = 0
     var posterUrl = ""
+    
+    private var queries : [String : PFQuery<PFObject>] = [:]
+    
+    func getCast(onSuccess: @escaping ([Cast])->Void){
+        let query = queries["cast"]?.order(byAscending: "order")
+        query?.findObjectsInBackground { (objects, error) -> Void in
+            if let error = error{
+                print("\(error) \(error.localizedDescription)")
+                return
+            }
+            if let objects = objects{
+                var cast : [Cast] = []
+                for (_, object) in objects.enumerated(){
+                    cast.append(Cast(pfo: object))
+                }
+                onSuccess(cast)
+            }
+        }
+    }
+    
+    func getCrew(onSuccess: @escaping ([Crew])->Void){
+        let query = queries["crew"]
+        query?.findObjectsInBackground { (objects, error) -> Void in
+            if let error = error{
+                print("\(error) \(error.localizedDescription)")
+                return
+            }
+            if let objects = objects{
+                var crew : [Crew] = []
+                for (_, object) in objects.enumerated(){
+                    crew.append(Crew(pfo: object))
+                }
+                onSuccess(crew)
+            }
+        }
+    }
+    
+    func getGenres(onSuccess: @escaping ([Genre])->Void){
+        let query = queries["genres"]
+        query?.findObjectsInBackground { (objects, error) -> Void in
+            if let error = error{
+                print("\(error) \(error.localizedDescription)")
+                return
+            }
+            if let objects = objects{
+                var genre : [Genre] = []
+                for (_, object) in objects.enumerated(){
+                    genre.append(Genre(pfo: object))
+                }
+                onSuccess(genre)
+            }
+        }
+    }
+    
+    func getCountries(onSuccess: @escaping ([Country])->Void){
+        let query = queries["countries"]
+        query?.findObjectsInBackground { (objects, error) -> Void in
+            if let error = error{
+                print("\(error) \(error.localizedDescription)")
+                return
+            }
+            if let objects = objects{
+                var countries : [Country] = []
+                for (_, object) in objects.enumerated(){
+                    countries.append(Country(pfo: object))
+                }
+                onSuccess(countries)
+            }
+        }
+    }
     
     var imageUrl : String{
         get{
@@ -65,31 +133,12 @@ class Movie {
         self.voteAverage = pfo["vote_average"] as! Double
         self.tagline = pfo["tagline"] as! String
         
-        pfo.relation(forKey: "genres").query().findObjectsInBackground { (objects, error) -> Void in
-            if let error = error{
-                print("\(error) \(error.localizedDescription)")
-                return
-            }
-            if let objects = objects{
-                for (_, object) in objects.enumerated(){
-                    self.genres.append(Genre(pfo: object))
-                }
-            }
-        }
+        self.queries["cast"] = pfo.relation(forKey: "actors").query()
+        self.queries["crew"] = pfo.relation(forKey: "crew").query()
+        self.queries["genres"] = pfo.relation(forKey: "genres").query()
+        self.queries["countries"] = pfo.relation(forKey: "countries").query()
         
         self.status = pfo["status"] as! String
-        
-        pfo.relation(forKey: "countries").query().findObjectsInBackground { (objects, error) -> Void in
-            if let error = error{
-                print("\(error) \(error.localizedDescription)")
-                return
-            }
-            if let objects = objects{
-                for (_, object) in objects.enumerated(){
-                    self.countries.append(Country(pfo: object))
-                }
-            }
-        }
         
         self.id = pfo["ID"] as! Int
         self.popularity = pfo["popularity"] as! Double

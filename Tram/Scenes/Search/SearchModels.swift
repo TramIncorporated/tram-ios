@@ -28,16 +28,7 @@ enum Search
     }
     struct ViewModel
     {
-        struct ShortMovie{
-            var title : String
-            var year : String
-            var rating : String
-            var stars : [String]
-            var imageUrl : String
-            var movie : Movie?
-        }
-        
-        var movies : [ShortMovie]
+        var movies : [Movie]
     }
   }
 }

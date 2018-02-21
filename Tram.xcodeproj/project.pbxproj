@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880BDB42203DA190009431E2 /* ParseWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880BDB41203DA190009431E2 /* ParseWorker.swift */; };
 		883B5F0B20304BD90012F913 /* MovieCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 883B5F0920304BD80012F913 /* MovieCollectionCell.xib */; };
 		883B5F0C20304BD90012F913 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B5F0A20304BD80012F913 /* MovieCollectionViewCell.swift */; };
 		883B5F132030A2C40012F913 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B5F112030A2C40012F913 /* TitleCollectionViewCell.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		880BDB41203DA190009431E2 /* ParseWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseWorker.swift; sourceTree = "<group>"; };
 		883B5F0920304BD80012F913 /* MovieCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionCell.xib; sourceTree = "<group>"; };
 		883B5F0A20304BD80012F913 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		883B5F112030A2C40012F913 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		880BDB40203DA17B009431E2 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				880BDB41203DA190009431E2 /* ParseWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		883B5F0820304BD80012F913 /* MovieCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +313,7 @@
 		9ECDD3591ACC2BC3F360F75E /* Tram */ = {
 			isa = PBXGroup;
 			children = (
+				880BDB40203DA17B009431E2 /* Workers */,
 				883B5F0E2030A2450012F913 /* Views */,
 				88C2EB462024CAFA00DEAC47 /* Models */,
 				88C2EB322024CAFA00DEAC47 /* Scenes */,
@@ -410,6 +421,7 @@
 				88C2EB552024CAFA00DEAC47 /* SearchRouter.swift in Sources */,
 				88C2EB632024CAFA00DEAC47 /* ImageExtension.swift in Sources */,
 				88C2EB622024CAFA00DEAC47 /* Person.swift in Sources */,
+				880BDB42203DA190009431E2 /* ParseWorker.swift in Sources */,
 				88C2EB5B2024CAFA00DEAC47 /* MovieDetailsPresenter.swift in Sources */,
 				88C2EB5F2024CAFA00DEAC47 /* MovieDetailsModels.swift in Sources */,
 				883B5F0C20304BD90012F913 /* MovieCollectionViewCell.swift in Sources */,

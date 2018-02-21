@@ -43,12 +43,17 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     
     func loadPeople(request: MovieDetails.LoadPeople.Request) {
         if let movie = movie{
-            DispatchQueue.global().async {
-                let people = self.worker?.loadPeople(of: movie, type: request.type)
-                if let people = people{
-                    let response = MovieDetails.LoadPeople.Response(type: request.type, people: people)
+            switch request.type{
+            case .Cast:
+                self.worker?.loadCast(of: movie, onSuccess: { (cast) in
+                    let response = MovieDetails.LoadPeople.Response(type: request.type, people: cast)
                     self.presenter?.presentPeople(response: response)
-                }
+                })
+            case .Crew:
+                self.worker?.loadCrew(of: movie, onSuccess: { (crew) in
+                    let response = MovieDetails.LoadPeople.Response(type: request.type, people: crew)
+                    self.presenter?.presentPeople(response: response)
+                })
             }
         }
     }

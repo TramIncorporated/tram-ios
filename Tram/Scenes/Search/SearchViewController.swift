@@ -88,32 +88,37 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         interactor?.searchMovies(request: request)
     }
     
-    var shortMovies = [Search.SearchMovies.ViewModel.ShortMovie]()
+    var movies : [Movie] = []
     
     func displayMovies(viewModel: Search.SearchMovies.ViewModel)
     {
-        shortMovies = viewModel.movies
+        movies = viewModel.movies
         collectionView.reloadData()
     }
 }
 
 extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shortMovies.count
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionViewCell
         
-        let m = shortMovies[indexPath.row]
+        let m = movies[indexPath.row]
         
         cell.titleLabel.text = m.title
         cell.yearLabel.text = m.year
         cell.ratingLabel.text = m.rating
-        cell.starsLabel.text = m.stars.joined(separator: ", ")
+        
+        m.getCast { (cast) in
+            cell.starsLabel.text = cast.prefix(2).flatMap({ (c) -> String? in
+                c.name
+            }).joined(separator: ", ")
+        }
         
         cell.imageView.setImageInBackground(url: URL(string: m.imageUrl))
-        cell.movie = m.movie
+        cell.movie = m
         
         return cell
     }

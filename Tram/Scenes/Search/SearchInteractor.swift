@@ -29,11 +29,14 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore
     var presenter: SearchPresentationLogic?
     var worker: SearchWorker?
     
+    init(){
+        worker = SearchWorker()
+    }
+    
     // MARK: Do something
     
     func searchMovies(request: Search.SearchMovies.Request)
     {
-        worker = SearchWorker()
         worker?.searchMovies(query: request.query, onSuccess: { (movies) in
             self.movies = movies
             let response = Search.SearchMovies.Response(movies: movies)

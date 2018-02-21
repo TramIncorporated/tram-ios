@@ -38,18 +38,7 @@ class MovieDetailsPresenter: MovieDetailsPresentationLogic
     func fillData(response: MovieDetails.FillData.Response)
     {
         let movie = response.movie
-        let viewModel = MovieDetails.FillData.ViewModel(
-            title: movie?.title,
-            year: movie?.year,
-            length: movie?.length,
-            genres: movie?.genres.map({ (genre) -> String in
-                return genre.name
-            }).joined(separator: ", "),
-            heartRating: movie?.rating,
-            starRating: "Not available",
-            imageUrl: movie?.imageUrl,
-            plot: movie?.overview,
-            details: [])
+        let viewModel = MovieDetails.FillData.ViewModel(movie: movie)
         viewController?.displayFilling(viewModel: viewModel)
     }
     

@@ -43,10 +43,8 @@ extension PeopleCollectionViewCell : UICollectionViewDelegate, UICollectionViewD
         let job = people[indexPath.row]
         
         cell.nameLabel.text = job.name
-        cell.roleLabel.text = job.role
-        if let url = job.imageUrl{
-            cell.imageView.setImageInBackground(url: URL(string: url))
-        }
+        cell.roleLabel.text = job.position
+        cell.imageView.setImageInBackground(url: URL(string: job.imageUrl))
         
         return cell
     }

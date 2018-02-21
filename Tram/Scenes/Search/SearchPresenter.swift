@@ -25,11 +25,7 @@ class SearchPresenter: SearchPresentationLogic
     
     func presentMovies(response: Search.SearchMovies.Response)
     {
-        let shortMovies = response.movies.map { (movie) -> Search.SearchMovies.ViewModel.ShortMovie in
-            return Search.SearchMovies.ViewModel.ShortMovie(title: movie.title, year: movie.year, rating: movie.rating, stars: ["Not avaliable"], imageUrl: movie.imageUrl, movie: movie)
-        }
-        
-        let viewModel = Search.SearchMovies.ViewModel(movies: shortMovies)
+        let viewModel = Search.SearchMovies.ViewModel(movies: response.movies)
         viewController?.displayMovies(viewModel: viewModel)
     }
 }

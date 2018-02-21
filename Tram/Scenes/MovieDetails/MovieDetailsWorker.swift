@@ -57,39 +57,13 @@ class MovieDetailsWorker
         }
     }
     
-    func loadPeople(of movie: Movie, type: MovieDetails.LoadPeople.JobType) -> [Job] {
-        var people: [Job] = []
-        let id = movie.id
-        var roleName = ""
-        var className = ""
-        switch type{
-        case .Cast:
-            roleName = "character"
-            className = "Cast"
-        case .Crew:
-            roleName = "job"
-            className = "Crew"
-        }
-        
-        let query = PFQuery(className: className).whereKey("movie_id", equalTo: id)
-        query.cachePolicy = .networkElseCache
-        do{
-            let credits = try query.findObjects()
-            for credit in credits{
-                let role = credit[roleName] as! String
-                let id = credit["ID"] as! Int
-                let personQuery = PFQuery(className: "Person").whereKey("ID", equalTo: id)
-                personQuery.cachePolicy = .networkElseCache
-                
-                let object = try personQuery.getFirstObject()
-                let person = Person(pfo: object)
-                people.append(Job(name: person.name, role: role, imageUrl: person.imageUrl))
-            }
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-        
-        return people
+    func loadCast(of movie: Movie, onSuccess: @escaping ([Cast])->Void){
+        let worker = ParseWorker()
+        worker.loadCast(of: movie, onSuccess: onSuccess)
+    }
+    
+    func loadCrew(of movie: Movie, onSuccess: @escaping ([Crew])->Void){
+        let worker = ParseWorker()
+        worker.loadCrew(of: movie, onSuccess: onSuccess)
     }
 }
