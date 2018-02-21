@@ -25,7 +25,9 @@ class PeopleCollectionViewCell: UICollectionViewCell {
     
     var people : [Job] = []{
         didSet{
-            self.peopleCollection.reloadData()
+            DispatchQueue.main.async {
+                self.peopleCollection.reloadData()
+            }
         }
     }
 }

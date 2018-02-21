@@ -17,9 +17,10 @@ protocol MovieDetailsDisplayLogic: class
     func displayFilling(viewModel: MovieDetails.FillData.ViewModel)
     func displayCrew(viewModel: MovieDetails.LoadPeople.ViewModel)
     func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel)
+    func displayWatchlistStatus(viewModel: MovieDetails.Watchlist.ViewModel)
 }
 
-class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
+class MovieDetailsViewController: UIViewController
 {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -85,9 +86,18 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
         loadCrew()
     }
     
-    // MARK: Do something
+    @objc func topButtonPressed(_ sender: Any) {
+        let request = MovieDetails.Watchlist.Request(action: .Change)
+        interactor?.watchlist(request: request)
+    }
+    @objc func bottomButtonPressed(_ sender: Any) {
+    }
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    // Use cases
+    func determineWatchlistStatus(){
+        let request = MovieDetails.Watchlist.Request(action: .RequestStatus)
+        interactor?.watchlist(request: request)
+    }
     
     func fillData()
     {
@@ -104,7 +114,24 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
         let request = MovieDetails.LoadPeople.Request(type: .Cast)
         interactor?.loadPeople(request: request)
     }
+    
     var generalDataStore : MovieDetails.FillData.ViewModel?
+    
+    var titleCell : TitleCollectionViewCell?
+    var castCell: PeopleCollectionViewCell?
+    var crewCell: PeopleCollectionViewCell?
+    var plotCell: PlotCollectionViewCell?
+}
+
+extension MovieDetailsViewController : MovieDetailsDisplayLogic {
+    func displayWatchlistStatus(viewModel: MovieDetails.Watchlist.ViewModel) {
+        switch viewModel.status {
+        case .In:
+            titleCell?.topButton.setTitle("Remove from watchlist", for: .normal)
+        case .Out:
+            titleCell?.topButton.setTitle("Add to watchlist", for: .normal)
+        }
+    }
     
     func displayFilling(viewModel: MovieDetails.FillData.ViewModel)
     {
@@ -117,17 +144,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
     
     func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel) {
         castCell?.people = viewModel.people
-        
-        //collectionView.reloadItems(at: )
     }
-    
-    @IBAction func topButtonPressed(_ sender: Any) {
-    }
-    @IBAction func bottomButtonPressed(_ sender: Any) {
-    }
-    
-    var castCell: PeopleCollectionViewCell?
-    var crewCell: PeopleCollectionViewCell?
 }
 
 extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource{
@@ -139,6 +156,10 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
         switch indexPath.row {
         case 0:
             let titleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath) as! TitleCollectionViewCell
+            
+            titleCell.topButton.addTarget(self, action: #selector(self.topButtonPressed(_:)), for: .touchUpInside)
+            titleCell.bottomButton.addTarget(self, action: #selector(self.bottomButtonPressed(_:)), for: .touchUpInside)
+            
             if let viewModel = generalDataStore {
                 titleCell.titleLabel.text = viewModel.title
                 titleCell.yearLabel.text = viewModel.year
@@ -149,6 +170,9 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
                     titleCell.imageView.setImageInBackground(url: URL(string: imageUrl))
                 }
             }
+            self.titleCell = titleCell
+            
+            determineWatchlistStatus()
             
             return titleCell
             
@@ -159,6 +183,8 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
                 plotCell.sectionTitleLabel.text = "Plot"
                 plotCell.textView.text = viewModel.plot
             }
+            
+            self.plotCell = plotCell
             return plotCell
             
         case 2:

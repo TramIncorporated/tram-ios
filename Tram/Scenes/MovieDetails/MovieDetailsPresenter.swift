@@ -16,6 +16,7 @@ protocol MovieDetailsPresentationLogic
 {
     func fillData(response: MovieDetails.FillData.Response)
     func presentPeople(response: MovieDetails.LoadPeople.Response)
+    func presentWatchlist(response: MovieDetails.Watchlist.Response)
 }
 
 class MovieDetailsPresenter: MovieDetailsPresentationLogic
@@ -24,14 +25,14 @@ class MovieDetailsPresenter: MovieDetailsPresentationLogic
     
     func presentPeople(response: MovieDetails.LoadPeople.Response) {
         let viewModel = MovieDetails.LoadPeople.ViewModel(people: response.people)
-        if let type = response.type{
-            switch type {
-            case .Cast:
-                viewController?.displayCast(viewModel: viewModel)
-            case .Crew:
-                viewController?.displayCrew(viewModel: viewModel)
-            }
+        
+        switch response.type {
+        case .Cast:
+            viewController?.displayCast(viewModel: viewModel)
+        case .Crew:
+            viewController?.displayCrew(viewModel: viewModel)
         }
+        
     }
     
     func fillData(response: MovieDetails.FillData.Response)
@@ -50,5 +51,9 @@ class MovieDetailsPresenter: MovieDetailsPresentationLogic
             plot: movie?.overview,
             details: [])
         viewController?.displayFilling(viewModel: viewModel)
+    }
+    
+    func presentWatchlist(response: MovieDetails.Watchlist.Response){
+        viewController?.displayWatchlistStatus(viewModel: MovieDetails.Watchlist.ViewModel(status: response.status))
     }
 }

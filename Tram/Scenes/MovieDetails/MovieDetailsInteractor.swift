@@ -16,6 +16,7 @@ protocol MovieDetailsBusinessLogic
 {
     func fillData(request: MovieDetails.FillData.Request)
     func loadPeople(request: MovieDetails.LoadPeople.Request)
+    func watchlist(request: MovieDetails.Watchlist.Request)
 }
 
 protocol MovieDetailsDataStore
@@ -30,7 +31,9 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     var presenter: MovieDetailsPresentationLogic?
     var worker: MovieDetailsWorker?
     
-    // MARK: Do something
+    init(){
+        worker = MovieDetailsWorker()
+    }
     
     func fillData(request: MovieDetails.FillData.Request)
     {
@@ -39,18 +42,22 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     }
     
     func loadPeople(request: MovieDetails.LoadPeople.Request) {
-        if worker == nil{
-            worker = MovieDetailsWorker()
-        }
-        
-        if let movie = movie, let type = request.type{
+        if let movie = movie{
             DispatchQueue.global().async {
-                let people = self.worker?.loadPeople(of: movie, type: type)
+                let people = self.worker?.loadPeople(of: movie, type: request.type)
                 if let people = people{
-                    let response = MovieDetails.LoadPeople.Response(type: type, people: people)
+                    let response = MovieDetails.LoadPeople.Response(type: request.type, people: people)
                     self.presenter?.presentPeople(response: response)
                 }
             }
+        }
+    }
+    
+    func watchlist(request: MovieDetails.Watchlist.Request){
+        if let movie = movie{
+            worker?.watchlist(movie: movie, action: request.action, onSuccess: { (status) in
+                self.presenter?.presentWatchlist(response: MovieDetails.Watchlist.Response(status: status))
+            })
         }
     }
 }

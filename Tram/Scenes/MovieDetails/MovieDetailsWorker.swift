@@ -15,6 +15,48 @@ import Parse
 
 class MovieDetailsWorker
 {
+    func watchlist(movie: Movie, action: MovieDetails.Watchlist.Action, onSuccess: (MovieDetails.Watchlist.Status)->Void){
+        let ud = UserDefaults.standard
+        let key = "watchlist_movie"
+        var list = ud.stringArray(forKey: key) ?? []
+        var status = list.contains(String(movie.id))
+        
+        switch action {
+        case .RequestStatus:
+            break
+        case .Add:
+            if !status{
+                list.append(String(movie.id))
+            }
+        case .Remove:
+            if status{
+                if let index = list.index(of: String(movie.id)){
+                    list.remove(at: index)
+                }
+            }
+        case .Change:
+            if status {
+                if let index = list.index(of: String(movie.id)){
+                    list.remove(at: index)
+                }
+            }
+            else {
+                list.append(String(movie.id))
+            }
+        }
+        
+        status = list.contains(String(movie.id))
+        
+        ud.set(list, forKey: key)
+        
+        if status {
+            onSuccess(.In)
+        }
+        else {
+            onSuccess(.Out)
+        }
+    }
+    
     func loadPeople(of movie: Movie, type: MovieDetails.LoadPeople.JobType) -> [Job] {
         var people: [Job] = []
         let id = movie.id

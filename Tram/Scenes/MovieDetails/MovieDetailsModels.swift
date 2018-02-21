@@ -46,16 +46,39 @@ enum MovieDetails
         }
         
         struct Request{
-            var type : JobType?
+            var type : JobType
         }
         
         struct Response{
-            var type: JobType?
+            var type: JobType
             var people: [Job]
         }
         
         struct ViewModel{
             var people:[Job]
+        }
+    }
+    
+    enum Watchlist{
+        enum Status{
+            case In
+            case Out
+        }
+        enum Action{
+            case Add
+            case Remove
+            case RequestStatus
+            case Change
+        }
+        
+        struct Request {
+            var action : Action
+        }
+        struct Response {
+            var status : Status
+        }
+        struct ViewModel{
+            var status : Status
         }
     }
 }
