@@ -82,8 +82,7 @@ class MovieDetailsViewController: UIViewController
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
         fillData()
-        loadCast()
-        loadCrew()
+        loadPeople()
     }
     
     @objc func topButtonPressed(_ sender: Any) {
@@ -105,13 +104,8 @@ class MovieDetailsViewController: UIViewController
         interactor?.fillData(request: request)
     }
     
-    func loadCrew(){
-        let request = MovieDetails.LoadPeople.Request(type: .Crew)
-        interactor?.loadPeople(request: request)
-    }
-    
-    func loadCast(){
-        let request = MovieDetails.LoadPeople.Request(type: .Cast)
+    func loadPeople(){
+        let request = MovieDetails.LoadPeople.Request()
         interactor?.loadPeople(request: request)
     }
     
@@ -149,7 +143,7 @@ extension MovieDetailsViewController : MovieDetailsDisplayLogic {
 
 extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 4 + (generalDataStore?.movie?.details.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -167,11 +161,9 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
                 titleCell.heartLabel.text = movie.rating
                 titleCell.starLabel.text = "Not available"
                 titleCell.imageView.setImageInBackground(url: URL(string: movie.imageUrl))
-                movie.getGenres(onSuccess: { (genres) in
-                    titleCell.genresLabel.text = genres.flatMap({ (g) -> String? in
-                        g.name
-                    }).joined(separator: ", ")
-                })
+                titleCell.genresLabel.text = movie.genres.flatMap({ (g) -> String? in
+                    g.name
+                }).joined(separator: ", ")
             }
             self.titleCell = titleCell
             
@@ -205,6 +197,14 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             
             self.crewCell = crewCell
             return crewCell
+            
+        case 4..<(4+(generalDataStore?.movie?.details.count ?? 0)):
+            let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCollectionViewCell
+            if let details = generalDataStore?.movie?.details{
+                detailCell.nameLabel.text = details[indexPath.row - 4].0
+                detailCell.valueLabel.text = details[indexPath.row - 4].1
+            }
+            return detailCell // impossible case
             
         default:
             return UICollectionViewCell()

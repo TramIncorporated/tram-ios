@@ -17,25 +17,6 @@ class SearchWorker
 {
     func searchMovies(query: String, onSuccess: @escaping ([Movie])->Void)
     {
-        var movies = [Movie]()
-        
-        let query = PFQuery(className: "Movie").whereKey("title", hasPrefix: query)
-        
-        query.cachePolicy = .networkElseCache
-        query.findObjectsInBackground { (objects, error) -> Void in
-            if let error = error{
-                print("\(error) \(error.localizedDescription)")
-                return
-            }
-            
-            if let objects = objects{
-                for (_, object) in objects.enumerated(){
-                    let movie = Movie(pfo: object)
-                    movies.append(movie)
-                }
-                
-                onSuccess(movies)
-            }
-        }
+        TmdbWorker().searchMovies(query: query, onSuccess: onSuccess)
     }
 }

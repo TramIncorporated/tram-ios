@@ -12,7 +12,6 @@ class TitleCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         let screenWidth = UIScreen.main.bounds.size.width
         containerWidthConstraint.constant = screenWidth - (8 * 2)

@@ -21,11 +21,11 @@ class SearchPresenter: SearchPresentationLogic
 {
     weak var viewController: SearchDisplayLogic?
     
-    // MARK: Do something
-    
     func presentMovies(response: Search.SearchMovies.Response)
     {
         let viewModel = Search.SearchMovies.ViewModel(movies: response.movies)
-        viewController?.displayMovies(viewModel: viewModel)
+        DispatchQueue.main.async {
+            self.viewController?.displayMovies(viewModel: viewModel)
+        }
     }
 }

@@ -10,67 +10,69 @@ import Foundation
 import Parse
 
 protocol Job{
-    var name: String { get set }
-    var position: String { get set }
-    var profilePath: String { get set }
-    var gender : Int { get set }
-    var id : Int { get set }
-    var creditId : String { get set }
-    var imageUrl: String { get }
+    var name : String? {get set}
+    var position : String {get set}
+    var profile_path : String? {get set}
+    var gender : Int {get set}
+    var id : Int {get set}
+    var credit_id : String? {get set}
+    var imageUrl : String {get}
 }
 
-struct Cast : Job{
-    var imageUrl: String {
+struct Cast : Codable, Job{
+    var position: String{
         get{
-            return "http://image.tmdb.org/t/p/w185\(profilePath)"
+            return character ?? ""
+        }
+        set{
+            character = newValue
         }
     }
     
-    var name: String = ""
-    var position: String = ""// character
-    var profilePath: String = "" // profile_path
-    var castId = -1 // cast_id
-    var creditId = "" // credit_id
+    var imageUrl: String {
+        if let profile_path = profile_path{
+            return "http://image.tmdb.org/t/p/w185\(profile_path)"
+        }
+        return ""
+    }
+    
+    var name: String?
+    var character: String?// character
+    var profile_path: String? // profile_path
+    var cast_id = -1 // cast_id
+    var credit_id : String? // credit_id
     var gender = -1
     var id = -1 // ID
     var order = -1
-    
-    init(pfo: PFObject){
-        self.name = pfo.getString(forKey: "name")
-        self.position = pfo.getString(forKey: "character")
-        self.profilePath = pfo.getString(forKey: "profile_path")
-        self.castId = pfo.getInt(forKey: "cast_id")
-        self.creditId = pfo.getString(forKey: "credit_id")
-        self.gender = pfo.getInt(forKey: "gender")
-        self.id = pfo.getInt(forKey: "ID")
-        self.order = pfo.getInt(forKey: "order")
-    }
 }
 
-struct Crew : Job{
-    var imageUrl: String {
+struct Crew : Codable, Job{
+    
+    var position: String {
         get{
-            return "http://image.tmdb.org/t/p/w185\(profilePath)"
+            return job ?? ""
+        }
+        set{
+            job = newValue
         }
     }
     
-    var name: String = ""
-    var position: String = "" // job
-    var profilePath: String = "" // profile_path
-    var creditId = "" // credit_id
-    var department = ""
+    var imageUrl: String {
+        get{
+            if let profile_path = profile_path{
+            return "http://image.tmdb.org/t/p/w185\(profile_path)"
+            }
+            return ""
+        }
+    }
+    
+    var name: String?
+    var job: String? // job
+    var profile_path: String? // profile_path
+    var credit_id : String? // credit_id
+    var department : String?
     var gender = -1
     var id = -1 // ID
-    
-    init(pfo: PFObject){
-        self.name = pfo.getString(forKey: "name")
-        self.position = pfo.getString(forKey: "character")
-        self.profilePath = pfo.getString(forKey: "profile_path")
-        self.creditId = pfo.getString(forKey: "creditId")
-        self.gender = pfo.getInt(forKey: "gender")
-        self.id = pfo.getInt(forKey: "ID")
-        self.department = pfo.getString(forKey: "department")
-    }
 }
 
 extension PFObject{

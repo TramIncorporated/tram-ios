@@ -110,11 +110,16 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
         cell.yearLabel.text = m.year
         cell.ratingLabel.text = m.rating
         
-        m.getCast { (cast) in
-            cell.starsLabel.text = cast.prefix(2).flatMap({ (c) -> String? in
+        TmdbWorker().getCredits(movieId: m.id) { (cast, crew) in
+            let text = cast.sorted(by: { (a, b) -> Bool in
+                a.order<b.order
+            }).prefix(2).flatMap({ (c) -> String? in
                 c.name
             }).joined(separator: ", ")
-        }
+            DispatchQueue.main.async {
+                cell.starsLabel.text = text
+            }
+        } // todo overlook with VIP
         
         cell.imageView.setImageInBackground(url: URL(string: m.imageUrl))
         cell.movie = m
@@ -137,6 +142,14 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
 
 extension SearchViewController : UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-        searchMovies(query: searchText)
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text{
+            if text.count>0{
+                searchMovies(query: text)
+            }
+        }
     }
 }

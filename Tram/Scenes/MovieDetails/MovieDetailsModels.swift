@@ -32,7 +32,6 @@ enum MovieDetails
     enum LoadPeople{
         
         struct Request{
-            var type : JobType
         }
         
         struct Response{

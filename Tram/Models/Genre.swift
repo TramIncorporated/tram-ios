@@ -9,14 +9,11 @@
 import Foundation
 import Parse
 
-class Genre{
-    var objectId = ""
+class Genre : Codable{
     var id = 0
     var name = ""
-    
-    init(pfo : PFObject){
-        self.objectId = pfo.objectId!
-        self.id = pfo["id"] as! Int
-        self.name = pfo["name"] as! String
+    init(from json: JSONGenre){
+        id = json.id
+        name = json.name ?? ""
     }
 }

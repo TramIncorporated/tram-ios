@@ -16,10 +16,10 @@ enum JobType{
 
 class ParseWorker{
     func loadCast(of movie: Movie, onSuccess: @escaping ([Cast])->Void){
-        movie.getCast(onSuccess: onSuccess)
+//        movie.getCast(onSuccess: onSuccess)
     }
     
     func loadCrew(of movie: Movie, onSuccess: @escaping ([Crew])->Void){
-        movie.getCrew(onSuccess: onSuccess)
+//        movie.getCrew(onSuccess: onSuccess)
     }
 }

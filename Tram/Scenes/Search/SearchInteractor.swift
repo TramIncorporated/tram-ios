@@ -37,10 +37,10 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore
     
     func searchMovies(request: Search.SearchMovies.Request)
     {
-        worker?.searchMovies(query: request.query, onSuccess: { (movies) in
+        worker?.searchMovies(query: request.query) { (movies) in
             self.movies = movies
             let response = Search.SearchMovies.Response(movies: movies)
             self.presenter?.presentMovies(response: response)
-        })
+        }
     }
 }

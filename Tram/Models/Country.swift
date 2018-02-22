@@ -9,14 +9,11 @@
 import Foundation
 import Parse
 
-class Country{
-    var objectId = ""
-    var iso = ""
+class Country : Codable{
+    var code = ""
     var name = ""
-    
-    init(pfo : PFObject){
-        self.objectId = pfo.objectId!
-        self.iso = pfo["iso_3166_1"] as! String
-        self.name = pfo["name"] as! String
+    init(from json: JSONCountry){
+        code = json.iso_3166_1 ?? ""
+        name = json.name ?? ""
     }
 }
