@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sectionHeader" id="U6b-Vx-4bR" customClass="ListHeaderCollectionReusableView" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ImO-Si-c1D">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLL-id-H4d">
+                            <rect key="frame" x="16" y="9.5" width="66" height="31"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-WP-u09">
+                            <rect key="frame" x="366" y="5" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="VB4-LU-GOP"/>
+                                <constraint firstAttribute="width" secondItem="3Ea-WP-u09" secondAttribute="height" multiplier="1:1" id="W2U-Fh-eFw"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="arrow"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="W4C-y2-P5h" firstAttribute="trailing" secondItem="3Ea-WP-u09" secondAttribute="trailing" constant="8" id="1Xb-ee-IxA"/>
+                        <constraint firstItem="aLL-id-H4d" firstAttribute="centerY" secondItem="W4C-y2-P5h" secondAttribute="centerY" id="KJB-ma-pNm"/>
+                        <constraint firstItem="aLL-id-H4d" firstAttribute="leading" secondItem="W4C-y2-P5h" secondAttribute="leading" constant="16" id="oPK-QC-dLK"/>
+                        <constraint firstItem="3Ea-WP-u09" firstAttribute="centerY" secondItem="W4C-y2-P5h" secondAttribute="centerY" id="sV8-UO-ZcA"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="W4C-y2-P5h"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ImO-Si-c1D" secondAttribute="bottom" id="2QY-FN-C93"/>
+                <constraint firstItem="ImO-Si-c1D" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="QYJ-rk-wSs"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="ImO-Si-c1D" secondAttribute="trailing" id="Zmc-bZ-xW3"/>
+                <constraint firstItem="ImO-Si-c1D" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="k1s-iu-X9P"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="hideButton" destination="3Ea-WP-u09" id="p9F-bj-4Hs"/>
+                <outlet property="sectionTitle" destination="aLL-id-H4d" id="ztL-yn-pZk"/>
+            </connections>
+            <point key="canvasLocation" x="36" y="-37"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="arrow" width="200" height="200"/>
+    </resources>
+</document>

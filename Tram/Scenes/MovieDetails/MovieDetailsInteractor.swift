@@ -16,7 +16,7 @@ protocol MovieDetailsBusinessLogic
 {
     func fillData(request: MovieDetails.FillData.Request)
     func loadPeople(request: MovieDetails.LoadPeople.Request)
-    func watchlist(request: MovieDetails.Watchlist.Request)
+    func list(request: MovieDetails.List.Request)
 }
 
 protocol MovieDetailsDataStore
@@ -54,10 +54,10 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
         }
     }
     
-    func watchlist(request: MovieDetails.Watchlist.Request){
+    func list(request: MovieDetails.List.Request){
         if let movie = movie{
-            worker?.watchlist(movie: movie, action: request.action, onSuccess: { (status) in
-                self.presenter?.presentWatchlist(response: MovieDetails.Watchlist.Response(status: status))
+            worker?.list(movie: movie, name: request.list, action: request.action, onSuccess: { (list, status) in
+                self.presenter?.presentList(response: MovieDetails.List.Response(list: list, status: status))
             })
         }
     }

@@ -17,7 +17,8 @@ protocol MovieDetailsDisplayLogic: class
     func displayFilling(viewModel: MovieDetails.FillData.ViewModel)
     func displayCrew(viewModel: MovieDetails.LoadPeople.ViewModel)
     func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel)
-    func displayWatchlistStatus(viewModel: MovieDetails.Watchlist.ViewModel)
+    func displayWatchlistStatus(viewModel: MovieDetails.List.ViewModel)
+    func displayWatchedStatus(viewModel: MovieDetails.List.ViewModel)
 }
 
 class MovieDetailsViewController: UIViewController
@@ -86,16 +87,23 @@ class MovieDetailsViewController: UIViewController
     }
     
     @objc func topButtonPressed(_ sender: Any) {
-        let request = MovieDetails.Watchlist.Request(action: .Change)
-        interactor?.watchlist(request: request)
+        let request = MovieDetails.List.Request(list: .Watchlist,action: .Change)
+        interactor?.list(request: request)
     }
     @objc func bottomButtonPressed(_ sender: Any) {
+        let request = MovieDetails.List.Request(list: .Watched, action: .Change)
+        interactor?.list(request: request)
     }
     
     // Use cases
     func determineWatchlistStatus(){
-        let request = MovieDetails.Watchlist.Request(action: .RequestStatus)
-        interactor?.watchlist(request: request)
+        let request = MovieDetails.List.Request(list: .Watchlist, action: .RequestStatus)
+        interactor?.list(request: request)
+    }
+    
+    func determineWatchedStatus(){
+        let request = MovieDetails.List.Request(list: .Watched, action: .RequestStatus)
+        interactor?.list(request: request)
     }
     
     func fillData()
@@ -118,7 +126,16 @@ class MovieDetailsViewController: UIViewController
 }
 
 extension MovieDetailsViewController : MovieDetailsDisplayLogic {
-    func displayWatchlistStatus(viewModel: MovieDetails.Watchlist.ViewModel) {
+    func displayWatchedStatus(viewModel: MovieDetails.List.ViewModel) {
+        switch viewModel.status {
+        case .In:
+            titleCell?.bottomButton.setTitle("Unwatched", for: .normal)
+        case .Out:
+            titleCell?.bottomButton.setTitle("Watched", for: .normal)
+        }
+    }
+    
+    func displayWatchlistStatus(viewModel: MovieDetails.List.ViewModel) {
         switch viewModel.status {
         case .In:
             titleCell?.topButton.setTitle("Remove from watchlist", for: .normal)
@@ -168,6 +185,7 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             self.titleCell = titleCell
             
             determineWatchlistStatus()
+            determineWatchedStatus()
             
             return titleCell
             

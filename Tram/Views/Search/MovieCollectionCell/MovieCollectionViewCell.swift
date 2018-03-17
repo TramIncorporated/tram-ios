@@ -16,5 +16,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     
+    @IBOutlet weak var containerWidthConstraint: NSLayoutConstraint!
     var movie : Movie?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        let screenWidth = UIScreen.main.bounds.size.width
+        containerWidthConstraint.constant = screenWidth - (8*2)
+    }
 }

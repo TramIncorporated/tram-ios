@@ -22,8 +22,6 @@ class SearchViewController: UIViewController, SearchDisplayLogic
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     var interactor: SearchBusinessLogic?
     var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
     
@@ -69,12 +67,25 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         }
     }
     
-    // MARK: View lifecycle
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    func initSearchController(){
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search movies"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+    }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.collectionView.register(UINib(nibName: "MovieCollectionCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+        }
+        initSearchController()
     }
     
     // MARK: Do something
@@ -137,19 +148,14 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         router?.routeToMovieDetails(segue: nil)
-    }
+    }    
 }
 
-extension SearchViewController : UISearchBarDelegate{
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-        
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text{
-            if text.count>0{
-                searchMovies(query: text)
-            }
+extension SearchViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text, text != ""{
+            self.searchMovies(query: text)
         }
     }
 }

@@ -15,9 +15,20 @@ import Parse
 
 class MovieDetailsWorker
 {
-    func watchlist(movie: Movie, action: MovieDetails.Watchlist.Action, onSuccess: (MovieDetails.Watchlist.Status)->Void){
+    func list(movie: Movie, name: MovieDetails.List.Name, action: MovieDetails.List.Action, onSuccess: (MovieDetails.List.Name, MovieDetails.List.Status)->Void){
         let ud = UserDefaults.standard
-        let key = "watchlist_movie"
+        
+        var tkey: String?
+        switch name {
+        case .Watchlist:
+            tkey = "watchlist_movie"
+        case .Watched:
+            tkey = "watched_movie"
+        }
+        guard let key = tkey else{
+            return
+        }
+        
         var list = ud.stringArray(forKey: key) ?? []
         var status = list.contains(String(movie.id))
         
@@ -50,10 +61,10 @@ class MovieDetailsWorker
         ud.set(list, forKey: key)
         
         if status {
-            onSuccess(.In)
+            onSuccess(name, .In)
         }
         else {
-            onSuccess(.Out)
+            onSuccess(name, .Out)
         }
     }
     
@@ -66,4 +77,5 @@ class MovieDetailsWorker
         let worker = ParseWorker()
         worker.loadCrew(of: movie, onSuccess: onSuccess)
     }
+    
 }

@@ -31,7 +31,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-Lm-AqN" userLabel="TitleView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uKb-i2-shA">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uKb-i2-shA">
                                 <rect key="frame" x="8" y="8" width="117" height="184"/>
                                 <color key="backgroundColor" red="0.0" green="0.89798516039999998" blue="0.34294915199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -130,7 +130,7 @@
                             <constraint firstItem="3S4-Ig-OxH" firstAttribute="leading" secondItem="gKn-Wc-J1F" secondAttribute="trailing" constant="8" id="3rd-ZJ-WgR"/>
                             <constraint firstItem="uKb-i2-shA" firstAttribute="top" secondItem="Uxo-Lm-AqN" secondAttribute="top" constant="8" id="3sG-5d-pN4"/>
                             <constraint firstItem="Y7d-ZQ-GJ4" firstAttribute="leading" secondItem="yXx-uw-hcC" secondAttribute="leading" id="5A2-cW-OtG"/>
-                            <constraint firstItem="uKb-i2-shA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Uxo-Lm-AqN" secondAttribute="leading" constant="8" id="5jM-p2-6RV"/>
+                            <constraint firstItem="uKb-i2-shA" firstAttribute="leading" secondItem="Uxo-Lm-AqN" secondAttribute="leading" constant="8" id="5jM-p2-6RV"/>
                             <constraint firstAttribute="bottom" secondItem="uKb-i2-shA" secondAttribute="bottom" constant="8" id="6X2-rq-o4L"/>
                             <constraint firstItem="uKb-i2-shA" firstAttribute="trailing" secondItem="Uxo-Lm-AqN" secondAttribute="leading" constant="125" id="6dR-7F-zMU"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3yj-03-5Fg" secondAttribute="trailing" constant="8" id="7FP-1L-TA8"/>

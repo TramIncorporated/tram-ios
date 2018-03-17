@@ -14,6 +14,15 @@
 		880BDB44203E0CBC009431E2 /* TmdbWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880BDB43203E0CBC009431E2 /* TmdbWorker.swift */; };
 		880BDB46203E17AB009431E2 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880BDB45203E17AB009431E2 /* Company.swift */; };
 		880BDB48203E18BD009431E2 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880BDB47203E18BD009431E2 /* Language.swift */; };
+		8816BCC22045609700B7CE2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8816BCC12045609700B7CE2D /* Assets.xcassets */; };
+		8816BCCA2045639800B7CE2D /* ListsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCC42045639800B7CE2D /* ListsPresenter.swift */; };
+		8816BCCB2045639800B7CE2D /* ListsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCC52045639800B7CE2D /* ListsWorker.swift */; };
+		8816BCCC2045639800B7CE2D /* ListsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCC62045639800B7CE2D /* ListsRouter.swift */; };
+		8816BCCD2045639800B7CE2D /* ListsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCC72045639800B7CE2D /* ListsModels.swift */; };
+		8816BCCE2045639800B7CE2D /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCC82045639800B7CE2D /* ListsViewController.swift */; };
+		8816BCCF2045639800B7CE2D /* ListsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCC92045639800B7CE2D /* ListsInteractor.swift */; };
+		8816BCD520457A3800B7CE2D /* ListHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8816BCD320457A3800B7CE2D /* ListHeaderCollectionReusableView.swift */; };
+		8816BCD620457A3800B7CE2D /* ListHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8816BCD420457A3800B7CE2D /* ListHeaderCollectionReusableView.xib */; };
 		883A6D0E203ED22000CF6A1A /* JSONMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883A6D0D203ED22000CF6A1A /* JSONMovie.swift */; };
 		883B5F0B20304BD90012F913 /* MovieCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 883B5F0920304BD80012F913 /* MovieCollectionCell.xib */; };
 		883B5F0C20304BD90012F913 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B5F0A20304BD80012F913 /* MovieCollectionViewCell.swift */; };
@@ -60,7 +69,6 @@
 		88C2EB642024CAFA00DEAC47 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C2EB4B2024CAFA00DEAC47 /* Country.swift */; };
 		88D0ACE0203820FC0019D27C /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D0ACDF203820FC0019D27C /* Job.swift */; };
 		9ECDD2EFF812F91753E7E5C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ECDD2E3705169588B62A615 /* Main.storyboard */; };
-		9ECDD3CAACC3ECD9417F8BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ECDDBB3C089D6C5DEF55196 /* Assets.xcassets */; };
 		9ECDDDE10CB8ADDF0166F51B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ECDD1708221D170E70E4369 /* LaunchScreen.storyboard */; };
 		9ECDDFB20D62436BC12E3FD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECDDD923C5C868D39DB83CC /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +81,15 @@
 		880BDB43203E0CBC009431E2 /* TmdbWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbWorker.swift; sourceTree = "<group>"; };
 		880BDB45203E17AB009431E2 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		880BDB47203E18BD009431E2 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		8816BCC12045609700B7CE2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8816BCC42045639800B7CE2D /* ListsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsPresenter.swift; sourceTree = "<group>"; };
+		8816BCC52045639800B7CE2D /* ListsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsWorker.swift; sourceTree = "<group>"; };
+		8816BCC62045639800B7CE2D /* ListsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRouter.swift; sourceTree = "<group>"; };
+		8816BCC72045639800B7CE2D /* ListsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsModels.swift; sourceTree = "<group>"; };
+		8816BCC82045639800B7CE2D /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		8816BCC92045639800B7CE2D /* ListsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsInteractor.swift; sourceTree = "<group>"; };
+		8816BCD320457A3800B7CE2D /* ListHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		8816BCD420457A3800B7CE2D /* ListHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		883A6D0D203ED22000CF6A1A /* JSONMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMovie.swift; sourceTree = "<group>"; };
 		883B5F0920304BD80012F913 /* MovieCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionCell.xib; sourceTree = "<group>"; };
 		883B5F0A20304BD80012F913 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -121,7 +138,6 @@
 		9ECDD39DC662D7BE0C4ADFD0 /* Tram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ECDD93CE98B91D7CE27ABCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9ECDDAF9C6B5BCC15C517373 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9ECDDBB3C089D6C5DEF55196 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9ECDDD923C5C868D39DB83CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ECDDDF076298470FA7EFE97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +186,28 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
+		8816BCC32045637800B7CE2D /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				8816BCC42045639800B7CE2D /* ListsPresenter.swift */,
+				8816BCC52045639800B7CE2D /* ListsWorker.swift */,
+				8816BCC62045639800B7CE2D /* ListsRouter.swift */,
+				8816BCC72045639800B7CE2D /* ListsModels.swift */,
+				8816BCC82045639800B7CE2D /* ListsViewController.swift */,
+				8816BCC92045639800B7CE2D /* ListsInteractor.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		8816BCD2204579F500B7CE2D /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				8816BCD320457A3800B7CE2D /* ListHeaderCollectionReusableView.swift */,
+				8816BCD420457A3800B7CE2D /* ListHeaderCollectionReusableView.xib */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
 		883B5F0820304BD80012F913 /* MovieCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +220,7 @@
 		883B5F0E2030A2450012F913 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8816BCD2204579F500B7CE2D /* Lists */,
 				883B5F102030A2780012F913 /* MovieDetails */,
 				883B5F0F2030A26A0012F913 /* Search */,
 			);
@@ -283,6 +322,7 @@
 		88C2EB322024CAFA00DEAC47 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				8816BCC32045637800B7CE2D /* Lists */,
 				88C2EB332024CAFA00DEAC47 /* Search */,
 				88C2EB3A2024CAFA00DEAC47 /* MovieDetails */,
 			);
@@ -350,8 +390,8 @@
 				88C2EB462024CAFA00DEAC47 /* Models */,
 				88C2EB322024CAFA00DEAC47 /* Scenes */,
 				9ECDDDF076298470FA7EFE97 /* Info.plist */,
-				9ECDDBB3C089D6C5DEF55196 /* Assets.xcassets */,
 				9ECDD1708221D170E70E4369 /* LaunchScreen.storyboard */,
+				8816BCC12045609700B7CE2D /* Assets.xcassets */,
 				9ECDDD923C5C868D39DB83CC /* AppDelegate.swift */,
 				9ECDD2E3705169588B62A615 /* Main.storyboard */,
 			);
@@ -425,10 +465,11 @@
 				883B5F282030AB460012F913 /* PeopleCollectionViewCell.xib in Resources */,
 				883B5F0B20304BD90012F913 /* MovieCollectionCell.xib in Resources */,
 				883B5F2D2030ABE20012F913 /* DetailCollectionViewCell.xib in Resources */,
-				9ECDD3CAACC3ECD9417F8BE0 /* Assets.xcassets in Resources */,
 				9ECDDDE10CB8ADDF0166F51B /* LaunchScreen.storyboard in Resources */,
 				9ECDD2EFF812F91753E7E5C3 /* Main.storyboard in Resources */,
+				8816BCD620457A3800B7CE2D /* ListHeaderCollectionReusableView.xib in Resources */,
 				883B5F232030A5640012F913 /* PersonCollectionViewCell.xib in Resources */,
+				8816BCC22045609700B7CE2D /* Assets.xcassets in Resources */,
 				883B5F1A2030A3C10012F913 /* PlotCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,11 +486,15 @@
 				880BDB44203E0CBC009431E2 /* TmdbWorker.swift in Sources */,
 				880BDB48203E18BD009431E2 /* Language.swift in Sources */,
 				883B5F2C2030ABE20012F913 /* DetailCollectionViewCell.swift in Sources */,
+				8816BCCE2045639800B7CE2D /* ListsViewController.swift in Sources */,
 				88C2EB602024CAFA00DEAC47 /* Movie.swift in Sources */,
 				88C2EB512024CAFA00DEAC47 /* SearchInteractor.swift in Sources */,
 				88C2EB5C2024CAFA00DEAC47 /* MovieDetailsWorker.swift in Sources */,
 				88C2EB502024CAFA00DEAC47 /* SearchViewController.swift in Sources */,
+				8816BCCF2045639800B7CE2D /* ListsInteractor.swift in Sources */,
+				8816BCCB2045639800B7CE2D /* ListsWorker.swift in Sources */,
 				88C2EB5D2024CAFA00DEAC47 /* MovieDetailsViewController.swift in Sources */,
+				8816BCCD2045639800B7CE2D /* ListsModels.swift in Sources */,
 				88C2EB612024CAFA00DEAC47 /* Genre.swift in Sources */,
 				88C2EB522024CAFA00DEAC47 /* SearchPresenter.swift in Sources */,
 				880BDB46203E17AB009431E2 /* Company.swift in Sources */,
@@ -467,13 +512,16 @@
 				88C2EB5E2024CAFA00DEAC47 /* MovieDetailsRouter.swift in Sources */,
 				880B3124203E226E00A31DBA /* MovieSearchEntry.swift in Sources */,
 				88530D8D203E26F9003C87E2 /* CreditsRequestResult.swift in Sources */,
+				8816BCD520457A3800B7CE2D /* ListHeaderCollectionReusableView.swift in Sources */,
 				883B5F222030A5640012F913 /* PersonCollectionViewCell.swift in Sources */,
 				88C2EB642024CAFA00DEAC47 /* Country.swift in Sources */,
+				8816BCCC2045639800B7CE2D /* ListsRouter.swift in Sources */,
 				883B5F192030A3C10012F913 /* PlotCollectionViewCell.swift in Sources */,
 				883A6D0E203ED22000CF6A1A /* JSONMovie.swift in Sources */,
 				88C2EB532024CAFA00DEAC47 /* SearchModels.swift in Sources */,
 				88C2EB542024CAFA00DEAC47 /* SearchWorker.swift in Sources */,
 				88D0ACE0203820FC0019D27C /* Job.swift in Sources */,
+				8816BCCA2045639800B7CE2D /* ListsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
