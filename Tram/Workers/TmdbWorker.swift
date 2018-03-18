@@ -13,7 +13,7 @@ class TmdbWorker{
     let api_key = "a4eedc72a9524b6f354d4ce2624b29f7"
     
     func getMovie(by id: Int, onSuccess: @escaping (Movie)->Void) {
-        let urlString = "\(base)/movie/\(id)?api_key=\(api_key)"
+        let urlString = "\(base)/movie/\(id)?api_key=\(api_key)&append_to_response=credits"
         if let url = URL(string: urlString){
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
@@ -33,7 +33,7 @@ class TmdbWorker{
     }
     
     private func searchMovies(query: String, onSuccess: @escaping (MovieSearchResult)->Void){
-        let urlString = "\(base)/search/movie?api_key=\(api_key)&query=\(query)"
+        let urlString = "\(base)/search/movie?api_key=\(api_key)&query=\(query.addingPercentEncoding(withAllowedCharacters: []) ?? "")"
         if let url = URL(string: urlString){
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {

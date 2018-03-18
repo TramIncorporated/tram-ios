@@ -73,6 +73,8 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search movies"
+        searchController.searchBar.delegate = self
+        //searchController.searchBar.scopeButtonTitles = ["Movies", "TV Shows", "Users"]
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
@@ -121,19 +123,18 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
         cell.yearLabel.text = m.year
         cell.ratingLabel.text = m.rating
         
-        TmdbWorker().getCredits(movieId: m.id) { (cast, crew) in
-            let text = cast.sorted(by: { (a, b) -> Bool in
-                a.order<b.order
-            }).prefix(2).flatMap({ (c) -> String? in
-                c.name
-            }).joined(separator: ", ")
-            DispatchQueue.main.async {
-                cell.starsLabel.text = text
-            }
-        } // todo overlook with VIP
+        cell.starsLabel.text = m.stars
         
-        cell.imageView.setImageInBackground(url: URL(string: m.imageUrl))
         cell.movie = m
+        cell.imageView.alpha = 0
+        ImageCacheManager.getImageInBackground(url: URL(string: m.imageUrl)) { (image) in
+            if cell.movie?.id ?? -1 == m.id{
+                cell.imageView.image = image
+                UIView.animate(withDuration: 0.2) {
+                    cell.imageView.alpha = 1
+                }
+            }
+        }
         
         return cell
     }
@@ -145,16 +146,20 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
         let height : CGFloat = 100
         return CGSize(width: width, height: height)
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         router?.routeToMovieDetails(segue: nil)
     }    
 }
 
-extension SearchViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
+extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text, text != ""{
+//        if let text = searchController.searchBar.text, text != ""{
+//            self.searchMovies(query: text)
+//        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, text != ""{
             self.searchMovies(query: text)
         }
     }

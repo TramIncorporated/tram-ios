@@ -39,8 +39,14 @@ class Movie {
         voteAverage = json.vote_average
         voteCount = json.vote_count
         
+        crew = json.credits?.crew ?? []
+        cast = json.credits?.cast ?? []
+        
         initDetails()
     }
+    
+    var crew: [Crew]
+    var cast: [Cast]
     
     var adult : Bool?
     var budget : Int?
@@ -78,12 +84,12 @@ class Movie {
         }
         if let budget = budget{
             let key = "Budget"
-            let value = "$\(budget)"
+            let value = budget.toDollarString()
             details.append((key, value))
         }
         if let revenue = revenue{
             let key = "Revenue"
-            let value = "$\(revenue)"
+            let value = revenue.toDollarString()
             details.append((key, value))
         }
         if let homepage = homepage{
@@ -100,21 +106,21 @@ class Movie {
             let key = "Languages"
             let value = spokenLanguages.flatMap({ (l) -> String in
                 return l.name
-            }).joined(separator: ", ")
+            }).toBulletList()
             details.append((key, value))
         }
         if companies.count > 0{
             let key = "Companies"
             let value = companies.flatMap({ (c) -> String in
                 return c.name
-            }).joined(separator: ", ")
+            }).toBulletList()
             details.append((key, value))
         }
         if countries.count > 0{
             let key = "Countries"
             let value = countries.flatMap({ (c) -> String in
                 return c.name
-            }).joined(separator: ", ")
+            }).toBulletList()
             details.append((key, value))
         }
     }
@@ -168,6 +174,16 @@ class Movie {
                 return "http://image.tmdb.org/t/p/w185\(posterPath)"
             }
             return ""
+        }
+    }
+    
+    var stars : String{
+        get{
+            return cast
+                .sorted { $0.order < $1.order }
+                .prefix(2)
+                .flatMap{ $0.name }
+                .joined(separator: ", ")
         }
     }
 }

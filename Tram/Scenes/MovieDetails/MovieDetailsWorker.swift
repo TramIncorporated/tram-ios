@@ -68,14 +68,4 @@ class MovieDetailsWorker
         }
     }
     
-    func loadCast(of movie: Movie, onSuccess: @escaping ([Cast])->Void){
-        let worker = ParseWorker()
-        worker.loadCast(of: movie, onSuccess: onSuccess)
-    }
-    
-    func loadCrew(of movie: Movie, onSuccess: @escaping ([Crew])->Void){
-        let worker = ParseWorker()
-        worker.loadCrew(of: movie, onSuccess: onSuccess)
-    }
-    
 }

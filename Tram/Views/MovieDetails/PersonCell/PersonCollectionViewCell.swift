@@ -13,4 +13,6 @@ class PersonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var job : Job?
 }

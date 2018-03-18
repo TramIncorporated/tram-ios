@@ -71,7 +71,7 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     {
         super.viewDidLoad()
         
-        self.collectionView?.register(UINib(nibName: "MovieCollectionCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
+        self.collectionView?.register(UINib(nibName: "ListMovieCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
         self.collectionView?.register(UINib(nibName: "ListHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -168,7 +168,7 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! ListMovieCell
         var item: Movie?
         switch indexPath.section{
         case SectionIndex.Watchlist.rawValue:
@@ -179,12 +179,24 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
             ()
         }
         if let item = item{
+            cell.movie = item
             cell.titleLabel.text = item.title
-            cell.imageView.setImageInBackground(url: URL(string: (item.imageUrl)))
+            
+            cell.imageView.alpha = 0
+            ImageCacheManager.getImageInBackground(url: URL(string: item.imageUrl)) { (image) in
+                if cell.movie?.id ?? -1 == item.id{
+                    cell.imageView.image = image
+                    UIView.animate(withDuration: 0.2) {
+                        cell.imageView.alpha = 1
+                    }
+                }
+            }
+            
             cell.ratingLabel.text = item.rating
             cell.yearLabel.text = item.year
-            cell.starsLabel.text = "Not available"
+            cell.lengthLabel.text = item.length
         }
+        
         return cell
     }
     
@@ -220,7 +232,6 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     }
     
     @objc func toggleWatchlist(_ sender: Any){
-        print("watchlist")
         if let button = sender as? UIButton{
             var indexPaths: [IndexPath] = []
             for i in 0..<watchlistDataSource.count{
@@ -247,7 +258,6 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     }
     
     @objc func toggleWatched(_ sender: Any){
-        print("watched")
         if let button = sender as? UIButton{
             var indexPaths: [IndexPath] = []
             for i in 0..<watchedDataSource.count{

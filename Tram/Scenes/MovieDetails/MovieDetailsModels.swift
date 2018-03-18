@@ -29,21 +29,6 @@ enum MovieDetails
         }
     }
     
-    enum LoadPeople{
-        
-        struct Request{
-        }
-        
-        struct Response{
-            var type: JobType
-            var people: [Job]
-        }
-        
-        struct ViewModel{
-            var people:[Job]
-        }
-    }
-    
     enum List{
         enum Name{
             case Watchlist

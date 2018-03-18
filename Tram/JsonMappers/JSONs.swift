@@ -33,6 +33,12 @@ class JSONMovie : Codable{
     var video : Bool?
     var vote_average : Double?
     var vote_count : Int?
+    var credits: JSONCredits?
+}
+
+class JSONCredits : Codable{
+    var cast: [Cast]?
+    var crew: [Crew]?
 }
 
 class JSONCompany : Codable{

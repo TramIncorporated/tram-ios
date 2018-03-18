@@ -15,25 +15,12 @@ import UIKit
 protocol MovieDetailsPresentationLogic
 {
     func fillData(response: MovieDetails.FillData.Response)
-    func presentPeople(response: MovieDetails.LoadPeople.Response)
     func presentList(response: MovieDetails.List.Response)
 }
 
 class MovieDetailsPresenter: MovieDetailsPresentationLogic
 {
     weak var viewController: MovieDetailsDisplayLogic?
-    
-    func presentPeople(response: MovieDetails.LoadPeople.Response) {
-        let viewModel = MovieDetails.LoadPeople.ViewModel(people: response.people)
-        
-        switch response.type {
-        case .Cast:
-            viewController?.displayCast(viewModel: viewModel)
-        case .Crew:
-            viewController?.displayCrew(viewModel: viewModel)
-        }
-        
-    }
     
     func fillData(response: MovieDetails.FillData.Response)
     {

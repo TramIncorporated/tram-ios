@@ -15,7 +15,6 @@ import UIKit
 protocol MovieDetailsBusinessLogic
 {
     func fillData(request: MovieDetails.FillData.Request)
-    func loadPeople(request: MovieDetails.LoadPeople.Request)
     func list(request: MovieDetails.List.Request)
 }
 
@@ -39,19 +38,6 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     {
         let response = MovieDetails.FillData.Response(movie: movie)
         presenter?.fillData(response: response)
-    }
-    
-    func loadPeople(request: MovieDetails.LoadPeople.Request) {
-        if let movie = movie{
-            TmdbWorker().getCredits(movieId: movie.id, onSuccess: { (cast, crew) in
-                DispatchQueue.main.async {
-                    let response = MovieDetails.LoadPeople.Response(type: .Cast, people: cast)
-                    self.presenter?.presentPeople(response: response)
-                    let response1 = MovieDetails.LoadPeople.Response(type: .Crew, people: crew)
-                    self.presenter?.presentPeople(response: response1)
-                }
-            })
-        }
     }
     
     func list(request: MovieDetails.List.Request){

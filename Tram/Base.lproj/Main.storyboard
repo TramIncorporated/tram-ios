@@ -48,7 +48,17 @@
                             <outlet property="delegate" destination="x1O-hY-LOM" id="r9G-II-mTy"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="AU9-Ag-NcS"/>
+                    <navigationItem key="navigationItem" id="AU9-Ag-NcS">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="GRO-WN-2bW">
+                            <rect key="frame" x="131.66666666666666" y="7" width="150.99999999999997" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Movies"/>
+                                <segment title="TV Shows"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <segue destination="TVj-Wh-F4m" kind="showDetail" identifier="MovieDetails" id="p6e-Gf-t6h"/>
                     </connections>
@@ -112,7 +122,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hzi-Fq-9KI"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2ij-82-tLl"/>
+                    <navigationItem key="navigationItem" title="Search" id="2ij-82-tLl"/>
                     <connections>
                         <outlet property="collectionView" destination="nhc-Ue-MGV" id="o5g-9K-k7J"/>
                         <segue destination="TVj-Wh-F4m" kind="showDetail" identifier="MovieDetails" id="8jm-FE-njb"/>
@@ -136,7 +146,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LMc-kz-0qP">
                                         <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gxH-LE-hyy">
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gxH-LE-hyy">
                                             <size key="itemSize" width="375" height="200"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>

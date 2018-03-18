@@ -15,8 +15,6 @@ import UIKit
 protocol MovieDetailsDisplayLogic: class
 {
     func displayFilling(viewModel: MovieDetails.FillData.ViewModel)
-    func displayCrew(viewModel: MovieDetails.LoadPeople.ViewModel)
-    func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel)
     func displayWatchlistStatus(viewModel: MovieDetails.List.ViewModel)
     func displayWatchedStatus(viewModel: MovieDetails.List.ViewModel)
 }
@@ -83,7 +81,7 @@ class MovieDetailsViewController: UIViewController
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
         fillData()
-        loadPeople()
+        //loadPeople()
     }
     
     @objc func topButtonPressed(_ sender: Any) {
@@ -110,11 +108,6 @@ class MovieDetailsViewController: UIViewController
     {
         let request = MovieDetails.FillData.Request()
         interactor?.fillData(request: request)
-    }
-    
-    func loadPeople(){
-        let request = MovieDetails.LoadPeople.Request()
-        interactor?.loadPeople(request: request)
     }
     
     var generalDataStore : MovieDetails.FillData.ViewModel?
@@ -149,13 +142,6 @@ extension MovieDetailsViewController : MovieDetailsDisplayLogic {
         self.generalDataStore = viewModel
         collectionView.reloadData()
     }
-    func displayCrew(viewModel: MovieDetails.LoadPeople.ViewModel) {
-        crewCell?.people = viewModel.people
-    }
-    
-    func displayCast(viewModel: MovieDetails.LoadPeople.ViewModel) {
-        castCell?.people = viewModel.people
-    }
 }
 
 extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource{
@@ -177,7 +163,15 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
                 titleCell.lengthLabel.text = movie.length
                 titleCell.heartLabel.text = movie.rating
                 titleCell.starLabel.text = "Not available"
-                titleCell.imageView.setImageInBackground(url: URL(string: movie.imageUrl))
+                
+                titleCell.imageView.alpha = 0
+                ImageCacheManager.getImageInBackground(url: URL(string: movie.imageUrl)) { (image) in
+                    titleCell.imageView.image = image
+                    UIView.animate(withDuration: 0.2) {
+                        titleCell.imageView.alpha = 1
+                    }
+                }
+                
                 titleCell.genresLabel.text = movie.genres.flatMap({ (g) -> String? in
                     g.name
                 }).joined(separator: ", ")
@@ -205,13 +199,22 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             
             castCell.sectionTitleLabel.text = "Cast"
             
+            if let movie = generalDataStore?.movie{
+                castCell.people = movie.cast
+            }
+            
             self.castCell = castCell
+            
             return castCell
             
         case 3:
             let crewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as! PeopleCollectionViewCell
             
             crewCell.sectionTitleLabel.text = "Crew"
+            
+            if let movie = generalDataStore?.movie{
+                crewCell.people = movie.crew
+            }
             
             self.crewCell = crewCell
             return crewCell
