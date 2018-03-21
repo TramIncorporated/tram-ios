@@ -32,9 +32,9 @@ class MovieDetailsPresenter: MovieDetailsPresentationLogic
     func presentList(response: MovieDetails.List.Response){
         switch response.list{
         case .Watchlist:
-            viewController?.displayWatchlistStatus(viewModel: MovieDetails.List.ViewModel(status: response.status))
+            viewController?.displayWatchlistStatus(viewModel: MovieDetails.List.ViewModel(list: response.list, status: response.status, action: response.action))
         case .Watched:
-            viewController?.displayWatchedStatus(viewModel: MovieDetails.List.ViewModel(status: response.status))
+            viewController?.displayWatchedStatus(viewModel: MovieDetails.List.ViewModel(list: response.list, status: response.status, action: response.action))
         }
         
     }

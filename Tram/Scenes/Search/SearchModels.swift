@@ -14,21 +14,29 @@ import UIKit
 
 enum Search
 {
-  // MARK: Use cases
-  
-  enum SearchMovies
-  {
-    struct Request
-    {
-        var query : String
+    // MARK: Use cases
+    
+    enum SearchMovies {
+        struct Request {
+            var query : String
+        }
+        struct Response {
+            var movies : [Movie]
+        }
+        struct ViewModel {
+            var movies : [Movie]
+        }
     }
-    struct Response
-    {
-        var movies : [Movie]
+    
+    enum SearchTVShows{
+        struct Request {
+            var query : String
+        }
+        struct Response {
+            var shows : [TVShow]
+        }
+        struct ViewModel {
+            var shows : [TVShow]
+        }
     }
-    struct ViewModel
-    {
-        var movies : [Movie]
-    }
-  }
 }

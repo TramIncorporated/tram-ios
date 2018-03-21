@@ -15,16 +15,19 @@ import UIKit
 protocol SearchBusinessLogic
 {
     func searchMovies(request: Search.SearchMovies.Request)
+    func searchTVShows(request: Search.SearchTVShows.Request)
 }
 
 protocol SearchDataStore
 {
     var movies : [Movie]? {get}
+    var shows : [TVShow]? {get}
 }
 
 class SearchInteractor: SearchBusinessLogic, SearchDataStore
 {
     var movies: [Movie]?
+    var shows: [TVShow]?
     
     var presenter: SearchPresentationLogic?
     var worker: SearchWorker?
@@ -42,5 +45,13 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore
             let response = Search.SearchMovies.Response(movies: movies)
             self.presenter?.presentMovies(response: response)
         }
+    }
+    
+    func searchTVShows(request: Search.SearchTVShows.Request){
+        worker?.searchTVShows(query: request.query, onSuccess: { (shows) in
+            self.shows = shows
+            let response = Search.SearchTVShows.Response(shows: shows)
+            self.presenter?.presentTVShows(response: response)
+        })
     }
 }

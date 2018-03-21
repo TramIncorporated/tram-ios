@@ -91,4 +91,80 @@ class TmdbWorker{
             onSuccess(crr.cast, crr.crew)
         }
     }
+    
+    func getTVShow(by id: Int, onSuccess: @escaping (TVShow)->Void){
+        let urlString = "\(base)/tv/\(id)?api_key=\(api_key)&append_to_response=credits"
+        if let url = URL(string: urlString){
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                
+                guard let data = data else { return }
+                do{
+                    let json = try JSONDecoder().decode(JSONTVShow.self, from: data)
+                    onSuccess(TVShow(with: json))
+                }
+                catch let jsonError {
+                    print(jsonError)
+                }
+                }.resume()
+        }
+    }
+    
+    
+    
+    private func searchTVShows(query: String, onSuccess: @escaping (TVShowSearchResult)->Void){
+        let urlString = "\(base)/search/tv?api_key=\(api_key)&query=\(query.addingPercentEncoding(withAllowedCharacters: []) ?? "")"
+        if let url = URL(string: urlString){
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                
+                guard let data = data else { return }
+                do{
+                    let json = try JSONDecoder().decode(TVShowSearchResult.self, from: data)
+                    onSuccess(json)
+                }
+                catch let jsonError {
+                    print(jsonError)
+                }
+                }.resume()
+        }
+    }
+    
+    func searchTVShows(query: String, onSuccess: @escaping ([TVShow])->Void){
+        searchTVShows(query: query) { (json : TVShowSearchResult) in
+            var shows : [TVShow] = []
+            for jsonshow in json.results{
+                self.getTVShow(by: jsonshow.id, onSuccess: { (show) in
+                    shows.append(show)
+                    if shows.count == json.results.count{
+                        onSuccess(shows)
+                    }
+                })
+            }
+        }
+    }
+    
+    func getSeason(tvid: Int, seasonNumber: Int, onSuccess: @escaping (Season)->Void){
+        let urlString = "\(base)/tv/\(tvid)/season/\(seasonNumber)?api_key=\(api_key)"
+        if let url = URL(string: urlString){
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                
+                guard let data = data else { return }
+                do{
+                    let json = try JSONDecoder().decode(JSONSeason.self, from: data)
+                    onSuccess(Season(full: json))
+                }
+                catch let jsonError {
+                    print(jsonError)
+                }
+                }.resume()
+        }
+    }
 }

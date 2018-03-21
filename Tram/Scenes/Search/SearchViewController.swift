@@ -15,6 +15,7 @@ import UIKit
 protocol SearchDisplayLogic: class
 {
     func displayMovies(viewModel: Search.SearchMovies.ViewModel)
+    func displayTVShows(viewModel: Search.SearchTVShows.ViewModel)
 }
 
 class SearchViewController: UIViewController, SearchDisplayLogic
@@ -74,7 +75,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search movies"
         searchController.searchBar.delegate = self
-        //searchController.searchBar.scopeButtonTitles = ["Movies", "TV Shows", "Users"]
+        searchController.searchBar.scopeButtonTitles = ["Movies", "TV Shows"]
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
@@ -90,48 +91,86 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         initSearchController()
     }
     
-    // MARK: Do something
+    enum Scope{
+        case Movies
+        case TVShows
+    }
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    var scope = Scope.Movies
     
     func searchMovies(query: String)
     {
         let request = Search.SearchMovies.Request(query: query)
         interactor?.searchMovies(request: request)
     }
+    func searchTVShows(query: String)
+    {
+        let request = Search.SearchTVShows.Request(query: query)
+        interactor?.searchTVShows(request: request)
+    }
     
     var movies : [Movie] = []
+    var shows : [TVShow] = []
     
     func displayMovies(viewModel: Search.SearchMovies.ViewModel)
     {
         movies = viewModel.movies
         collectionView.reloadData()
     }
+    func displayTVShows(viewModel: Search.SearchTVShows.ViewModel)
+    {
+        shows = viewModel.shows
+        collectionView.reloadData()
+    }
 }
 
 extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        switch scope {
+        case .Movies:
+            return movies.count
+        case .TVShows:
+            return shows.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionViewCell
-        
-        let m = movies[indexPath.row]
-        
-        cell.titleLabel.text = m.title
-        cell.yearLabel.text = m.year
-        cell.ratingLabel.text = m.rating
-        
-        cell.starsLabel.text = m.stars
-        
-        cell.movie = m
-        cell.imageView.alpha = 0
-        ImageCacheManager.getImageInBackground(url: URL(string: m.imageUrl)) { (image) in
-            if cell.movie?.id ?? -1 == m.id{
-                cell.imageView.image = image
-                UIView.animate(withDuration: 0.2) {
-                    cell.imageView.alpha = 1
+        switch scope {
+        case .Movies:
+            let m = movies[indexPath.row]
+            
+            cell.titleLabel.text = m.title
+            cell.yearLabel.text = m.year
+            cell.ratingLabel.text = m.rating
+            
+            cell.starsLabel.text = m.stars
+            
+            cell.id = m.id
+            cell.imageView.alpha = 0
+            ImageCacheManager.getImageInBackground(url: URL(string: m.imageUrl)) { (image) in
+                if cell.id ?? -1 == m.id{
+                    cell.imageView.image = image
+                    UIView.animate(withDuration: 0.2) {
+                        cell.imageView.alpha = 1
+                    }
+                }
+            }
+        case .TVShows:
+            let show = shows[indexPath.row]
+            
+            cell.titleLabel.text = show.name
+            cell.yearLabel.text = show.year
+            cell.ratingLabel.text = show.rating
+            cell.starsLabel.text = show.stars
+            cell.id = show.id
+            cell.imageView.alpha = 0
+            ImageCacheManager.getImageInBackground(url: URL(string: show.imageUrl)) { (image) in
+                if cell.id ?? -1 == show.id{
+                    cell.imageView.image = image
+                    UIView.animate(withDuration: 0.2) {
+                        cell.imageView.alpha = 1
+                    }
                 }
             }
         }
@@ -147,20 +186,49 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
         return CGSize(width: width, height: height)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        router?.routeToMovieDetails(segue: nil)
+        switch scope {
+        case .Movies:
+            router?.routeToMovieDetails(segue: nil)
+        case .TVShows:
+            router?.routeToTVShowDetails(segue: nil)
+        }
     }    
 }
 
 extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-//        if let text = searchController.searchBar.text, text != ""{
-//            self.searchMovies(query: text)
-//        }
+        if let text = searchController.searchBar.text, text != ""{
+//            switch scope{
+//            case .Movies:
+//                self.searchMovies(query: text)
+//            case .TVShows:
+//                self.searchTVShows(query: text)
+//            }
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, text != ""{
-            self.searchMovies(query: text)
+            switch scope{
+            case .Movies:
+                self.searchMovies(query: text)
+            case .TVShows:
+                self.searchTVShows(query: text)
+            }
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        switch selectedScope{
+        case 0:
+            searchBar.placeholder = "Search movies"
+            scope = .Movies
+        case 1:
+            searchBar.placeholder = "Search TV shows"
+            scope = .TVShows
+        default:
+            ()
+        }
+        collectionView.reloadData()
     }
 }

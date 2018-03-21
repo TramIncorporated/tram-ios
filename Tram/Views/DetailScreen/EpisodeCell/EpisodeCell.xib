@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="episodeCell" id="gTV-IL-0wX" customClass="EpisodeCell" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLC-85-b5C">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGJ-YZ-DmO" userLabel="episodeNumberLabel">
+                                <rect key="frame" x="16" y="2" width="79" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chapter One : MADMAX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7E-as-ZYL" userLabel="titleLabel">
+                                <rect key="frame" x="103" y="2" width="180" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27.10.2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kpZ-Rm-3pb" userLabel="airDateLabel">
+                                <rect key="frame" x="103" y="25" width="86" height="23"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="M7E-as-ZYL" firstAttribute="leading" secondItem="yGJ-YZ-DmO" secondAttribute="trailing" constant="8" id="3fr-wi-oey"/>
+                            <constraint firstAttribute="height" constant="50" id="E80-Sw-nCI"/>
+                            <constraint firstItem="kpZ-Rm-3pb" firstAttribute="top" secondItem="M7E-as-ZYL" secondAttribute="bottom" constant="2" id="O0T-Pc-di1"/>
+                            <constraint firstItem="yGJ-YZ-DmO" firstAttribute="top" secondItem="MLC-85-b5C" secondAttribute="top" constant="2" id="XZa-4l-mQb"/>
+                            <constraint firstItem="M7E-as-ZYL" firstAttribute="centerY" secondItem="yGJ-YZ-DmO" secondAttribute="centerY" id="YTh-Pj-RDV"/>
+                            <constraint firstItem="kpZ-Rm-3pb" firstAttribute="leading" secondItem="M7E-as-ZYL" secondAttribute="leading" id="dyy-T0-NwU"/>
+                            <constraint firstItem="yGJ-YZ-DmO" firstAttribute="leading" secondItem="MLC-85-b5C" secondAttribute="leading" constant="16" id="nix-pp-08O"/>
+                            <constraint firstAttribute="width" constant="414" id="uvZ-YS-Lch"/>
+                            <constraint firstAttribute="bottom" secondItem="kpZ-Rm-3pb" secondAttribute="bottom" constant="2" id="wlw-8g-rgC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="MLC-85-b5C" secondAttribute="trailing" id="5Xp-Bd-yFM"/>
+                <constraint firstItem="MLC-85-b5C" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OPp-at-nLJ"/>
+                <constraint firstAttribute="bottom" secondItem="MLC-85-b5C" secondAttribute="bottom" id="Z4g-h1-y7V"/>
+                <constraint firstItem="MLC-85-b5C" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="iYD-Xe-LdV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="airDateLabel" destination="kpZ-Rm-3pb" id="dcr-qp-rBf"/>
+                <outlet property="containerWidthConstraint" destination="uvZ-YS-Lch" id="b7u-iP-ozy"/>
+                <outlet property="episodeNumberLabel" destination="yGJ-YZ-DmO" id="87v-Ik-Pm5"/>
+                <outlet property="titleLabel" destination="M7E-as-ZYL" id="Spw-v2-e7S"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

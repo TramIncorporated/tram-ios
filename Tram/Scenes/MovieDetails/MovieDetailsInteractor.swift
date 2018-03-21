@@ -42,8 +42,8 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore
     
     func list(request: MovieDetails.List.Request){
         if let movie = movie{
-            worker?.list(movie: movie, name: request.list, action: request.action, onSuccess: { (list, status) in
-                self.presenter?.presentList(response: MovieDetails.List.Response(list: list, status: status))
+            worker?.list(movie: movie, name: request.list, action: request.action, onSuccess: { (list, status, action) in
+                self.presenter?.presentList(response: MovieDetails.List.Response(list: list, status: status, action: action))
             })
         }
     }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="subsectionCell" id="gTV-IL-0wX" customClass="SubsectionCollectionViewCell" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ay-k0-frZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzx-vZ-54y">
+                                <rect key="frame" x="366" y="5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Gzx-vZ-54y" secondAttribute="height" multiplier="1:1" id="2FV-Zy-1b3"/>
+                                    <constraint firstAttribute="width" constant="40" id="n2m-WG-XJj"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button" image="arrow"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0Q-BZ-ITT">
+                                <rect key="frame" x="16" y="13.5" width="48.5" height="23"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Gzx-vZ-54y" secondAttribute="trailing" constant="8" id="FTb-aT-afs"/>
+                            <constraint firstItem="y0Q-BZ-ITT" firstAttribute="leading" secondItem="0Ay-k0-frZ" secondAttribute="leading" constant="16" id="ZbL-fZ-2Vv"/>
+                            <constraint firstAttribute="width" constant="414" id="kau-PF-S2s"/>
+                            <constraint firstItem="y0Q-BZ-ITT" firstAttribute="centerY" secondItem="0Ay-k0-frZ" secondAttribute="centerY" id="l1q-2Z-WOg"/>
+                            <constraint firstAttribute="height" constant="50" id="rxl-Wl-zmj"/>
+                            <constraint firstItem="Gzx-vZ-54y" firstAttribute="centerY" secondItem="0Ay-k0-frZ" secondAttribute="centerY" id="zOp-Q7-iOt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iE7-RB-gdL"/>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="0Ay-k0-frZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Jss-Z1-v6v"/>
+                <constraint firstItem="0Ay-k0-frZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Qyr-8g-piN"/>
+                <constraint firstAttribute="bottom" secondItem="0Ay-k0-frZ" secondAttribute="bottom" id="v9p-NL-f17"/>
+                <constraint firstAttribute="trailing" secondItem="0Ay-k0-frZ" secondAttribute="trailing" id="wfT-Ov-bdH"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="containerWidthConstraint" destination="kau-PF-S2s" id="vMB-cC-rNB"/>
+                <outlet property="hideButton" destination="Gzx-vZ-54y" id="V4P-8t-IcP"/>
+                <outlet property="label" destination="y0Q-BZ-ITT" id="VAY-Gr-ceW"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="arrow" width="200" height="200"/>
+    </resources>
+</document>

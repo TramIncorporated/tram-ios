@@ -15,8 +15,11 @@ import Parse
 
 class SearchWorker
 {
-    func searchMovies(query: String, onSuccess: @escaping ([Movie])->Void)
-    {
+    func searchMovies(query: String, onSuccess: @escaping ([Movie])->Void) {
         TmdbWorker().searchMovies(query: query, onSuccess: onSuccess)
+    }
+    
+    func searchTVShows(query: String, onSuccess: @escaping ([TVShow])->Void){
+        TmdbWorker().searchTVShows(query: query, onSuccess: onSuccess)
     }
 }

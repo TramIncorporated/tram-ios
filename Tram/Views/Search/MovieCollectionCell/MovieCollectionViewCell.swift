@@ -17,7 +17,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var starsLabel: UILabel!
     
     @IBOutlet weak var containerWidthConstraint: NSLayoutConstraint!
-    var movie : Movie?
+    var id : Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()

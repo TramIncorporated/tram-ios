@@ -15,57 +15,7 @@ import Parse
 
 class MovieDetailsWorker
 {
-    func list(movie: Movie, name: MovieDetails.List.Name, action: MovieDetails.List.Action, onSuccess: (MovieDetails.List.Name, MovieDetails.List.Status)->Void){
-        let ud = UserDefaults.standard
-        
-        var tkey: String?
-        switch name {
-        case .Watchlist:
-            tkey = "watchlist_movie"
-        case .Watched:
-            tkey = "watched_movie"
-        }
-        guard let key = tkey else{
-            return
-        }
-        
-        var list = ud.stringArray(forKey: key) ?? []
-        var status = list.contains(String(movie.id))
-        
-        switch action {
-        case .RequestStatus:
-            break
-        case .Add:
-            if !status{
-                list.append(String(movie.id))
-            }
-        case .Remove:
-            if status{
-                if let index = list.index(of: String(movie.id)){
-                    list.remove(at: index)
-                }
-            }
-        case .Change:
-            if status {
-                if let index = list.index(of: String(movie.id)){
-                    list.remove(at: index)
-                }
-            }
-            else {
-                list.append(String(movie.id))
-            }
-        }
-        
-        status = list.contains(String(movie.id))
-        
-        ud.set(list, forKey: key)
-        
-        if status {
-            onSuccess(name, .In)
-        }
-        else {
-            onSuccess(name, .Out)
-        }
+    func list(movie: Movie, name: ListName, action: Action, onSuccess: (ListName, Status, Action)->Void){
+        LocalWorker().list(do: action, movie: movie, in: name, onSuccess: onSuccess)
     }
-    
 }

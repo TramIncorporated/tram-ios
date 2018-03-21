@@ -15,6 +15,7 @@ import UIKit
 @objc protocol SearchRoutingLogic
 {
     func routeToMovieDetails(segue: UIStoryboardSegue?)
+    func routeToTVShowDetails(segue: UIStoryboardSegue?)
 }
 
 protocol SearchDataPassing
@@ -44,6 +45,21 @@ class SearchRouter: NSObject, SearchRoutingLogic, SearchDataPassing
         }
     }
     
+    func routeToTVShowDetails(segue: UIStoryboardSegue?)
+    {
+        if let segue = segue {
+            let destinationVC = segue.destination as! TVShowDetailsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToTVShowDetails(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "TVShowDetailsViewController") as! TVShowDetailsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToTVShowDetails(source: dataStore!, destination: &destinationDS)
+            navigateToTVShowDetails(source: viewController!, destination: destinationVC)
+        }
+    }
+    
     // MARK: Navigation
     
     func navigateToMovieDetails(source: SearchViewController, destination: MovieDetailsViewController)
@@ -57,5 +73,19 @@ class SearchRouter: NSObject, SearchRoutingLogic, SearchDataPassing
     {
         let row = viewController?.collectionView.indexPathsForSelectedItems?.first?.row
         destination.movie = source.movies?[row!]
+    }
+    // MARK: Navigation
+    
+    func navigateToTVShowDetails(source: SearchViewController, destination: TVShowDetailsViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+    
+    // MARK: Passing data
+    
+    func passDataToTVShowDetails(source: SearchDataStore, destination: inout TVShowDetailsDataStore)
+    {
+        let row = viewController?.collectionView.indexPathsForSelectedItems?.first?.row
+        destination.show = source.shows?[row!]
     }
 }

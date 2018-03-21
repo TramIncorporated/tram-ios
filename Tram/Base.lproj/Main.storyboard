@@ -126,6 +126,7 @@
                     <connections>
                         <outlet property="collectionView" destination="nhc-Ue-MGV" id="o5g-9K-k7J"/>
                         <segue destination="TVj-Wh-F4m" kind="showDetail" identifier="MovieDetails" id="8jm-FE-njb"/>
+                        <segue destination="QqY-Kd-iGz" kind="showDetail" identifier="TVShowDetails" id="9C7-wc-nNM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhl-Mp-81p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -186,6 +187,47 @@
             </objects>
             <point key="canvasLocation" x="3045" y="0.0"/>
         </scene>
+        <!--Show Details View Controller-->
+        <scene sceneID="XdT-jc-3u3">
+            <objects>
+                <viewController storyboardIdentifier="TVShowDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QqY-Kd-iGz" customClass="TVShowDetailsViewController" customModule="Tram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Ld-lK-wrJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q1h-Aw-Mvz">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="lrw-KM-X6H">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="QqY-Kd-iGz" id="XEg-kY-8iR"/>
+                                    <outlet property="delegate" destination="QqY-Kd-iGz" id="Ojw-Ch-810"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="03G-jE-w4V" firstAttribute="trailing" secondItem="q1h-Aw-Mvz" secondAttribute="trailing" id="9Sr-Af-v6D"/>
+                            <constraint firstItem="q1h-Aw-Mvz" firstAttribute="top" secondItem="03G-jE-w4V" secondAttribute="top" id="OH6-9H-bM3"/>
+                            <constraint firstItem="03G-jE-w4V" firstAttribute="bottom" secondItem="q1h-Aw-Mvz" secondAttribute="bottom" id="Ymd-5V-Nlq"/>
+                            <constraint firstItem="q1h-Aw-Mvz" firstAttribute="leading" secondItem="03G-jE-w4V" secondAttribute="leading" id="l21-Um-KYC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="03G-jE-w4V"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="q1h-Aw-Mvz" id="Qxo-Jy-XWY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="obp-KB-UqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3045" y="-699"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="VXR-c0-ziv">
             <objects>
@@ -213,6 +255,6 @@
         <image name="star" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p6e-Gf-t6h"/>
+        <segue reference="8jm-FE-njb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -30,31 +30,19 @@ enum MovieDetails
     }
     
     enum List{
-        enum Name{
-            case Watchlist
-            case Watched
-        }
-        enum Status{
-            case In
-            case Out
-        }
-        enum Action{
-            case Add
-            case Remove
-            case RequestStatus
-            case Change
-        }
-        
         struct Request {
-            var list: Name
+            var list: ListName
             var action : Action
         }
         struct Response {
-            var list: Name
+            var list: ListName
             var status : Status
+            var action : Action
         }
         struct ViewModel{
+            var list: ListName
             var status : Status
+            var action : Action
         }
     }
 }

@@ -15,6 +15,7 @@ import UIKit
 protocol SearchPresentationLogic
 {
     func presentMovies(response: Search.SearchMovies.Response)
+    func presentTVShows(response: Search.SearchTVShows.Response)
 }
 
 class SearchPresenter: SearchPresentationLogic
@@ -26,6 +27,14 @@ class SearchPresenter: SearchPresentationLogic
         let viewModel = Search.SearchMovies.ViewModel(movies: response.movies)
         DispatchQueue.main.async {
             self.viewController?.displayMovies(viewModel: viewModel)
+        }
+    }
+    
+    func presentTVShows(response: Search.SearchTVShows.Response)
+    {
+        let viewModel = Search.SearchTVShows.ViewModel(shows: response.shows)
+        DispatchQueue.main.async {
+            self.viewController?.displayTVShows(viewModel: viewModel)
         }
     }
 }

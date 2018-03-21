@@ -94,22 +94,8 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
         case Watched = 1
     }
     
-    var watchlist: [Movie]?
-    var watchlistStash: [Movie]?
-    var watched: [Movie]?
-    var watchedStash: [Movie]?
-    var watchlistHidden = false
-    var watchedHidden = false
-    var watchlistDataSource: [Movie]{
-        get{
-            return watchlist ?? watchlistStash ?? []
-        }
-    }
-    var watchedDataSource: [Movie]{
-        get{
-            return watched ?? watchedStash ?? []
-        }
-    }
+    var watchlist = HideableDataSource(items: [Movie](), hidden: false)
+    var watched = HideableDataSource(items: [Movie](), hidden: true)
     
     func loadWatchlist()
     {
@@ -125,28 +111,12 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     
     func displayWatchlist(viewModel: Lists.Watchlist.ViewModel)
     {
-        if watchlistHidden{
-            self.watchlistStash = viewModel.watchlist
-            self.watchlist = nil
-        }
-        else{
-            self.watchlist = viewModel.watchlist
-            self.watchlistStash = nil
-        }
-        
+        watchlist.setItems(items: viewModel.watchlist)
         self.collectionView?.reloadData()
     }
     
     func displayWatched(viewModel: Lists.Watched.ViewModel) {
-        if watchedHidden{
-            self.watchedStash = viewModel.watched
-            self.watched = nil
-        }
-        else{
-            self.watched = viewModel.watched
-            self.watchedStash = nil
-        }
-        
+        watched.setItems(items: viewModel.watched)
         self.collectionView?.reloadData()
     }
     
@@ -159,9 +129,9 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case SectionIndex.Watchlist.rawValue:
-            return watchlist?.count ?? 0
+            return watchlist.dataSource.count
         case SectionIndex.Watched.rawValue:
-            return watched?.count ?? 0
+            return watched.dataSource.count
         default:
             return 0
         }
@@ -172,9 +142,9 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
         var item: Movie?
         switch indexPath.section{
         case SectionIndex.Watchlist.rawValue:
-            item = watchlistDataSource[indexPath.row]
+            item = watchlist.dataSource[indexPath.row]
         case SectionIndex.Watched.rawValue:
-            item = watchedDataSource[indexPath.row]
+            item = watched.dataSource[indexPath.row]
         default:
             ()
         }
@@ -218,9 +188,9 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
         var transform: CGFloat?
         switch indexPath.section {
         case SectionIndex.Watchlist.rawValue:
-            transform = watchlistHidden ? CGFloat.pi : 0
+            transform = watchlist.hidden ? CGFloat.pi : 0
         case SectionIndex.Watched.rawValue:
-            transform = watchedHidden ? CGFloat.pi : 0
+            transform = watched.hidden ? CGFloat.pi : 0
         default:
             ()
         }
@@ -233,23 +203,16 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     
     @objc func toggleWatchlist(_ sender: Any){
         if let button = sender as? UIButton{
-            var indexPaths: [IndexPath] = []
-            for i in 0..<watchlistDataSource.count{
-                indexPaths.append(IndexPath(row: i, section: SectionIndex.Watchlist.rawValue))
-            }
+            let indexPaths = watchlist.indexPaths(for: SectionIndex.Watchlist.rawValue)
             
-            if watchlistHidden{
-                watchlist = watchlistStash
-                watchlistStash = nil
+            if watchlist.hidden{
+                watchlist.toggle()
                 self.collectionView?.insertItems(at: indexPaths)
             }
             else{
-                watchlistStash = watchlist
-                watchlist = nil
+                watchlist.toggle()
                 self.collectionView?.deleteItems(at: indexPaths)
             }
-            
-            watchlistHidden = !watchlistHidden
             
             UIView.animate(withDuration: 0.25) { () -> Void in
                 button.transform = button.transform.rotated(by: CGFloat.pi)
@@ -259,23 +222,16 @@ class ListsViewController: UICollectionViewController, ListsDisplayLogic
     
     @objc func toggleWatched(_ sender: Any){
         if let button = sender as? UIButton{
-            var indexPaths: [IndexPath] = []
-            for i in 0..<watchedDataSource.count{
-                indexPaths.append(IndexPath(row: i, section: SectionIndex.Watched.rawValue))
-            }
+            let indexPaths = watched.indexPaths(for: SectionIndex.Watched.rawValue)
             
-            if watchedHidden{
-                watched = watchedStash
-                watchedStash = nil
+            if watched.hidden{
+                watched.toggle()
                 self.collectionView?.insertItems(at: indexPaths)
             }
             else{
-                watchedStash = watched
-                watched = nil
+                watched.toggle()
                 self.collectionView?.deleteItems(at: indexPaths)
             }
-            
-            watchedHidden = !watchedHidden
             
             UIView.animate(withDuration: 0.25) { () -> Void in
                 button.transform = button.transform.rotated(by: CGFloat.pi)

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="sectionMEGACell" id="gTV-IL-0wX" customClass="SectionCollectionViewCell" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HiV-CQ-EGX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2b-g9-pL1">
+                                <rect key="frame" x="366" y="5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="n2b-g9-pL1" secondAttribute="height" multiplier="1:1" id="0zr-EA-Pa4"/>
+                                    <constraint firstAttribute="width" constant="40" id="bXM-Pc-RAB"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button" image="arrow"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2s9-KB-mZA">
+                                <rect key="frame" x="8" y="13" width="52.5" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2s9-KB-mZA" firstAttribute="centerY" secondItem="HiV-CQ-EGX" secondAttribute="centerY" id="HcT-Yy-W15"/>
+                            <constraint firstAttribute="height" constant="50" id="PHM-mB-seF"/>
+                            <constraint firstAttribute="width" constant="414" id="RsT-FU-IKI"/>
+                            <constraint firstItem="n2b-g9-pL1" firstAttribute="centerY" secondItem="HiV-CQ-EGX" secondAttribute="centerY" id="WUF-H3-GUQ"/>
+                            <constraint firstAttribute="trailing" secondItem="n2b-g9-pL1" secondAttribute="trailing" constant="8" id="lwd-Ve-2wv"/>
+                            <constraint firstItem="2s9-KB-mZA" firstAttribute="leading" secondItem="HiV-CQ-EGX" secondAttribute="leading" constant="8" id="xrR-B4-L0O"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="HiV-CQ-EGX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9AG-It-1pw"/>
+                <constraint firstItem="HiV-CQ-EGX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bZt-ux-Z0K"/>
+                <constraint firstAttribute="bottom" secondItem="HiV-CQ-EGX" secondAttribute="bottom" id="mfv-4D-vpD"/>
+                <constraint firstAttribute="trailing" secondItem="HiV-CQ-EGX" secondAttribute="trailing" id="yRa-G7-QYU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="containerWidthConstraint" destination="RsT-FU-IKI" id="Z9p-Hh-GIn"/>
+                <outlet property="hideButton" destination="n2b-g9-pL1" id="7eL-Jt-Uau"/>
+                <outlet property="label" destination="2s9-KB-mZA" id="tJQ-0s-nN0"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="arrow" width="200" height="200"/>
+    </resources>
+</document>

@@ -81,7 +81,6 @@ class MovieDetailsViewController: UIViewController
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
         fillData()
-        //loadPeople()
     }
     
     @objc func topButtonPressed(_ sender: Any) {
@@ -120,6 +119,10 @@ class MovieDetailsViewController: UIViewController
 
 extension MovieDetailsViewController : MovieDetailsDisplayLogic {
     func displayWatchedStatus(viewModel: MovieDetails.List.ViewModel) {
+        if viewModel.status == .In{
+            let request = MovieDetails.List.Request(list: .Watchlist, action: .Remove)
+            interactor?.list(request: request)
+        }
         switch viewModel.status {
         case .In:
             titleCell?.bottomButton.setTitle("Unwatched", for: .normal)
@@ -129,6 +132,10 @@ extension MovieDetailsViewController : MovieDetailsDisplayLogic {
     }
     
     func displayWatchlistStatus(viewModel: MovieDetails.List.ViewModel) {
+        if viewModel.status == .In{
+            let request = MovieDetails.List.Request(list: .Watched, action: .Remove)
+            interactor?.list(request: request)
+        }
         switch viewModel.status {
         case .In:
             titleCell?.topButton.setTitle("Remove from watchlist", for: .normal)

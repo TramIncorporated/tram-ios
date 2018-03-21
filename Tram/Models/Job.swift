@@ -13,7 +13,7 @@ protocol Job{
     var name : String? {get set}
     var position : String {get set}
     var profile_path : String? {get set}
-    var gender : Int {get set}
+    var gender : Int? {get set}
     var id : Int {get set}
     var credit_id : String? {get set}
     var imageUrl : String {get}
@@ -39,9 +39,9 @@ struct Cast : Codable, Job{
     var name: String?
     var character: String?// character
     var profile_path: String? // profile_path
-    var cast_id = -1 // cast_id
+    var cast_id: Int?
     var credit_id : String? // credit_id
-    var gender = -1
+    var gender: Int?
     var id = -1 // ID
     var order = -1
 }
@@ -71,21 +71,6 @@ struct Crew : Codable, Job{
     var profile_path: String? // profile_path
     var credit_id : String? // credit_id
     var department : String?
-    var gender = -1
+    var gender: Int?
     var id = -1 // ID
-}
-
-extension PFObject{
-    func getString(forKey: String) -> String{
-        if let value = self[forKey] as? String{
-            return value
-        }
-        return ""
-    }
-    func getInt(forKey: String) -> Int {
-        if let value = self[forKey] as? Int{
-            return value
-        }
-        return -1
-    }
 }

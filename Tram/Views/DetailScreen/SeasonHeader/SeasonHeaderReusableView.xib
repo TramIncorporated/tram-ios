@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seasonHeader" id="U6b-Vx-4bR" customClass="SeasonHeaderReusableView" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSi-jF-hgq">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDO-gH-qmt">
+                            <rect key="frame" x="16" y="9.5" width="66" height="31"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kt8-Ms-oLG">
+                            <rect key="frame" x="366" y="5" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="4AK-Bv-wKB"/>
+                                <constraint firstAttribute="width" secondItem="kt8-Ms-oLG" secondAttribute="height" multiplier="1:1" id="sDR-vW-FRa"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="arrow"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="414" id="1Zq-V4-9ev"/>
+                        <constraint firstItem="ZDO-gH-qmt" firstAttribute="centerY" secondItem="D8r-hT-Y4A" secondAttribute="centerY" id="36v-v4-y7G"/>
+                        <constraint firstItem="ZDO-gH-qmt" firstAttribute="leading" secondItem="D8r-hT-Y4A" secondAttribute="leading" constant="16" id="NrH-kR-UR8"/>
+                        <constraint firstItem="D8r-hT-Y4A" firstAttribute="trailing" secondItem="kt8-Ms-oLG" secondAttribute="trailing" constant="8" id="ZX2-o6-YyW"/>
+                        <constraint firstItem="kt8-Ms-oLG" firstAttribute="centerY" secondItem="D8r-hT-Y4A" secondAttribute="centerY" id="fpu-rP-L0M"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="D8r-hT-Y4A"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="iSi-jF-hgq" secondAttribute="trailing" id="7C4-4v-IDN"/>
+                <constraint firstItem="iSi-jF-hgq" firstAttribute="bottom" secondItem="VXr-Tz-HHm" secondAttribute="bottom" id="YO0-l8-XNZ"/>
+                <constraint firstItem="iSi-jF-hgq" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="f07-ac-h7A"/>
+                <constraint firstItem="iSi-jF-hgq" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" id="pTG-Vw-uYJ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="containerWidthConstraint" destination="1Zq-V4-9ev" id="wGh-5d-AOO"/>
+                <outlet property="hideButton" destination="kt8-Ms-oLG" id="zsB-9p-2R9"/>
+                <outlet property="seasonTitleLabel" destination="ZDO-gH-qmt" id="ASW-lF-m3f"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="arrow" width="200" height="200"/>
+    </resources>
+</document>
