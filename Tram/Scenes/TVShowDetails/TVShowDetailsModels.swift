@@ -14,20 +14,57 @@ import UIKit
 
 enum TVShowDetails
 {
-  // MARK: Use cases
-  
-  enum DataFilling
-  {
-    struct Request
+    // MARK: Use cases
+    
+    enum DataFilling
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var show : TVShow?
+        }
+        struct ViewModel
+        {
+            var show : TVShow?
+        }
     }
-    struct Response
-    {
-        var show : TVShow?
+    
+    enum ShowLists{
+        struct Request {
+            var list: ListName
+            var action : Action
+        }
+        struct Response {
+            var list: ListName
+            var status : Status
+            var action : Action
+        }
+        struct ViewModel{
+            var list: ListName
+            var status : Status
+            var action : Action
+        }
     }
-    struct ViewModel
-    {
-        var show : TVShow?
+    
+    enum EpisodeLists{
+        struct Request {
+            var list: ListName
+            var action : Action
+            var episode: Episode
+        }
+        struct Response {
+            var list: ListName
+            var status : Status
+            var action : Action
+            var episode: Episode
+        }
+        struct ViewModel{
+            var list: ListName
+            var status : Status
+            var action : Action
+            var episode: Episode
+        }
     }
-  }
 }

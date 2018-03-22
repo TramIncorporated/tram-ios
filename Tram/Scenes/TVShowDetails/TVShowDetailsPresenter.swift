@@ -15,10 +15,20 @@ import UIKit
 protocol TVShowDetailsPresentationLogic
 {
     func presentData(response: TVShowDetails.DataFilling.Response)
+    func presentShowLists(response: TVShowDetails.ShowLists.Response)
+    func presentEpisodeLists(response: TVShowDetails.EpisodeLists.Response)
 }
 
 class TVShowDetailsPresenter: TVShowDetailsPresentationLogic
 {
+    func presentShowLists(response: TVShowDetails.ShowLists.Response) {
+        viewController?.displayShowLists(viewModel: TVShowDetails.ShowLists.ViewModel(list: response.list, status: response.status, action: response.action))
+    }
+    
+    func presentEpisodeLists(response: TVShowDetails.EpisodeLists.Response) {
+        viewController?.displayEpisodeLists(viewModel: TVShowDetails.EpisodeLists.ViewModel(list: response.list, status: response.status, action: response.action, episode: response.episode))
+    }
+    
     weak var viewController: TVShowDetailsDisplayLogic?
     
     // MARK: Do something

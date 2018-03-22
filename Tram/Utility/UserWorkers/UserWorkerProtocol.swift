@@ -22,6 +22,10 @@ enum Action{
     case RequestStatus
     case Change
 }
+enum Type{
+    case Movie
+    case TVShow
+}
 
 protocol UserWorker{
     
@@ -29,5 +33,5 @@ protocol UserWorker{
     func list(do action: Action, show: TVShow, in listName: ListName, onSuccess: (ListName, Status, Action)->Void)
     func list(do action: Action, episode: Episode, in listName: ListName, onSuccess: (ListName, Status, Action)->Void)
     
-    
+    func getUser(by id: Int, onSuccess: @escaping (User)->Void)
 }

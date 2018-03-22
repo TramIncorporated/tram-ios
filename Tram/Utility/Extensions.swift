@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Int{
     func toDollarString() -> String{
@@ -32,5 +33,35 @@ extension Array where Element == String{
             return ""
         }
         return "• " + self.joined(separator: "\n• ")
+    }
+}
+
+extension UIButton {
+    func rotate(hidden: Bool, animate: Bool){
+        var rotation : CGFloat
+        if hidden{
+            rotation = CGFloat.pi
+        }
+        else{
+            rotation = 0
+        }
+        if animate{
+            UIView.animate(withDuration: 0.25) {
+                self.transform = CGAffineTransform(rotationAngle: rotation)
+            }
+        }
+        else{
+            self.transform = CGAffineTransform(rotationAngle: rotation)
+        }
+    }
+    func rotate(animate: Bool){
+        if animate{
+            UIView.animate(withDuration: 0.25) {
+                self.transform = self.transform.rotated(by: CGFloat.pi)
+            }
+        }
+        else{
+            self.transform = self.transform.rotated(by: CGFloat.pi)
+        }
     }
 }

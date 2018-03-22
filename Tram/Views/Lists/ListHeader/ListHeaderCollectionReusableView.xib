@@ -31,12 +31,13 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-WP-u09">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-WP-u09">
                             <rect key="frame" x="366" y="5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="VB4-LU-GOP"/>
                                 <constraint firstAttribute="width" secondItem="3Ea-WP-u09" secondAttribute="height" multiplier="1:1" id="W2U-Fh-eFw"/>
                             </constraints>
+                            <color key="tintColor" red="0.83921568627450982" green="0.83529411764705885" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Button" image="arrow"/>
                         </button>
                     </subviews>

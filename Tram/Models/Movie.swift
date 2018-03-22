@@ -82,12 +82,12 @@ class Movie {
             df.dateFormat = "dd.mm.yyyy"
             details.append(("Release date", df.string(from: date)))
         }
-        if let budget = budget{
+        if let budget = budget, budget != 0{
             let key = "Budget"
             let value = budget.toDollarString()
             details.append((key, value))
         }
-        if let revenue = revenue{
+        if let revenue = revenue, revenue != 0{
             let key = "Revenue"
             let value = revenue.toDollarString()
             details.append((key, value))

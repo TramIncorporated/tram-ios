@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="segmentedCell" id="gTV-IL-0wX" customClass="SegmentedCollectionViewCell" customModule="Tram" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dl-Pi-jL2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JPm-Hh-gWF" userLabel="segmented">
+                                <rect key="frame" x="8" y="11" width="398" height="29"/>
+                                <segments>
+                                    <segment title="Movies"/>
+                                    <segment title="TV Shows"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="2f1-ZY-IT2"/>
+                            <constraint firstItem="JPm-Hh-gWF" firstAttribute="centerY" secondItem="5dl-Pi-jL2" secondAttribute="centerY" id="IeZ-rY-guu"/>
+                            <constraint firstAttribute="width" constant="414" id="b9E-Az-6tO"/>
+                            <constraint firstItem="JPm-Hh-gWF" firstAttribute="leading" secondItem="5dl-Pi-jL2" secondAttribute="leading" constant="8" id="fN2-OU-aOW"/>
+                            <constraint firstAttribute="trailing" secondItem="JPm-Hh-gWF" secondAttribute="trailing" constant="8" id="mmH-dE-Zye"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="5dl-Pi-jL2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1f5-XJ-tbd"/>
+                <constraint firstAttribute="trailing" secondItem="5dl-Pi-jL2" secondAttribute="trailing" id="TDc-S3-z5g"/>
+                <constraint firstAttribute="bottom" secondItem="5dl-Pi-jL2" secondAttribute="bottom" id="g6V-2g-fRz"/>
+                <constraint firstItem="5dl-Pi-jL2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zSJ-vP-FGw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="containerWidthConstraint" destination="b9E-Az-6tO" id="DbV-kJ-xc6"/>
+                <outlet property="segmented" destination="JPm-Hh-gWF" id="L3r-14-9F0"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

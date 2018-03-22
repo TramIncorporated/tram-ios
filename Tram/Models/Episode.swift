@@ -8,7 +8,13 @@
 
 import Foundation
 
-class Episode{
+class Episode : Hashable{
+    static func ==(lhs: Episode, rhs: Episode) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    var hashValue: Int
+    
     init(with json : JSONEpisode){
         self.airDate = json.air_date
         self.crew = json.crew ?? []
@@ -22,6 +28,8 @@ class Episode{
         self.stillPath = json.still_path
         self.voteAverage = json.vote_average ?? 0
         self.voteCount = json.vote_count ?? 0
+        
+        self.hashValue = json.id ?? 0
     }
     
     var airDate : String?

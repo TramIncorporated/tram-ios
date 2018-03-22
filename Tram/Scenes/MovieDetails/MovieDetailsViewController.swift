@@ -115,6 +115,38 @@ class MovieDetailsViewController: UIViewController
     var castCell: PeopleCollectionViewCell?
     var crewCell: PeopleCollectionViewCell?
     var plotCell: PlotCollectionViewCell?
+    
+    var castCellIndex : Int{
+        get{
+            if (generalDataStore?.movie?.cast.count ?? 0) > 0{
+                return 2
+            }
+            else{
+                return -1
+            }
+        }
+    }
+    var crewCellIndex : Int{
+        get{
+            if (generalDataStore?.movie?.crew.count ?? 0) > 0{
+                if castCellIndex > 0{
+                    return castCellIndex + 1
+                }
+                else{
+                    return 2
+                }
+            }
+            else{
+                return -1
+            }
+        }
+    }
+    
+    var countOfTopCells: Int{
+        get{
+            return 2 + (castCellIndex > 0 ? 1 : 0) + (crewCellIndex > 0 ? 1 : 0)
+        }
+    }
 }
 
 extension MovieDetailsViewController : MovieDetailsDisplayLogic {
@@ -153,7 +185,7 @@ extension MovieDetailsViewController : MovieDetailsDisplayLogic {
 
 extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4 + (generalDataStore?.movie?.details.count ?? 0)
+        return countOfTopCells + (generalDataStore?.movie?.details.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -201,7 +233,7 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             self.plotCell = plotCell
             return plotCell
             
-        case 2:
+        case castCellIndex:
             let castCell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as! PeopleCollectionViewCell
             
             castCell.sectionTitleLabel.text = "Cast"
@@ -214,7 +246,7 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             
             return castCell
             
-        case 3:
+        case crewCellIndex:
             let crewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as! PeopleCollectionViewCell
             
             crewCell.sectionTitleLabel.text = "Crew"
@@ -226,11 +258,11 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
             self.crewCell = crewCell
             return crewCell
             
-        case 4..<(4+(generalDataStore?.movie?.details.count ?? 0)):
+        case countOfTopCells..<(countOfTopCells+(generalDataStore?.movie?.details.count ?? 0)):
             let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as! DetailCollectionViewCell
             if let details = generalDataStore?.movie?.details{
-                detailCell.nameLabel.text = details[indexPath.row - 4].0
-                detailCell.valueLabel.text = details[indexPath.row - 4].1
+                detailCell.nameLabel.text = details[indexPath.row - countOfTopCells].0
+                detailCell.valueLabel.text = details[indexPath.row - countOfTopCells].1
             }
             return detailCell // impossible case
             

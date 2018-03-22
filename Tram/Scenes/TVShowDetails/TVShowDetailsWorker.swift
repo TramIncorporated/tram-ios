@@ -14,7 +14,11 @@ import UIKit
 
 class TVShowDetailsWorker
 {
-  func doSomeWork()
-  {
-  }
+    func showLists(action: Action, show: TVShow, listName: ListName, onSuccess: (ListName, Status, Action)->Void){
+        LocalWorker().list(do: action, show: show, in: listName, onSuccess: onSuccess)
+    }
+    func episodeLists(action: Action, episode: Episode, listName: ListName, onSuccess: (ListName, Status, Action)->Void){
+        LocalWorker().list(do: action, episode: episode, in: listName, onSuccess: onSuccess)
+    }
+    
 }

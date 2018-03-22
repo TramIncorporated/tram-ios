@@ -11,6 +11,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
             <string>HelveticaNeue-Medium</string>
         </array>
         <array key="HelveticaNeueLights.ttc">
@@ -48,16 +49,35 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZY-C1-3l1" userLabel="watchButton">
+                                <rect key="frame" x="336" y="10.5" width="70" height="29"/>
+                                <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="kdB-Gj-Aa4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Unwatch"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="M7E-as-ZYL" firstAttribute="leading" secondItem="yGJ-YZ-DmO" secondAttribute="trailing" constant="8" id="3fr-wi-oey"/>
+                            <constraint firstAttribute="trailing" secondItem="DZY-C1-3l1" secondAttribute="trailing" constant="8" id="4j4-r0-1tn"/>
                             <constraint firstAttribute="height" constant="50" id="E80-Sw-nCI"/>
+                            <constraint firstItem="DZY-C1-3l1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="M7E-as-ZYL" secondAttribute="trailing" constant="8" id="LUK-zK-MKl"/>
                             <constraint firstItem="kpZ-Rm-3pb" firstAttribute="top" secondItem="M7E-as-ZYL" secondAttribute="bottom" constant="2" id="O0T-Pc-di1"/>
                             <constraint firstItem="yGJ-YZ-DmO" firstAttribute="top" secondItem="MLC-85-b5C" secondAttribute="top" constant="2" id="XZa-4l-mQb"/>
                             <constraint firstItem="M7E-as-ZYL" firstAttribute="centerY" secondItem="yGJ-YZ-DmO" secondAttribute="centerY" id="YTh-Pj-RDV"/>
                             <constraint firstItem="kpZ-Rm-3pb" firstAttribute="leading" secondItem="M7E-as-ZYL" secondAttribute="leading" id="dyy-T0-NwU"/>
                             <constraint firstItem="yGJ-YZ-DmO" firstAttribute="leading" secondItem="MLC-85-b5C" secondAttribute="leading" constant="16" id="nix-pp-08O"/>
+                            <constraint firstItem="DZY-C1-3l1" firstAttribute="centerY" secondItem="MLC-85-b5C" secondAttribute="centerY" id="rNb-jP-xXc"/>
                             <constraint firstAttribute="width" constant="414" id="uvZ-YS-Lch"/>
                             <constraint firstAttribute="bottom" secondItem="kpZ-Rm-3pb" secondAttribute="bottom" constant="2" id="wlw-8g-rgC"/>
                         </constraints>
@@ -76,6 +96,7 @@
                 <outlet property="containerWidthConstraint" destination="uvZ-YS-Lch" id="b7u-iP-ozy"/>
                 <outlet property="episodeNumberLabel" destination="yGJ-YZ-DmO" id="87v-Ik-Pm5"/>
                 <outlet property="titleLabel" destination="M7E-as-ZYL" id="Spw-v2-e7S"/>
+                <outlet property="watchButton" destination="DZY-C1-3l1" id="xB8-0R-1Ah"/>
             </connections>
         </collectionViewCell>
     </objects>

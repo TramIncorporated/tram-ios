@@ -15,6 +15,8 @@ import UIKit
 protocol TVShowDetailsBusinessLogic
 {
     func requestData(request: TVShowDetails.DataFilling.Request)
+    func showLists(request: TVShowDetails.ShowLists.Request)
+    func episodeLists(request: TVShowDetails.EpisodeLists.Request)
 }
 
 protocol TVShowDetailsDataStore
@@ -52,4 +54,22 @@ class TVShowDetailsInteractor: TVShowDetailsBusinessLogic, TVShowDetailsDataStor
             })
         }
     }
+    
+    
+    func showLists(request: TVShowDetails.ShowLists.Request) {
+        if let show = show{
+            worker?.showLists(action: request.action, show: show, listName: request.list, onSuccess: { (ln, s, a) in
+                let response = TVShowDetails.ShowLists.Response(list: ln, status: s, action: a)
+                presenter?.presentShowLists(response: response)
+            })
+        }
+    }
+    
+    func episodeLists(request: TVShowDetails.EpisodeLists.Request) {
+        worker?.episodeLists(action: request.action, episode: request.episode, listName: request.list, onSuccess: { (l, s, a) in
+            let response = TVShowDetails.EpisodeLists.Response(list: l, status: s, action: a, episode: request.episode)
+            presenter?.presentEpisodeLists(response: response)
+        })
+    }
+    
 }

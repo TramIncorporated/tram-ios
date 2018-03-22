@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="p90-dP-O5M" kind="relationship" relationship="viewControllers" id="hu1-M8-iCr"/>
                         <segue destination="MUT-Ik-UrD" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="T3C-0o-iA4" kind="relationship" relationship="viewControllers" id="a75-zG-7AO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -133,6 +134,48 @@
             </objects>
             <point key="canvasLocation" x="2177" y="0.0"/>
         </scene>
+        <!--Profile Scene View Controller-->
+        <scene sceneID="7vj-hv-6CP">
+            <objects>
+                <viewController id="EFq-p7-YrA" customClass="ProfileSceneViewController" customModule="Tram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qKC-RM-70D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iC9-kv-RQa">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="aFU-gh-XBk">
+                                    <size key="itemSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EFq-p7-YrA" id="qqF-AP-tZc"/>
+                                    <outlet property="delegate" destination="EFq-p7-YrA" id="z6p-wF-Ite"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4mZ-vW-z3M" firstAttribute="trailing" secondItem="iC9-kv-RQa" secondAttribute="trailing" id="0ew-vA-YVJ"/>
+                            <constraint firstItem="iC9-kv-RQa" firstAttribute="leading" secondItem="4mZ-vW-z3M" secondAttribute="leading" id="Yhs-KJ-A49"/>
+                            <constraint firstItem="iC9-kv-RQa" firstAttribute="top" secondItem="4mZ-vW-z3M" secondAttribute="top" id="isH-in-Qld"/>
+                            <constraint firstItem="4mZ-vW-z3M" firstAttribute="bottom" secondItem="iC9-kv-RQa" secondAttribute="bottom" id="vLi-ee-Mf4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4mZ-vW-z3M"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sEL-jg-l9T"/>
+                    <connections>
+                        <outlet property="collectionView" destination="iC9-kv-RQa" id="ClM-Bq-h64"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hzu-sV-36Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2177" y="756"/>
+        </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="GDa-jO-tT7">
             <objects>
@@ -232,7 +275,7 @@
         <scene sceneID="VXR-c0-ziv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p90-dP-O5M" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="star" id="LaT-vQ-DP7">
+                    <tabBarItem key="tabBarItem" title="" image="star-filled" id="LaT-vQ-DP7">
                         <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -249,12 +292,34 @@
             </objects>
             <point key="canvasLocation" x="1233" y="-699"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Rkx-WK-SQK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T3C-0o-iA4" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="profile-filled" id="Bvp-Xt-n1b">
+                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-13"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nks-fY-7jd">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EFq-p7-YrA" kind="relationship" relationship="rootViewController" id="R7F-cv-LbR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GZM-lJ-BvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1233" y="756"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="profile-filled" width="33" height="33"/>
         <image name="search-filled" width="33" height="33"/>
-        <image name="star" width="33" height="33"/>
+        <image name="star-filled" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8jm-FE-njb"/>
+        <segue reference="p6e-Gf-t6h"/>
     </inferredMetricsTieBreakers>
 </document>

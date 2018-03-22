@@ -15,6 +15,8 @@ import UIKit
 protocol TVShowDetailsDisplayLogic: class
 {
     func displayData(viewModel: TVShowDetails.DataFilling.ViewModel)
+    func displayShowLists(viewModel: TVShowDetails.ShowLists.ViewModel)
+    func displayEpisodeLists(viewModel: TVShowDetails.EpisodeLists.ViewModel)
 }
 
 class TVShowDetailsViewController: UIViewController, TVShowDetailsDisplayLogic
@@ -109,6 +111,56 @@ class TVShowDetailsViewController: UIViewController, TVShowDetailsDisplayLogic
         collectionView.reloadData()
     }
     
+    private var buttons = [Episode:UIButton]()
+    private var titleCell : TitleCollectionViewCell?
+    
+    func displayShowLists(viewModel: TVShowDetails.ShowLists.ViewModel){
+        switch viewModel.list {
+        case .Watchlist:
+            switch viewModel.status{
+            case .In:
+                titleCell?.topButton.setTitle("Remove from watchlist", for: .normal)
+            case .Out:
+                titleCell?.topButton.setTitle("Add to watchlist", for: .normal)
+            }
+        case .Watched:
+            if viewModel.status == .In{
+                let request = TVShowDetails.ShowLists.Request(list: .Watchlist, action: .Remove)
+                interactor?.showLists(request: request)
+            }
+            switch viewModel.status{
+            case .In:
+                titleCell?.bottomButton.setTitle("Unwatched", for: .normal)
+            case .Out:
+                titleCell?.bottomButton.setTitle("Watched", for: .normal)
+            }
+            if viewModel.action != .RequestStatus{
+                collectionView.reloadItems(at: (seasonsAreaStartCell..<(seasonsAreaStartCell+seasonsAreaCount)).flatMap { IndexPath(row: $0, section: 0) })
+            }
+        }
+    }
+    func displayEpisodeLists(viewModel: TVShowDetails.EpisodeLists.ViewModel){
+        if viewModel.list == .Watched{
+            var title: String
+            if viewModel.status == .In{
+                title = "Unwatch"
+            }
+            else{
+                title = "Watch"
+            }
+            buttons[viewModel.episode]?.setTitle(title, for: .normal)
+            
+            if viewModel.action != .RequestStatus{
+                requestShowStatus(listName: .Watched)
+            }
+        }
+    }
+    
+    func requestShowStatus(listName: ListName){
+        let request = TVShowDetails.ShowLists.Request(list: listName, action: .RequestStatus)
+        interactor?.showLists(request: request)
+    }
+    
     let seasonsAreaStartCell = 3
     var seasonsAreaData : HideableDataSource<(Season, HideableDataSource<Episode>)>?
     var seasonsAreaCount : Int{
@@ -147,12 +199,39 @@ class TVShowDetailsViewController: UIViewController, TVShowDetailsDisplayLogic
         }
         return indexPaths
     }
+    
+    var castCellIndex : Int{
+        get{
+            if (show?.cast.count ?? 0) > 0{
+                return seasonsAreaStartCell+seasonsAreaCount
+            }
+            return -1
+        }
+    }
+    
+    var crewCellIndex : Int{
+        get{
+            if (show?.crew.count ?? 0) > 0{
+                if castCellIndex < 0{
+                    return castCellIndex
+                }
+                return castCellIndex + 1
+            }
+            return 0
+        }
+    }
+    
+    var detailCellStart : Int {
+        get{
+            return seasonsAreaStartCell+seasonsAreaCount + (crewCellIndex > 0 ? 1 : 0) + (castCellIndex > 0 ? 1 : 0)
+        }
+    }
 }
 
 extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if let _ = show{
-            return seasonsAreaStartCell + seasonsAreaCount + 2 + (show?.details.count ?? 0)
+            return seasonsAreaStartCell + seasonsAreaCount + (crewCellIndex > 0 ? 1 : 0) + (castCellIndex > 0 ? 1 : 0) + (show?.details.count ?? 0)
         }
         else{
             return 0
@@ -163,6 +242,9 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
         switch indexPath.row {
         case 0:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath) as? TitleCollectionViewCell, let show = self.show{
+                cell.topButton.addTarget(self, action: #selector(topButtonPressed(_:)), for: .touchUpInside)
+                cell.bottomButton.addTarget(self, action: #selector(bottomButtonPressed(_:)), for: .touchUpInside)
+                
                 cell.titleLabel.text = show.name
                 cell.yearLabel.text = show.year
                 cell.genresLabel.text = show.genres.flatMap({ (g) -> String? in
@@ -179,6 +261,11 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                         cell.imageView.alpha = 1
                     }
                 })
+                titleCell = cell
+                
+                requestShowStatus(listName: .Watchlist)
+                requestShowStatus(listName: .Watched)
+                
                 
                 return cell
             }
@@ -196,7 +283,6 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                 
                 let transform = (seasonsAreaData?.hidden ?? true) ? CGFloat.pi : 0
                 cell.hideButton.transform = CGAffineTransform(rotationAngle: transform)
-                cell.hideButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 cell.hideButton.tag = -1
                 cell.hideButton.removeTarget(nil, action: nil, for: .allEvents)
                 cell.hideButton.addTarget(self, action: #selector(hideButtonPressed(_:)), for: .touchUpInside)
@@ -238,11 +324,19 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                     cell.episodeNumberLabel.text = "Episode \(item.episodeNumber)"
                     cell.titleLabel.text = item.name
                     cell.airDateLabel.text = item.dateString(format: "dd.mm.yyyy")
+                    
+                    cell.watchButton.removeTarget(nil, action: nil, for: .allEvents)
+                    cell.watchButton.addTarget(self, action: #selector(watchEpisodeButtonPressed(_:)), for: .touchUpInside)
+                    let tag = season * 10000 + episode
+                    cell.watchButton.tag = tag
+                    buttons[item] = cell.watchButton
+                    let request = TVShowDetails.EpisodeLists.Request(list: .Watched, action: .RequestStatus, episode: item)
+                    interactor?.episodeLists(request: request)
                 }               
                 
                 return cell
             }
-        case seasonsAreaStartCell+seasonsAreaCount:
+        case castCellIndex:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as? PeopleCollectionViewCell{
                 
                 cell.sectionTitleLabel.text = "Cast"
@@ -254,7 +348,7 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                 return cell
             }
             
-        case seasonsAreaStartCell+seasonsAreaCount + 1:
+        case crewCellIndex:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleCell", for: indexPath) as? PeopleCollectionViewCell{
                 
                 cell.sectionTitleLabel.text = "Crew"
@@ -264,11 +358,11 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                 }
                 return cell
             }
-        case (seasonsAreaStartCell+seasonsAreaCount + 2)..<((seasonsAreaStartCell+seasonsAreaCount + 2)+(show?.details.count ?? 0)):
+        case detailCellStart..<(detailCellStart+(show?.details.count ?? 0)):
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailCell", for: indexPath) as? DetailCollectionViewCell{
                 if let details = show?.details{
-                    cell.nameLabel.text = details[indexPath.row - (seasonsAreaStartCell+seasonsAreaCount + 2)].0
-                    cell.valueLabel.text = details[indexPath.row - (seasonsAreaStartCell+seasonsAreaCount + 2)].1
+                    cell.nameLabel.text = details[indexPath.row - detailCellStart].0
+                    cell.valueLabel.text = details[indexPath.row - detailCellStart].1
                 }
                 return cell
             }
@@ -277,6 +371,31 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
             return UICollectionViewCell()
         }
         return UICollectionViewCell()
+    }
+    
+    @objc func topButtonPressed(_ sender: Any){
+        let request = TVShowDetails.ShowLists.Request(list: .Watchlist, action: .Change)
+        interactor?.showLists(request: request)
+    }
+    
+    @objc func bottomButtonPressed(_ sender: Any){
+        let request = TVShowDetails.ShowLists.Request(list: .Watched, action: .Change)
+        interactor?.showLists(request: request)
+    }
+    
+    @objc func watchEpisodeButtonPressed(_ sender: Any){
+        if let sender = sender as? UIButton{
+            let ep = sender.tag % 10000
+            let se = sender.tag / 10000
+            let episode = seasonsAreaData?.dataSource[se].1.dataSource[ep]
+            
+            if let episode = episode{
+                buttons[episode] = sender
+                
+                let request = TVShowDetails.EpisodeLists.Request(list: .Watched, action: .Change, episode: episode)
+                interactor?.episodeLists(request: request)
+            }
+        }
     }
     
     @objc func hideButtonPressed(_ sender: Any){
