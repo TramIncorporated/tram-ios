@@ -12,7 +12,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue-Medium</string>
+            <string>HelveticaNeue-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -29,17 +29,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzx-vZ-54y">
-                                <rect key="frame" x="366" y="5" width="40" height="40"/>
+                                <rect key="frame" x="376" y="10" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Gzx-vZ-54y" secondAttribute="height" multiplier="1:1" id="2FV-Zy-1b3"/>
-                                    <constraint firstAttribute="width" constant="40" id="n2m-WG-XJj"/>
+                                    <constraint firstAttribute="width" constant="30" id="n2m-WG-XJj"/>
                                 </constraints>
                                 <color key="tintColor" red="0.83921568629999999" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button" image="arrow"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0Q-BZ-ITT">
-                                <rect key="frame" x="16" y="13.5" width="48.5" height="23"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
+                                <rect key="frame" x="16" y="14.5" width="47" height="21.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

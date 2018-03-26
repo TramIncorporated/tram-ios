@@ -15,6 +15,8 @@ class TitleCollectionViewCell: UICollectionViewCell {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         let screenWidth = UIScreen.main.bounds.size.width
         containerWidthConstraint.constant = screenWidth - (8 * 2)
+        
+        resetImage()
     }
     
     @IBOutlet weak var imageView: UIImageView!
@@ -30,4 +32,10 @@ class TitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var containerWidthConstraint: NSLayoutConstraint!
+    
+    func resetImage(){
+        imageView.layer.borderColor = UIColor(hex: "#d1d1d1").cgColor
+        imageView.layer.borderWidth = 1
+        imageView.image = #imageLiteral(resourceName: "poster-title")
+    }
 }

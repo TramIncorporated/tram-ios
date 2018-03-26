@@ -18,7 +18,7 @@ class User{
     var showWatchlist: [TVShow]?
     var showWatched: [TVShow]?
     
-    var episodesWatched : Int?
+    var showWatchedDictionary: [String:[String]]?
     
     var bars : [(progressText: String, title: String, progress: Float)]{
         get{

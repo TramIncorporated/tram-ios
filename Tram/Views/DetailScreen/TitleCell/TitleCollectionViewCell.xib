@@ -31,9 +31,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-Lm-AqN" userLabel="TitleView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uKb-i2-shA">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster-title" translatesAutoresizingMaskIntoConstraints="NO" id="uKb-i2-shA">
                                 <rect key="frame" x="8" y="8" width="117" height="184"/>
-                                <color key="backgroundColor" red="0.0" green="0.89798516039999998" blue="0.34294915199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -68,16 +67,16 @@
                                 <color key="tintColor" red="0.91995251180000004" green="0.059988722209999998" blue="0.43924811479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="heart-filled"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXU-c5-Jrq" userLabel="Star">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXU-c5-Jrq" userLabel="Star">
                                 <rect key="frame" x="258.5" y="73" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="T45-k4-6Dj"/>
                                     <constraint firstAttribute="width" constant="24" id="tJf-pR-oG0"/>
                                 </constraints>
-                                <color key="tintColor" red="0.92470067739999995" green="0.83331567049999999" blue="0.18801060319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.92549019607843142" green="0.83137254901960778" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="star-filled"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yj-03-5Fg" userLabel="StarRating">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yj-03-5Fg" userLabel="StarRating">
                                 <rect key="frame" x="290.5" y="77" width="77.5" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -191,6 +190,7 @@
     </objects>
     <resources>
         <image name="heart-filled" width="50" height="50"/>
-        <image name="star-filled" width="50" height="50"/>
+        <image name="poster-title" width="600" height="944"/>
+        <image name="star-filled" width="33" height="33"/>
     </resources>
 </document>

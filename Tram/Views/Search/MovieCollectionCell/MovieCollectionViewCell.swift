@@ -23,7 +23,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        let screenWidth = UIScreen.main.bounds.size.width
+        let screenWidth = UIScreen.main.bounds.width
         containerWidthConstraint.constant = screenWidth - (8*2)
+        
+        resetImage()
+    }
+    
+    func resetImage(){
+        imageView.layer.borderColor = UIColor(hex: "#d1d1d1").cgColor
+        imageView.layer.borderWidth = 1
+        imageView.image = #imageLiteral(resourceName: "poster-search")
     }
 }

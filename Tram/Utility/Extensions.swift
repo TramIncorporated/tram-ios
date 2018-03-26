@@ -29,10 +29,14 @@ extension Int{
 
 extension Array where Element == String{
     func toBulletList() -> String{
-        if self.count == 0{
+        let filtered = self.filter { $0.trimmingCharacters(in: [" ", "\n"]) != "" }
+        if filtered.count == 0{
             return ""
         }
-        return "• " + self.joined(separator: "\n• ")
+        if filtered.count == 1{
+            return filtered[0]
+        }
+        return "• " + filtered.joined(separator: "\n• ")
     }
 }
 
@@ -65,3 +69,42 @@ extension UIButton {
         }
     }
 }
+
+extension UIColor{
+    convenience init(hex: String){
+        let hex = hex.trimmingCharacters(in: ["#", " "])
+        switch hex.count {
+        case 6:
+            let scanner = Scanner(string: hex)
+            var hexNumber: UInt64 = 0
+            
+            if scanner.scanHexInt64(&hexNumber) {
+                let r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                let g = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
+                let b = CGFloat(hexNumber & 0x0000ff) / 255
+                let a = CGFloat(255) / 255
+                
+                self.init(red: r, green: g, blue: b, alpha: a)
+                return
+            }
+        case 8:
+            let scanner = Scanner(string: hex)
+            var hexNumber: UInt64 = 0
+            
+            if scanner.scanHexInt64(&hexNumber) {
+                let r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+                let g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+                let b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+                let a = CGFloat(hexNumber & 0x000000ff) / 255
+                
+                self.init(red: r, green: g, blue: b, alpha: a)
+                return
+            }
+        default:
+            self.init()
+            return
+        }
+        self.init()
+    }
+}
+

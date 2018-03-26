@@ -29,7 +29,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="poJ-Y8-neF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OlX-q5-us1">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cute" translatesAutoresizingMaskIntoConstraints="NO" id="OlX-q5-us1">
                                 <rect key="frame" x="8" y="8" width="164" height="164"/>
                                 <color key="backgroundColor" red="0.5824300567699866" green="0.9882352941176471" blue="0.5954211399802154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -100,4 +100,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="cute" width="797" height="1062"/>
+    </resources>
 </document>

@@ -20,6 +20,8 @@ class LocalWorker : UserWorker{
         user.handle = "@romikabi"
         user.name = "Roman Abuzyarov"
         
+        user.showWatchedDictionary = UserDefaults.standard.dictionary(forKey: watchedShow) as? [String:[String]] ?? [:]
+        
         let expected = 4
         var current = 0
         
@@ -104,10 +106,19 @@ class LocalWorker : UserWorker{
             
             for (k, _) in dictionary{
                 tmdb.getTVShow(by: Int(k)!, onSuccess: { (show) in
-                    shows.append(show)
-                    if shows.count >= expected{
-                        onSuccess(shows)
-                    }
+                    let expectedS = show.seasons.count
+                    var currentS = 0
+                    for season in show.seasons{
+                        season.loadEpisodes(onSuccess: { (s) in
+                            currentS += 1
+                            if currentS >= expectedS{
+                                shows.append(show)
+                                if shows.count >= expected{
+                                    onSuccess(shows)
+                                }
+                            }
+                        })
+                    }                    
                 })
             }
         case .Watched:

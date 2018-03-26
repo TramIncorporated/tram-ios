@@ -203,9 +203,14 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
                 titleCell.heartLabel.text = movie.rating
                 titleCell.starLabel.text = "Not available"
                 
-                titleCell.imageView.alpha = 0
+                titleCell.imageView.alpha = 1
+                titleCell.resetImage()
                 ImageCacheManager.getImageInBackground(url: URL(string: movie.imageUrl)) { (image) in
+                    UIView.animate(withDuration: 0.2) {
+                        titleCell.imageView.alpha = 0
+                    }
                     titleCell.imageView.image = image
+                    titleCell.imageView.layer.borderWidth = 0
                     UIView.animate(withDuration: 0.2) {
                         titleCell.imageView.alpha = 1
                     }

@@ -17,7 +17,8 @@ class ListMovieCell: UICollectionViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var lengthLabel: UILabel!
     
-    var movie: Movie?
+    @IBOutlet weak var watchButton: UIButton!
+    var id: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +26,15 @@ class ListMovieCell: UICollectionViewCell {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         let screenWidth = UIScreen.main.bounds.size.width
         containerWidthConstraint.constant = screenWidth - (8*2)
+        resetImage()
     }
     @IBOutlet weak var rightConstraint: NSLayoutConstraint!
     @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+    
+    
+    func resetImage(){
+        imageView.layer.borderColor = UIColor(hex: "#d1d1d1").cgColor
+        imageView.layer.borderWidth = 1
+        imageView.image = #imageLiteral(resourceName: "poster-search")
+    }
 }

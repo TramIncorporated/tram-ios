@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="frontView">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mLh-wc-DAP">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster-search" translatesAutoresizingMaskIntoConstraints="NO" id="mLh-wc-DAP">
                             <rect key="frame" x="16" y="8" width="63" height="84"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="mLh-wc-DAP" secondAttribute="height" multiplier="3:4" id="6Tt-9U-9Mb"/>
@@ -121,5 +121,6 @@
     </objects>
     <resources>
         <image name="heart-filled" width="50" height="50"/>
+        <image name="poster-search" width="600" height="800"/>
     </resources>
 </document>

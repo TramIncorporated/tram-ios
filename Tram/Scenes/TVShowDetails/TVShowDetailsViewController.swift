@@ -254,9 +254,14 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                 cell.lengthLabel.text = show.episodeRunTime.flatMap { "\($0)m" }.joined(separator: ", ")
                 cell.starLabel.text = "Not available"
                 
-                cell.imageView.alpha = 0
+                cell.imageView.alpha = 1
+                cell.resetImage()
                 ImageCacheManager.getImageInBackground(url: URL(string: show.imageUrl), onComplete: { (image) in
+                    UIView.animate(withDuration: 0.2) {
+                        cell.imageView.alpha = 1
+                    }
                     cell.imageView.image = image
+                    cell.imageView.layer.borderWidth = 0
                     UIView.animate(withDuration: 0.2) {
                         cell.imageView.alpha = 1
                     }

@@ -85,10 +85,6 @@ class ProfileSceneViewController: UIViewController, ProfileSceneDisplayLogic
         self.collectionView?.register(UINib(nibName: "SegmentedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "segmentedCell")
         self.collectionView?.register(UINib(nibName: "ListHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         
-        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            //flowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - (8*2), height: 100)
-            //flowLayout.headerReferenceSize = CGSize(width: (self.collectionView?.frame.width)!-(8*2), height: 50)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -214,6 +210,15 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
                     
                     cell.segmented.removeTarget(nil, action: nil, for: .allEvents)
                     cell.segmented.addTarget(self, action: #selector(segmentedChanged(_:)), for: .valueChanged)
+                    let blue = UIColor(red: 50.0/255, green: 85.0/255, blue: 219.0/255, alpha: 1)
+                    let gray = UIColor.black
+                    let font = UIFont(name: "HelveticaNeue-Thin", size: 16.0)!
+                    var attributes = [NSAttributedStringKey.foregroundColor : blue,
+                                      NSAttributedStringKey.font : font]
+                    cell.segmented.setTitleTextAttributes(attributes, for: .selected)
+                    attributes = [NSAttributedStringKey.foregroundColor : gray,
+                                  NSAttributedStringKey.font : font]
+                    cell.segmented.setTitleTextAttributes(attributes, for: .normal)
                     
                     return cell
                 }
@@ -228,13 +233,24 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
                     let item = movies[indexPath.section-1].dataSource[indexPath.row]
                     cell.ratingLabel.text = item.rating
                     cell.titleLabel.text = item.title
-                    cell.starsLabel.text = item.length
+                    cell.starsLabel.text = item.cast
+                        .sorted {$0.order<$1.order}
+                        .prefix(2)
+                        .flatMap {$0.name!}
+                        .joined(separator: ", ")
+                    
                     cell.yearLabel.text = item.year
+                    
                     cell.id = item.id
-                    cell.imageView.alpha = 0
+                    cell.imageView.alpha = 1
+                    cell.resetImage()
                     ImageCacheManager.getImageInBackground(url: URL(string: item.imageUrl)) { (image) in
                         if cell.id ?? -1 == item.id{
+                            UIView.animate(withDuration: 0.2) {
+                                cell.imageView.alpha = 1
+                            }
                             cell.imageView.image = image
+                            cell.imageView.layer.borderWidth = 0
                             UIView.animate(withDuration: 0.2) {
                                 cell.imageView.alpha = 1
                             }
@@ -244,7 +260,12 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
                     let item = shows[indexPath.section-1].dataSource[indexPath.row]
                     cell.ratingLabel.text = item.rating
                     cell.titleLabel.text = item.name
-                    cell.starsLabel.text = item.episodeRunTime.flatMap { "\($0)m" }.joined(separator: ", ")
+                    cell.starsLabel.text = item.cast
+                        .sorted {$0.order<$1.order}
+                        .prefix(2)
+                        .flatMap {$0.name!}
+                        .joined(separator: ", ")
+                    
                     cell.yearLabel.text = item.year
                     cell.id = item.id
                     cell.imageView.alpha = 0
@@ -282,10 +303,28 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
             case 1..<(1+(user?.bars.count ?? 0)):
                 return CGSize(width: width, height: 60)
             default:
-                return CGSize(width: width, height: 50)
+                return CGSize(width: width, height: 60)
             }
         default:
             return CGSize(width: width, height: 100)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            return
+        }
+        switch scope {
+        case .Movie:
+            let movie = movies[indexPath.section-1].dataSource[indexPath.row]
+            let movieDetails = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsViewController") as? MovieDetailsViewController
+            (movieDetails?.interactor as? MovieDetailsInteractor)?.movie = movie
+            self.show(movieDetails!, sender: self)
+        case .TVShow:
+            let show = shows[indexPath.section-1].dataSource[indexPath.row]
+            let showDetails = storyboard?.instantiateViewController(withIdentifier: "TVShowDetailsViewController") as? TVShowDetailsViewController
+            (showDetails?.interactor as? TVShowDetailsInteractor)?.show = show
+            self.show(showDetails!, sender: self)
         }
     }
 }

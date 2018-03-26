@@ -76,6 +76,21 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         searchController.searchBar.placeholder = "Search movies"
         searchController.searchBar.delegate = self
         searchController.searchBar.scopeButtonTitles = ["Movies", "TV Shows"]
+        
+//        searchController.searchBar.tintColor = UIColor.white
+//        
+//        let blue = UIColor(red: 50.0/255, green: 85.0/255, blue: 219.0/255, alpha: 1)
+//        let gray = UIColor.black
+//        let font = UIFont(name: "HelveticaNeue-Thin", size: 16.0)!
+//        
+//        var attributes = [NSAttributedStringKey.foregroundColor.rawValue : blue,
+//                          NSAttributedStringKey.font.rawValue : font]
+//        searchController.searchBar.setScopeBarButtonTitleTextAttributes(attributes, for: .selected)
+//        
+//        attributes = [NSAttributedStringKey.foregroundColor.rawValue : gray,
+//                      NSAttributedStringKey.font.rawValue : font]
+//        searchController.searchBar.setScopeBarButtonTitleTextAttributes(attributes, for: .normal)
+        
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
@@ -147,9 +162,14 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
             cell.starsLabel.text = m.stars
             
             cell.id = m.id
-            cell.imageView.alpha = 0
+            cell.imageView.alpha = 1
+            cell.resetImage()
             ImageCacheManager.getImageInBackground(url: URL(string: m.imageUrl)) { (image) in
                 if cell.id ?? -1 == m.id{
+                    UIView.animate(withDuration: 0.2) {
+                        cell.imageView.alpha = 1
+                    }
+                    cell.imageView.layer.borderWidth = 0
                     cell.imageView.image = image
                     UIView.animate(withDuration: 0.2) {
                         cell.imageView.alpha = 1

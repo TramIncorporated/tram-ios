@@ -46,10 +46,15 @@ extension PeopleCollectionViewCell : UICollectionViewDelegate, UICollectionViewD
         cell.roleLabel.text = job.position
         cell.job = job
         
-        cell.imageView.alpha = 0
+        cell.resetImage()
         ImageCacheManager.getImageInBackground(url: URL(string: job.imageUrl)) { (image) in
             if cell.job?.id ?? -1 == job.id{
+                UIView.animate(withDuration: 0.2) {
+                    cell.imageView.alpha = 0
+                }
+                cell.imageView.layer.borderWidth = 0
                 cell.imageView.image = image
+                cell.imageView.contentMode = UIViewContentMode.scaleAspectFill
                 UIView.animate(withDuration: 0.2) {
                     cell.imageView.alpha = 1
                 }
