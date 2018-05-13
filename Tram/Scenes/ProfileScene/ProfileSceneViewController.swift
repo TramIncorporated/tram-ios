@@ -236,7 +236,8 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
                     cell.starsLabel.text = item.cast
                         .sorted {$0.order<$1.order}
                         .prefix(2)
-                        .flatMap {$0.name!}
+                        .filter { $0.name != nil }
+                        .map {$0.name!}
                         .joined(separator: ", ")
                     
                     cell.yearLabel.text = item.year
@@ -263,7 +264,8 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
                     cell.starsLabel.text = item.cast
                         .sorted {$0.order<$1.order}
                         .prefix(2)
-                        .flatMap {$0.name!}
+                        .filter { $0.name != nil }
+                        .flatMap { $0.name! }
                         .joined(separator: ", ")
                     
                     cell.yearLabel.text = item.year

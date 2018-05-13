@@ -216,7 +216,7 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
                     }
                 }
                 
-                titleCell.genresLabel.text = movie.genres.flatMap({ (g) -> String? in
+                titleCell.genresLabel.text = movie.genres.map({ (g) -> String in
                     g.name
                 }).joined(separator: ", ")
             }

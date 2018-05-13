@@ -135,7 +135,9 @@ class TVShowDetailsViewController: UIViewController, TVShowDetailsDisplayLogic
                 titleCell?.bottomButton.setTitle("Watched", for: .normal)
             }
             if viewModel.action != .RequestStatus{
-                collectionView.reloadItems(at: (seasonsAreaStartCell..<(seasonsAreaStartCell+seasonsAreaCount)).flatMap { IndexPath(row: $0, section: 0) })
+                collectionView
+                    .reloadItems(at: (seasonsAreaStartCell..<(seasonsAreaStartCell+seasonsAreaCount))
+                        .map { IndexPath(row: $0, section: 0) })
             }
         }
     }
@@ -247,11 +249,9 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                 
                 cell.titleLabel.text = show.name
                 cell.yearLabel.text = show.year
-                cell.genresLabel.text = show.genres.flatMap({ (g) -> String? in
-                    g.name
-                }).joined(separator: ", ")
+                cell.genresLabel.text = show.genres.map { $0.name }.joined(separator: ", ")
                 cell.heartLabel.text = show.rating
-                cell.lengthLabel.text = show.episodeRunTime.flatMap { "\($0)m" }.joined(separator: ", ")
+                cell.lengthLabel.text = show.episodeRunTime.map { "\($0)m" }.joined(separator: ", ")
                 cell.starLabel.text = "Not available"
                 
                 cell.imageView.alpha = 1

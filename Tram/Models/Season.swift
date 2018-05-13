@@ -31,9 +31,7 @@ class Season{
         self.posterPath = full.poster_path
         self.seasonNumber = full.season_number ?? 0
         
-        self.episodes = full.episodes?.flatMap({ (json) -> Episode in
-            Episode(with: json)
-        }) ?? []
+        self.episodes = full.episodes?.map { Episode(with: $0) } ?? []
         self._id = full._id ?? ""
     }
     

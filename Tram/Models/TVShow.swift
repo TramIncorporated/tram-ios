@@ -11,24 +11,18 @@ import Foundation
 class TVShow{
     init(with json: JSONTVShow){
         self.backdropPath = json.backdrop_path
-        self.createdBy = json.created_by?.flatMap({ (json) -> Creator in
-            Creator(with: json)
-        }) ?? []
+        self.createdBy = json.created_by?.map { Creator(with: $0) } ?? []
         self.episodeRunTime = json.episode_run_time ?? []
         
         self.firstAirDate = json.first_air_date
-        self.genres = json.genres?.flatMap({ (json) -> Genre in
-            Genre(from: json)
-        }) ?? []
+        self.genres = json.genres?.map { Genre(from: $0) } ?? []
         self.homepage = json.homepage
         self.id = json.id ?? 0
         self.inProduction = json.in_production ?? false
         self.languages = json.languages ?? []
         self.lastAirDate = json.last_air_date
         self.name = json.name ?? ""
-        self.networks = json.networks?.flatMap({ (json) -> Network in
-            Network(with: json)
-        }) ?? []
+        self.networks = json.networks?.map { Network(with: $0) } ?? []
         self.numberOfEpisodes = json.number_of_episodes ?? 0
         self.numberOfSeasons = json.number_of_seasons ?? 0
         self.originCountry = json.origin_country ?? []
@@ -37,15 +31,13 @@ class TVShow{
         self.overview = json.overview ?? ""
         self.popularity = json.popularity ?? 0
         self.posterPath = json.poster_path
-        self.productionCompanies = json.production_companies?.flatMap({ (json) -> Company in
-            Company(from: json)
-        }) ?? []
+        self.productionCompanies = json.production_companies?.map { Company(from: $0) } ?? []
         let id = json.id ?? 0
-        self.seasons = json.seasons?.flatMap({ (json) -> Season in
+        self.seasons = json.seasons?.map{ (json) -> Season in
             let s = Season(short: json)
             s.tvid = id
             return s
-        }) ?? []
+        } ?? []
         self.status = json.status ?? ""
         self.type = json.type ?? ""
         self.voteAverage = json.vote_average ?? 0
@@ -76,7 +68,7 @@ class TVShow{
         }
         if createdBy.count > 0{
             let key = "Created by"
-            let value = createdBy.flatMap { $0.name }.toBulletList()
+            let value = createdBy.map { $0.name }.toBulletList()
             details.append((key, value))
         }
         if let homepage = homepage, homepage != ""{
@@ -91,12 +83,12 @@ class TVShow{
         }
         if networks.count > 0{
             let key = "Networks"
-            let value = networks.flatMap { $0.name }.toBulletList()
+            let value = networks.map { $0.name }.toBulletList()
             details.append((key, value))
         }
         if productionCompanies.count > 0{
             let key = "Companies"
-            let value = productionCompanies.flatMap { $0.name }.toBulletList()
+            let value = productionCompanies.map { $0.name }.toBulletList()
             details.append((key, value))
         }
     }
@@ -178,7 +170,8 @@ class TVShow{
             return cast
                 .sorted { $0.order < $1.order }
                 .prefix(2)
-                .flatMap{ $0.name }
+                .filter{ $0.name != nil }
+                .map{ $0.name! }
                 .joined(separator: ", ")
         }
     }

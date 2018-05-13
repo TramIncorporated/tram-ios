@@ -117,7 +117,7 @@ class WatchlistSceneViewController: UIViewController, WatchlistSceneDisplayLogic
     func displayUser(viewModel: WatchlistScene.GetUser.ViewModel)
     {
         user = viewModel.user
-        let bools = episodes.flatMap {$0.hidden}
+        let bools = episodes.map { $0.hidden }
         episodes.removeAll()
         for i in 0..<(user?.showWatchlist ?? []).count {
             let hidden = i < bools.count ? bools[i] : true
@@ -131,18 +131,18 @@ class WatchlistSceneViewController: UIViewController, WatchlistSceneDisplayLogic
     var user : User?
     func unwatchedEpisodesCurrentSeason(index: Int) -> [Episode]{
         guard let tvshow = user?.showWatchlist?[index] else { return [] }
-        let watched = user?.showWatchedDictionary?["\(tvshow.id)"]?.flatMap({ (s) -> (Int, Int) in
+        let watched = user?.showWatchedDictionary?["\(tvshow.id)"]?.map { (s) -> (Int, Int) in
             let pair = s.components(separatedBy: ["_"])
             let season = Int(pair[0])!
             let episode = Int(pair[1])!
             return (season, episode)
-        }) ?? []
+        } ?? []
         
         for season in tvshow.seasons.sorted(by: {$0.seasonNumber < $1.seasonNumber}){
             if season.seasonNumber == 0 {
                 continue
             }
-            let watchedInSeason = watched.filter { $0.0 == season.seasonNumber }.flatMap { $0.1 }
+            let watchedInSeason = watched.filter { $0.0 == season.seasonNumber }.map { $0.1 }
             if season.episodes.count <= watchedInSeason.count{
                 continue
             }
@@ -151,7 +151,7 @@ class WatchlistSceneViewController: UIViewController, WatchlistSceneDisplayLogic
                 .sorted { $0.episodeNumber < $1.episodeNumber }
         }
         let special = tvshow.seasons[0]
-        let watchedInSeason = watched.filter { $0.0 == special.seasonNumber }.flatMap { $0.1 }
+        let watchedInSeason = watched.filter { $0.0 == special.seasonNumber }.map { $0.1 }
         return special.episodes
             .filter { !watchedInSeason.contains($0.episodeNumber) }
             .sorted { $0.episodeNumber < $1.episodeNumber }
@@ -204,7 +204,8 @@ extension WatchlistSceneViewController : UICollectionViewDelegate, UICollectionV
             cell.lengthLabel.text = item.cast
                 .sorted {$0.order<$1.order}
                 .prefix(2)
-                .flatMap {$0.name!}
+                .filter { $0.name != nil }
+                .map { $0.name! }
                 .joined(separator: ", ")
             
             cell.id = item.id
@@ -246,7 +247,8 @@ extension WatchlistSceneViewController : UICollectionViewDelegate, UICollectionV
             cell.bottomLabel.text = item.cast
                 .sorted {$0.order<$1.order}
                 .prefix(2)
-                .flatMap {$0.name!}
+                .filter { $0.name != nil }
+                .map { $0.name! }
                 .joined(separator: ", ")
             
             cell.id = item.id

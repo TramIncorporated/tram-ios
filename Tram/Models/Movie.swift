@@ -12,27 +12,19 @@ class Movie {
     init(with json: JSONMovie){
         adult = json.adult
         budget = json.budget ?? 0
-        genres = json.genres?.flatMap({ (json) -> Genre in
-            return Genre(from: json)
-        }) ?? []
+        genres = json.genres?.map { Genre(from: $0) } ?? []
         homepage = json.homepage
         id = json.id ?? -1
         originalTitle = json.original_title
         overview = json.overview
         popularity = json.popularity
         posterPath = json.poster_path
-        companies = json.production_companies?.flatMap({ (json) -> Company in
-            return Company(from: json)
-        }) ?? []
-        countries = json.production_countries?.flatMap({ (json) -> Country in
-            return Country(from: json)
-        }) ?? []
+        companies = json.production_companies?.map { Company(from: $0) } ?? []
+        countries = json.production_countries?.map { Country(from: $0) } ?? []
         releaseDate = json.release_date
         revenue = json.revenue
         runtime = json.runtime
-        spokenLanguages = json.spoken_languages?.flatMap({ (json) -> Language in
-            return Language(from: json)
-        }) ?? []
+        spokenLanguages = json.spoken_languages?.map { Language(from: $0) } ?? []
         status = json.status
         tagline = json.tagline
         title = json.title ?? ""
@@ -104,23 +96,17 @@ class Movie {
         }
         if spokenLanguages.count > 0{
             let key = "Languages"
-            let value = spokenLanguages.flatMap({ (l) -> String in
-                return l.name
-            }).toBulletList()
+            let value = spokenLanguages.map { $0.name }.toBulletList()
             details.append((key, value))
         }
         if companies.count > 0{
             let key = "Companies"
-            let value = companies.flatMap({ (c) -> String in
-                return c.name
-            }).toBulletList()
+            let value = companies.map { $0.name }.toBulletList()
             details.append((key, value))
         }
         if countries.count > 0{
             let key = "Countries"
-            let value = countries.flatMap({ (c) -> String in
-                return c.name
-            }).toBulletList()
+            let value = countries.map { $0.name }.toBulletList()
             details.append((key, value))
         }
     }
@@ -182,7 +168,8 @@ class Movie {
             return cast
                 .sorted { $0.order < $1.order }
                 .prefix(2)
-                .flatMap{ $0.name }
+                .filter { $0.name != nil }
+                .map{ $0.name! }
                 .joined(separator: ", ")
         }
     }

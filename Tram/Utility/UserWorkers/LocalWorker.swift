@@ -16,7 +16,7 @@ class LocalWorker : UserWorker{
     private let watchedShow = "watched_show"
     
     func getUser(by id: Int, onSuccess: @escaping (User) -> Void) {
-        var user = User()
+        let user = User()
         user.handle = "@romikabi"
         user.name = "Roman Abuzyarov"
         

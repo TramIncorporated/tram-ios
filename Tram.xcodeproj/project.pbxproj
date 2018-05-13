@@ -41,22 +41,10 @@
 		884351A0205FD3EA0099FF01 /* TVShowDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8843519A205FD3EA0099FF01 /* TVShowDetailsModels.swift */; };
 		884351A1205FD3EA0099FF01 /* TVShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8843519B205FD3EA0099FF01 /* TVShowDetailsViewController.swift */; };
 		884351A2205FD3EA0099FF01 /* TVShowDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8843519C205FD3EA0099FF01 /* TVShowDetailsInteractor.swift */; };
+		8844D01320A8D51F00858FA2 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8844D01220A8D51F00858FA2 /* keys.plist */; };
 		88522AA1205FADD80027DAD6 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88522A9F205FADD80027DAD6 /* EpisodeCell.swift */; };
 		88522AA2205FADD80027DAD6 /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88522AA0205FADD80027DAD6 /* EpisodeCell.xib */; };
 		88522AA5205FB2E70027DAD6 /* HideableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88522AA4205FB2E70027DAD6 /* HideableDataSource.swift */; };
-		886C88531FE32CEE004CDEF9 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88511FE32CED004CDEF9 /* Bolts.framework */; };
-		886C88541FE32CEE004CDEF9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88521FE32CEE004CDEF9 /* Parse.framework */; };
-		886C88571FE32D27004CDEF9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88561FE32D27004CDEF9 /* AudioToolbox.framework */; };
-		886C88591FE32D37004CDEF9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88581FE32D37004CDEF9 /* CFNetwork.framework */; };
-		886C885B1FE32D3D004CDEF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C885A1FE32D3D004CDEF9 /* CoreGraphics.framework */; };
-		886C885D1FE32D45004CDEF9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C885C1FE32D45004CDEF9 /* CoreLocation.framework */; };
-		886C885F1FE32D4D004CDEF9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C885E1FE32D4D004CDEF9 /* MobileCoreServices.framework */; };
-		886C88611FE32D54004CDEF9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88601FE32D54004CDEF9 /* QuartzCore.framework */; };
-		886C88631FE32D5B004CDEF9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88621FE32D5A004CDEF9 /* Security.framework */; };
-		886C88651FE32D62004CDEF9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88641FE32D62004CDEF9 /* StoreKit.framework */; };
-		886C88671FE32D69004CDEF9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88661FE32D69004CDEF9 /* SystemConfiguration.framework */; };
-		886C88691FE32D73004CDEF9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C88681FE32D73004CDEF9 /* libz.tbd */; };
-		886C886B1FE32D79004CDEF9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 886C886A1FE32D79004CDEF9 /* libsqlite3.tbd */; };
 		88BA175120628007000DEE59 /* LocalWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA175020628007000DEE59 /* LocalWorker.swift */; };
 		88BA1754206280CD000DEE59 /* UserWorkerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1753206280CD000DEE59 /* UserWorkerProtocol.swift */; };
 		88C2EB502024CAFA00DEAC47 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C2EB342024CAFA00DEAC47 /* SearchViewController.swift */; };
@@ -142,6 +130,7 @@
 		8843519A205FD3EA0099FF01 /* TVShowDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailsModels.swift; sourceTree = "<group>"; };
 		8843519B205FD3EA0099FF01 /* TVShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailsViewController.swift; sourceTree = "<group>"; };
 		8843519C205FD3EA0099FF01 /* TVShowDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailsInteractor.swift; sourceTree = "<group>"; };
+		8844D01220A8D51F00858FA2 /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		88522A9F205FADD80027DAD6 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		88522AA0205FADD80027DAD6 /* EpisodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EpisodeCell.xib; sourceTree = "<group>"; };
 		88522AA4205FB2E70027DAD6 /* HideableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideableDataSource.swift; sourceTree = "<group>"; };
@@ -215,19 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				886C886B1FE32D79004CDEF9 /* libsqlite3.tbd in Frameworks */,
-				886C88691FE32D73004CDEF9 /* libz.tbd in Frameworks */,
-				886C88671FE32D69004CDEF9 /* SystemConfiguration.framework in Frameworks */,
-				886C88651FE32D62004CDEF9 /* StoreKit.framework in Frameworks */,
-				886C88631FE32D5B004CDEF9 /* Security.framework in Frameworks */,
-				886C88611FE32D54004CDEF9 /* QuartzCore.framework in Frameworks */,
-				886C885F1FE32D4D004CDEF9 /* MobileCoreServices.framework in Frameworks */,
-				886C885D1FE32D45004CDEF9 /* CoreLocation.framework in Frameworks */,
-				886C885B1FE32D3D004CDEF9 /* CoreGraphics.framework in Frameworks */,
-				886C88591FE32D37004CDEF9 /* CFNetwork.framework in Frameworks */,
-				886C88571FE32D27004CDEF9 /* AudioToolbox.framework in Frameworks */,
-				886C88541FE32CEE004CDEF9 /* Parse.framework in Frameworks */,
-				886C88531FE32CEE004CDEF9 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,6 +576,7 @@
 				8816BCC12045609700B7CE2D /* Assets.xcassets */,
 				9ECDDD923C5C868D39DB83CC /* AppDelegate.swift */,
 				9ECDD2E3705169588B62A615 /* Main.storyboard */,
+				8844D01220A8D51F00858FA2 /* keys.plist */,
 			);
 			path = Tram;
 			sourceTree = "<group>";
@@ -638,10 +615,11 @@
 		9ECDD118C731C25C83B08919 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Tram, inc.";
 				TargetAttributes = {
 					9ECDD09FA59DAD88FEF62E04 = {
-						DevelopmentTeam = NM569ANC7R;
+						DevelopmentTeam = PGZM5CDR37;
 					};
 				};
 			};
@@ -677,6 +655,7 @@
 				88F60CCF2062CBAA000C8B0A /* BarCollectionViewCell.xib in Resources */,
 				88F60CCA2062C606000C8B0A /* AccountCollectionViewCell.xib in Resources */,
 				9ECDDDE10CB8ADDF0166F51B /* LaunchScreen.storyboard in Resources */,
+				8844D01320A8D51F00858FA2 /* keys.plist in Resources */,
 				9ECDD2EFF812F91753E7E5C3 /* Main.storyboard in Resources */,
 				88F60CF12062F3FD000C8B0A /* SegmentedCollectionViewCell.xib in Resources */,
 				8816BCD620457A3800B7CE2D /* ListHeaderCollectionReusableView.xib in Resources */,
@@ -791,7 +770,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NM569ANC7R;
+				DEVELOPMENT_TEAM = PGZM5CDR37;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -820,6 +799,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -827,6 +807,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -867,7 +848,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NM569ANC7R;
+				DEVELOPMENT_TEAM = PGZM5CDR37;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -896,6 +877,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -903,6 +885,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
