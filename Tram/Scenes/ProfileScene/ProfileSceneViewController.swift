@@ -81,7 +81,7 @@ class ProfileSceneViewController: UIViewController, ProfileSceneDisplayLogic
         
         self.collectionView?.register(UINib(nibName: "BarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "barCell")
         self.collectionView?.register(UINib(nibName: "AccountCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "accountCell")
-        self.collectionView?.register(UINib(nibName: "MovieCollectionCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
+        self.collectionView?.register(UINib(nibName: "ShortCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "shortCell")
         self.collectionView?.register(UINib(nibName: "SegmentedCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "segmentedCell")
         self.collectionView?.register(UINib(nibName: "ListHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         
@@ -227,58 +227,14 @@ extension ProfileSceneViewController : UICollectionViewDelegate, UICollectionVie
                 return UICollectionViewCell()
             }
         default:
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as? MovieCollectionViewCell{
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shortCell", for: indexPath) as? ShortCollectionViewCell{
                 switch scope{
                 case .Movie:
                     let item = movies[indexPath.section-1].dataSource[indexPath.row]
-                    cell.ratingLabel.text = item.rating
-                    cell.titleLabel.text = item.title
-                    cell.starsLabel.text = item.cast
-                        .sorted {$0.order<$1.order}
-                        .prefix(2)
-                        .filter { $0.name != nil }
-                        .map {$0.name!}
-                        .joined(separator: ", ")
-                    
-                    cell.yearLabel.text = item.year
-                    
-                    cell.id = item.id
-                    cell.imageView.alpha = 1
-                    cell.resetImage()
-                    ImageCacheManager.getImageInBackground(url: URL(string: item.imageUrl)) { (image) in
-                        if cell.id ?? -1 == item.id{
-                            UIView.animate(withDuration: 0.2) {
-                                cell.imageView.alpha = 1
-                            }
-                            cell.imageView.image = image
-                            cell.imageView.layer.borderWidth = 0
-                            UIView.animate(withDuration: 0.2) {
-                                cell.imageView.alpha = 1
-                            }
-                        }
-                    }
+                    cell.fill(filler: item)
                 case .TVShow:
                     let item = shows[indexPath.section-1].dataSource[indexPath.row]
-                    cell.ratingLabel.text = item.rating
-                    cell.titleLabel.text = item.name
-                    cell.starsLabel.text = item.cast
-                        .sorted {$0.order<$1.order}
-                        .prefix(2)
-                        .filter { $0.name != nil }
-                        .flatMap { $0.name! }
-                        .joined(separator: ", ")
-                    
-                    cell.yearLabel.text = item.year
-                    cell.id = item.id
-                    cell.imageView.alpha = 0
-                    ImageCacheManager.getImageInBackground(url: URL(string: item.imageUrl)) { (image) in
-                        if cell.id ?? -1 == item.id{
-                            cell.imageView.image = image
-                            UIView.animate(withDuration: 0.2) {
-                                cell.imageView.alpha = 1
-                            }
-                        }
-                    }
+                    cell.fill(filler: item)
                 }
                 return cell
             }

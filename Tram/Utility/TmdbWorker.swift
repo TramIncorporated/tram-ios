@@ -7,164 +7,151 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 class TmdbWorker{
     let base = "https://api.themoviedb.org/3"
-    let api_key = "a4eedc72a9524b6f354d4ce2624b29f7"
+    let apiKey : String = PropertyList(forResource: "keys", ofType: "plist")?["TMDB", "apiKey"] as? String ?? ""
     
-    func getMovie(by id: Int, onSuccess: @escaping (Movie)->Void) {
-        let urlString = "\(base)/movie/\(id)?api_key=\(api_key)&append_to_response=credits"
-        if let url = URL(string: urlString){
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
+    func getMovie(by id: Int, completion: @escaping (Movie)->Void){
+        let urlString = "\(base)/movie/\(id)"
+        let parameters = ["api_key": apiKey,
+                          "append_to_response": "credits"]
+        
+        Alamofire
+            .request(urlString, method: .get, parameters: parameters)
+            .validate()
+            .responseJSON { response in
+                if let error = response.error{
+                    print("Error while performing request:\n\t\(urlString)")
+                    print(error.localizedDescription)
                 }
-                
-                guard let data = data else { return }
-                do{
-                    let jsonmovie = try JSONDecoder().decode(JSONMovie.self, from: data)
-                    onSuccess(Movie(with: jsonmovie))
+                    
+                else if
+                    let data = response.data,
+                    let json = try? JSON(data: data){
+                    let movie = Movie(json: json)
+                    completion(movie)
                 }
-                catch let jsonError {
-                    print(jsonError)
-                }
-                }.resume()
         }
     }
     
-    private func searchMovies(query: String, onSuccess: @escaping (MovieSearchResult)->Void){
-        let urlString = "\(base)/search/movie?api_key=\(api_key)&query=\(query.addingPercentEncoding(withAllowedCharacters: []) ?? "")"
-        if let url = URL(string: urlString){
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
+    private func searchMovies(query: String, page: Int, completion: @escaping (_ ids: [Int])->Void){
+        let urlString = "\(base)/search/movie"
+        let parameters = ["api_key": apiKey,
+                          "query": query,
+                          "page": "\(page)"]
+        
+        Alamofire
+            .request(urlString, method: .get, parameters: parameters)
+            .responseJSON { response in
+                if let error = response.error{
+                    print("Error while performing request:\n\t\(urlString)")
+                    print(error.localizedDescription)
                 }
-                
-                guard let data = data else { return }
-                do{
-                    let movieSearchResult = try JSONDecoder().decode(MovieSearchResult.self, from: data)
-                    onSuccess(movieSearchResult)
+                    
+                else if
+                    let data = response.data,
+                    let json = try? JSON(data: data){
+                    let ids = json[JSONKeys.results].arrayValue.map { $0[JSONKeys.id].intValue }
+                    completion(ids)
                 }
-                catch let jsonError {
-                    print(jsonError)
-                }
-                }.resume()
         }
     }
     
-    func searchMovies(query: String, onSuccess: @escaping ([Movie])->Void){
-        searchMovies(query: query) { (msr : MovieSearchResult) in
+    func searchMovies(query: String, page: Int, completion: @escaping ([Movie])->Void){
+        searchMovies(query: query, page: page) { (ids : [Int]) in
             var movies : [Movie] = []
-            for mse in msr.results{
-                self.getMovie(by: mse.id, onSuccess: { (movie) in
+            for id in ids{
+                self.getMovie(by: id, completion: { (movie) in
                     movies.append(movie)
-                    if movies.count == msr.results.count{
-                        onSuccess(movies)
+                    if movies.count == ids.count{
+                        completion(movies)
                     }
                 })
             }
         }
     }
     
-    private func getCredits(movieId: Int, onSuccess: @escaping (CreditsRequestResult)->Void){
-        let urlString = "\(base)/movie/\(movieId)/credits?api_key=\(api_key)"
-        if let url = URL(string: urlString){
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
+    func getTVShow(by id: Int, completion: @escaping (TVShow)->Void){
+        let urlString = "\(base)/tv/\(id)"
+        let parameters = ["api_key": apiKey,
+                          "append_to_response": "credits"]
+        
+        Alamofire
+            .request(urlString, method: .get, parameters: parameters)
+            .validate()
+            .responseJSON { response in
+                if let error = response.error{
+                    print("Error while performing request:\n\t\(urlString)")
+                    print(error.localizedDescription)
                 }
-                
-                guard let data = data else { return }
-                do{
-                    let credits = try JSONDecoder().decode(CreditsRequestResult.self, from: data)
-                    onSuccess(credits)
+                    
+                else if
+                    let data = response.data,
+                    let json = try? JSON(data: data){
+                    let tvshow = TVShow(json: json)
+                    completion(tvshow)
                 }
-                catch let jsonError {
-                    print(jsonError)
-                }
-                }.resume()
         }
     }
     
-    func getCredits(movieId: Int, onSuccess: @escaping ([Cast], [Crew])->Void){
-        getCredits(movieId: movieId) { (crr : CreditsRequestResult) in
-            onSuccess(crr.cast, crr.crew)
+    private func searchTVShows(query: String, page: Int, completion: @escaping (_ ids: [Int])->Void){
+        let urlString = "\(base)/search/tv"
+        let parameters = ["api_key": apiKey,
+                          "query": query,
+                          "page": "\(page)"]
+        Alamofire
+            .request(urlString, method: .get, parameters: parameters)
+            .responseJSON { response in
+                if let error = response.error{
+                    print("Error while performing request:\n\t\(urlString)")
+                    print(error.localizedDescription)
+                }
+                    
+                else if
+                    let data = response.data,
+                    let json = try? JSON(data: data){
+                    let ids = json[JSONKeys.results].arrayValue.map { $0[JSONKeys.id].intValue }
+                    completion(ids)
+                }
         }
     }
     
-    func getTVShow(by id: Int, onSuccess: @escaping (TVShow)->Void){
-        let urlString = "\(base)/tv/\(id)?api_key=\(api_key)&append_to_response=credits"
-        if let url = URL(string: urlString){
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
-                }
-                
-                guard let data = data else { return }
-                do{
-                    let json = try JSONDecoder().decode(JSONTVShow.self, from: data)
-                    onSuccess(TVShow(with: json))
-                }
-                catch let jsonError {
-                    print(jsonError)
-                }
-                }.resume()
-        }
-    }
-    
-    
-    
-    private func searchTVShows(query: String, onSuccess: @escaping (TVShowSearchResult)->Void){
-        let urlString = "\(base)/search/tv?api_key=\(api_key)&query=\(query.addingPercentEncoding(withAllowedCharacters: []) ?? "")"
-        if let url = URL(string: urlString){
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
-                }
-                
-                guard let data = data else { return }
-                do{
-                    let json = try JSONDecoder().decode(TVShowSearchResult.self, from: data)
-                    onSuccess(json)
-                }
-                catch let jsonError {
-                    print(jsonError)
-                }
-                }.resume()
-        }
-    }
-    
-    func searchTVShows(query: String, onSuccess: @escaping ([TVShow])->Void){
-        searchTVShows(query: query) { (json : TVShowSearchResult) in
+    func searchTVShows(query: String, page: Int, completion: @escaping ([TVShow])->Void){
+        searchTVShows(query: query, page: page) { (ids: [Int]) in
             var shows : [TVShow] = []
-            for jsonshow in json.results{
-                self.getTVShow(by: jsonshow.id, onSuccess: { (show) in
+            for id in ids{
+                self.getTVShow(by: id, completion: { (show) in
                     shows.append(show)
-                    if shows.count == json.results.count{
-                        onSuccess(shows)
+                    if shows.count == ids.count{
+                        completion(shows)
                     }
                 })
             }
         }
     }
     
-    func getSeason(tvid: Int, seasonNumber: Int, onSuccess: @escaping (Season)->Void){
-        let urlString = "\(base)/tv/\(tvid)/season/\(seasonNumber)?api_key=\(api_key)"
-        if let url = URL(string: urlString){
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
+    func getSeason(tvid: Int, seasonNumber: Int, completion: @escaping (Season)->Void){
+        
+        let urlString = "\(base)/tv/\(tvid)/season/\(seasonNumber)"
+        let parameters = ["api_key": apiKey]
+        
+        Alamofire
+            .request(urlString, method: .get, parameters: parameters)
+            .responseJSON { response in
+                if let error = response.error{
+                    print("Error while performing request:\n\t\(urlString)")
+                    print(error.localizedDescription)
                 }
-                
-                guard let data = data else { return }
-                do{
-                    let json = try JSONDecoder().decode(JSONSeason.self, from: data)
-                    onSuccess(Season(full: json))
+                    
+                else if
+                    let data = response.data,
+                    let json = try? JSON(data: data){
+                    let season = Season(json: json, tvid: tvid)
+                    completion(season)
                 }
-                catch let jsonError {
-                    print(jsonError)
-                }
-                }.resume()
         }
     }
 }

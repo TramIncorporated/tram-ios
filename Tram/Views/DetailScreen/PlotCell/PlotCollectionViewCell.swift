@@ -19,4 +19,44 @@ class PlotCollectionViewCell: UICollectionViewCell {
         let screenWidth = UIScreen.main.bounds.size.width
         containerWidthConstraint.constant = screenWidth - (8*2)
     }
+    
+    func fill(filler: PlotCellFiller){
+        self.sectionTitleLabel.text = filler.plotCellTitle
+        self.textView.text = filler.plotCellContent
+    }
+}
+
+protocol PlotCellFiller {
+    var plotCellTitle : String { get }
+    var plotCellContent : String { get }
+}
+
+extension PlotCellFiller{
+    var plotCellTitle : String{
+        get{
+            return "Plot"
+        }
+    }
+}
+
+extension Movie : PlotCellFiller {
+    var plotCellContent: String {
+        get{
+            if let overview = overview{
+                return overview
+            }
+            return ""
+        }
+    }
+}
+
+extension TVShow : PlotCellFiller {
+    var plotCellContent: String {
+        get{
+            if let overview = overview{
+                return overview
+            }
+            return ""
+        }
+    }
 }

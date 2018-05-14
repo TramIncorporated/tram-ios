@@ -7,32 +7,72 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Movie {
-    init(with json: JSONMovie){
-        adult = json.adult
-        budget = json.budget ?? 0
-        genres = json.genres?.map { Genre(from: $0) } ?? []
-        homepage = json.homepage
-        id = json.id ?? -1
-        originalTitle = json.original_title
-        overview = json.overview
-        popularity = json.popularity
-        posterPath = json.poster_path
-        companies = json.production_companies?.map { Company(from: $0) } ?? []
-        countries = json.production_countries?.map { Country(from: $0) } ?? []
-        releaseDate = json.release_date
-        revenue = json.revenue
-        runtime = json.runtime
-        spokenLanguages = json.spoken_languages?.map { Language(from: $0) } ?? []
-        status = json.status
-        tagline = json.tagline
-        title = json.title ?? ""
-        voteAverage = json.vote_average
-        voteCount = json.vote_count
+    struct MovieJSONKeys{
+        static let adult = JSONKeys.adult
+        static let backdropPath = JSONKeys.backdropPath
+        static let belongsToCollection = JSONKeys.belongsToCollection
+        static let budget = JSONKeys.budget
+        static let genres = JSONKeys.genres
+        static let homepage = JSONKeys.homepage
+        static let id = JSONKeys.id
+        static let imdbId = JSONKeys.imdbId
+        static let originalLanguage = JSONKeys.originalLanguage
+        static let originalTitle = JSONKeys.originalTitle
+        static let overview = JSONKeys.overview
+        static let popularity = JSONKeys.popularity
+        static let posterPath = JSONKeys.posterPath
+        static let productionCompanies = JSONKeys.productionCompanies
+        static let productionCountries = JSONKeys.productionCountries
+        static let releaseDate = JSONKeys.releaseDate
+        static let revenue = JSONKeys.revenue
+        static let runtime = JSONKeys.runtime
+        static let spokenLanguages = JSONKeys.spokenLanguages
+        static let status = JSONKeys.status
+        static let tagline = JSONKeys.tagline
+        static let title = JSONKeys.title
+        static let video = JSONKeys.video
+        static let voteAverage = JSONKeys.voteAverage
+        static let voteCount = JSONKeys.voteCount
         
-        crew = json.credits?.crew ?? []
-        cast = json.credits?.cast ?? []
+        static let credits = JSONKeys.credits
+        static let cast = JSONKeys.cast
+        static let crew = JSONKeys.crew
+    }
+    
+    init(json: JSON){
+        adult = json[MovieJSONKeys.adult].boolValue
+        backdropPath = json[MovieJSONKeys.backdropPath].stringNilIfEmpty
+        if json[MovieJSONKeys.belongsToCollection] != JSON.null {
+            belongsToCollection = Collection(json: json[MovieJSONKeys.belongsToCollection])
+        }
+        budget = json[MovieJSONKeys.budget].intValue
+        genres = json[MovieJSONKeys.genres].arrayValue.map { Genre(json: $0) }
+        homepage = json[MovieJSONKeys.homepage].stringNilIfEmpty
+        id = json[MovieJSONKeys.id].intValue
+        
+        imdbId = json[MovieJSONKeys.imdbId].stringNilIfEmpty
+        originalLanguage = json[MovieJSONKeys.originalLanguage].stringValue
+        originalTitle = json[MovieJSONKeys.originalTitle].stringValue
+        overview = json[MovieJSONKeys.overview].stringNilIfEmpty
+        popularity = json[MovieJSONKeys.popularity].doubleValue
+        posterPath = json[MovieJSONKeys.posterPath].stringNilIfEmpty
+        companies = json[MovieJSONKeys.productionCompanies].arrayValue.map { Company(json: $0) }
+        countries = json[MovieJSONKeys.productionCountries].arrayValue.map { Country(json: $0) }
+        releaseDate = json[MovieJSONKeys.releaseDate].stringValue
+        revenue = json[MovieJSONKeys.revenue].intValue
+        runtime = json[MovieJSONKeys.runtime].int
+        spokenLanguages = json[MovieJSONKeys.spokenLanguages].arrayValue.map { Language(json: $0) }
+        status = MovieStatus(rawValue: json[MovieJSONKeys.status].stringValue)
+        tagline = json[MovieJSONKeys.tagline].stringNilIfEmpty
+        title = json[MovieJSONKeys.title].stringValue
+        voteAverage = json[MovieJSONKeys.voteAverage].doubleValue
+        voteCount = json[MovieJSONKeys.voteCount].intValue
+        
+        crew = json[MovieJSONKeys.credits][MovieJSONKeys.crew].arrayValue.map { Crew(json: $0) }
+        cast = json[MovieJSONKeys.credits][MovieJSONKeys.cast].arrayValue.map { Cast(json: $0) }
         
         initDetails()
     }
@@ -40,33 +80,47 @@ class Movie {
     var crew: [Crew]
     var cast: [Cast]
     
-    var adult : Bool?
-    var budget : Int?
+    var adult : Bool
+    var backdropPath : String?
+    var belongsToCollection : Collection?
+    var budget : Int
     var genres : [Genre]
     var homepage : String?
     var id : Int
-    var originalTitle : String?
+    var imdbId : String?
+    var originalLanguage : String
+    var originalTitle : String
     var overview : String?
-    var popularity : Double?
+    var popularity : Double
     var posterPath : String?
     var companies : [Company]
     var countries : [Country]
-    var releaseDate : String?
-    var revenue : Int?
+    var releaseDate : String
+    var revenue : Int
     var runtime : Int?
     var spokenLanguages : [Language]
-    var status : String?
+
+    enum MovieStatus : String {
+        case rumored = "Rumored"
+        case planned = "Planned"
+        case inProduction = "In Production"
+        case postProduction = "Post Production"
+        case released = "Released"
+        case canceled = "Canceled"
+    }
+    var status : MovieStatus?
+    
     var tagline : String?
     var title : String
-    var voteAverage : Double?
-    var voteCount : Int?
+    var voteAverage : Double
+    var voteCount : Int
     
     var details : [(String, String)] = []
     
     func initDetails(){
         if let status = status{
             let key = "Status"
-            let value = "\(status)"
+            let value = "\(status.rawValue)"
             details.append((key, value))
         }
         if let date = date{
@@ -74,22 +128,22 @@ class Movie {
             df.dateFormat = "dd.mm.yyyy"
             details.append(("Release date", df.string(from: date)))
         }
-        if let budget = budget, budget != 0{
+        if budget != 0{
             let key = "Budget"
             let value = budget.toDollarString()
             details.append((key, value))
         }
-        if let revenue = revenue, revenue != 0{
+        if revenue != 0{
             let key = "Revenue"
             let value = revenue.toDollarString()
             details.append((key, value))
         }
-        if let homepage = homepage{
+        if let homepage = homepage, homepage != ""{
             let key = "Homepage"
             let value = "\(homepage)"
             details.append((key, value))
         }
-        if let originalTitle = originalTitle{
+        if originalTitle != "" && originalTitle != title{
             let key = "Original title"
             let value = "\(originalTitle)"
             details.append((key, value))
@@ -115,7 +169,7 @@ class Movie {
         get{
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-mm-dd"
-            if let releaseDate = releaseDate, let date = dateFormatter.date(from: releaseDate){
+            if let date = dateFormatter.date(from: releaseDate){
                 return date
             }
             return nil
@@ -136,10 +190,7 @@ class Movie {
     
     var rating : String{
         get{
-            if let voteAverage = voteAverage{
-                return "\(Int(voteAverage*10))%"
-            }
-            return "Rating not available"
+            return "\(Int(voteAverage*10))%"
         }
     }
     
@@ -154,12 +205,12 @@ class Movie {
         }
     }
     
-    var imageUrl : String{
+    var imageUrl : URL?{
         get{
             if let posterPath = posterPath{
-                return "http://image.tmdb.org/t/p/w185\(posterPath)"
+                return URL(string: "http://image.tmdb.org/t/p/w185\(posterPath)")
             }
-            return ""
+            return nil
         }
     }
     
@@ -168,8 +219,7 @@ class Movie {
             return cast
                 .sorted { $0.order < $1.order }
                 .prefix(2)
-                .filter { $0.name != nil }
-                .map{ $0.name! }
+                .map{ $0.name }
                 .joined(separator: ", ")
         }
     }

@@ -11,15 +11,14 @@
 //
 
 import UIKit
-import Parse
 
 class SearchWorker
 {
     func searchMovies(query: String, onSuccess: @escaping ([Movie])->Void) {
-        TmdbWorker().searchMovies(query: query, onSuccess: onSuccess)
+        TmdbWorker().searchMovies(query: query, page: 1, completion: onSuccess)
     }
     
     func searchTVShows(query: String, onSuccess: @escaping ([TVShow])->Void){
-        TmdbWorker().searchTVShows(query: query, onSuccess: onSuccess)
+        TmdbWorker().searchTVShows(query: query, page: 1, completion: onSuccess)
     }
 }

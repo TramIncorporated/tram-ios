@@ -79,7 +79,7 @@ class LocalWorker : UserWorker{
         }
         for id in list{
             if let id = Int(id){
-                tmdb.getMovie(by: id, onSuccess: { (m) in
+                tmdb.getMovie(by: id, completion: { (m) in
                     movies.append(m)
                     if movies.count == expectedCount{
                         onSuccess(movies)
@@ -105,7 +105,7 @@ class LocalWorker : UserWorker{
             }
             
             for (k, _) in dictionary{
-                tmdb.getTVShow(by: Int(k)!, onSuccess: { (show) in
+                tmdb.getTVShow(by: Int(k)!, completion: { (show) in
                     let expectedS = show.seasons.count
                     var currentS = 0
                     for season in show.seasons{
@@ -135,7 +135,7 @@ class LocalWorker : UserWorker{
             
             for (k, v) in dictionary{
                 let epCount = ((v as? [String]) ?? []).count
-                tmdb.getTVShow(by: Int(k)!, onSuccess: { (show) in
+                tmdb.getTVShow(by: Int(k)!, completion: { (show) in
                     if show.numberOfEpisodes <= epCount{
                         shows.append(show)
                     }
@@ -244,7 +244,7 @@ class LocalWorker : UserWorker{
     
     func list(do action: Action, episode: Episode, in listName: ListName, onSuccess: (ListName, Status, Action) -> Void) {
         let ud = UserDefaults.standard
-        let id = String(episode.tvid!)
+        let id = String(episode.tvid)
         let season = String(episode.seasonNumber)
         let episode = String(episode.episodeNumber)
         let value = "\(season)_\(episode)"

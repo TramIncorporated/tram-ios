@@ -99,7 +99,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.collectionView.register(UINib(nibName: "MovieCollectionCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
+        self.collectionView.register(UINib(nibName: "ShortCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "shortCell")
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
@@ -150,49 +150,16 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shortCell", for: indexPath) as! ShortCollectionViewCell
         switch scope {
         case .Movies:
             let m = movies[indexPath.row]
             
-            cell.titleLabel.text = m.title
-            cell.yearLabel.text = m.year
-            cell.ratingLabel.text = m.rating
-            
-            cell.starsLabel.text = m.stars
-            
-            cell.id = m.id
-            cell.imageView.alpha = 1
-            cell.resetImage()
-            ImageCacheManager.getImageInBackground(url: URL(string: m.imageUrl)) { (image) in
-                if cell.id ?? -1 == m.id{
-                    UIView.animate(withDuration: 0.2) {
-                        cell.imageView.alpha = 1
-                    }
-                    cell.imageView.layer.borderWidth = 0
-                    cell.imageView.image = image
-                    UIView.animate(withDuration: 0.2) {
-                        cell.imageView.alpha = 1
-                    }
-                }
-            }
+            cell.fill(filler: m)
         case .TVShows:
             let show = shows[indexPath.row]
             
-            cell.titleLabel.text = show.name
-            cell.yearLabel.text = show.year
-            cell.ratingLabel.text = show.rating
-            cell.starsLabel.text = show.stars
-            cell.id = show.id
-            cell.imageView.alpha = 0
-            ImageCacheManager.getImageInBackground(url: URL(string: show.imageUrl)) { (image) in
-                if cell.id ?? -1 == show.id{
-                    cell.imageView.image = image
-                    UIView.animate(withDuration: 0.2) {
-                        cell.imageView.alpha = 1
-                    }
-                }
-            }
+            cell.fill(filler: show)
         }
         
         return cell

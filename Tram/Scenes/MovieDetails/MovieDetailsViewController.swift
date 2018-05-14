@@ -191,48 +191,26 @@ extension MovieDetailsViewController : UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
         case 0:
-            let titleCell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath) as! TitleCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath) as! TitleCollectionViewCell
             
-            titleCell.topButton.addTarget(self, action: #selector(self.topButtonPressed(_:)), for: .touchUpInside)
-            titleCell.bottomButton.addTarget(self, action: #selector(self.bottomButtonPressed(_:)), for: .touchUpInside)
+            cell.topButton.addTarget(self, action: #selector(self.topButtonPressed(_:)), for: .touchUpInside)
+            cell.bottomButton.addTarget(self, action: #selector(self.bottomButtonPressed(_:)), for: .touchUpInside)
             
             if let movie = generalDataStore?.movie {
-                titleCell.titleLabel.text = movie.title
-                titleCell.yearLabel.text = movie.year
-                titleCell.lengthLabel.text = movie.length
-                titleCell.heartLabel.text = movie.rating
-                titleCell.starLabel.text = "Not available"
-                
-                titleCell.imageView.alpha = 1
-                titleCell.resetImage()
-                ImageCacheManager.getImageInBackground(url: URL(string: movie.imageUrl)) { (image) in
-                    UIView.animate(withDuration: 0.2) {
-                        titleCell.imageView.alpha = 0
-                    }
-                    titleCell.imageView.image = image
-                    titleCell.imageView.layer.borderWidth = 0
-                    UIView.animate(withDuration: 0.2) {
-                        titleCell.imageView.alpha = 1
-                    }
-                }
-                
-                titleCell.genresLabel.text = movie.genres.map({ (g) -> String in
-                    g.name
-                }).joined(separator: ", ")
+                cell.fill(filler: movie)
             }
-            self.titleCell = titleCell
+            self.titleCell = cell
             
             determineWatchlistStatus()
             determineWatchedStatus()
             
-            return titleCell
+            return cell
             
         case 1:
             let plotCell = collectionView.dequeueReusableCell(withReuseIdentifier: "plotCell", for: indexPath) as! PlotCollectionViewCell
             
             if let movie = generalDataStore?.movie{
-                plotCell.sectionTitleLabel.text = "Plot"
-                plotCell.textView.text = movie.overview
+                plotCell.fill(filler: movie)
             }
             
             self.plotCell = plotCell

@@ -7,13 +7,18 @@
 //
 
 import Foundation
-import Parse
+import SwiftyJSON
 
-class Genre : Codable{
-    var id = 0
-    var name = ""
-    init(from json: JSONGenre){
-        id = json.id
-        name = json.name ?? ""
+class Genre {
+    struct GenreJSONKeys {
+        static let id = JSONKeys.id
+        static let name = JSONKeys.name
+    }
+    
+    var id : Int
+    var name : String
+    init(json: JSON){
+        id = json[GenreJSONKeys.id].intValue
+        name = json[GenreJSONKeys.name].stringValue
     }
 }

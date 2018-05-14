@@ -247,38 +247,19 @@ extension TVShowDetailsViewController : UICollectionViewDelegate, UICollectionVi
                 cell.topButton.addTarget(self, action: #selector(topButtonPressed(_:)), for: .touchUpInside)
                 cell.bottomButton.addTarget(self, action: #selector(bottomButtonPressed(_:)), for: .touchUpInside)
                 
-                cell.titleLabel.text = show.name
-                cell.yearLabel.text = show.year
-                cell.genresLabel.text = show.genres.map { $0.name }.joined(separator: ", ")
-                cell.heartLabel.text = show.rating
-                cell.lengthLabel.text = show.episodeRunTime.map { "\($0)m" }.joined(separator: ", ")
-                cell.starLabel.text = "Not available"
+                cell.fill(filler: show)
                 
-                cell.imageView.alpha = 1
-                cell.resetImage()
-                ImageCacheManager.getImageInBackground(url: URL(string: show.imageUrl), onComplete: { (image) in
-                    UIView.animate(withDuration: 0.2) {
-                        cell.imageView.alpha = 1
-                    }
-                    cell.imageView.image = image
-                    cell.imageView.layer.borderWidth = 0
-                    UIView.animate(withDuration: 0.2) {
-                        cell.imageView.alpha = 1
-                    }
-                })
                 titleCell = cell
                 
                 requestShowStatus(listName: .Watchlist)
                 requestShowStatus(listName: .Watched)
-                
                 
                 return cell
             }
             
         case 1:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "plotCell", for: indexPath) as? PlotCollectionViewCell, let show = show{
-                cell.sectionTitleLabel.text = "Plot"
-                cell.textView.text = show.overview
+                cell.fill(filler: show)
                 return cell
             }
             

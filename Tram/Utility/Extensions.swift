@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 extension Int{
     func toDollarString() -> String{
@@ -105,6 +106,16 @@ extension UIColor{
             return
         }
         self.init()
+    }
+}
+
+extension JSON {
+    var stringNilIfEmpty : String? {
+        get{
+            guard let string = self.string else { return nil }
+            guard !string.isEmpty else { return nil }
+            return self.string
+        }
     }
 }
 

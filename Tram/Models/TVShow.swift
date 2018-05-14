@@ -7,53 +7,87 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class TVShow{
-    init(with json: JSONTVShow){
-        self.backdropPath = json.backdrop_path
-        self.createdBy = json.created_by?.map { Creator(with: $0) } ?? []
-        self.episodeRunTime = json.episode_run_time ?? []
+    struct TVShowJSONKeys {
+        static let backdropPath = JSONKeys.backdropPath
+        static let createdBy = JSONKeys.createdBy
+        static let episodeRunTime = JSONKeys.episodeRunTime
+        static let firstAirDate = JSONKeys.firstAirDate
+        static let genres = JSONKeys.genres
+        static let homepage = JSONKeys.homepage
+        static let id = JSONKeys.id
+        static let inProduction = JSONKeys.inProduction
+        static let languages = JSONKeys.languages
+        static let lastAirDate = JSONKeys.lastAirDate
+        static let name = JSONKeys.name
+        static let networks = JSONKeys.networks
+        static let numberOfEpisodes = JSONKeys.numberOfEpisodes
+        static let numberOfSeasons = JSONKeys.numberOfSeasons
+        static let originCountry = JSONKeys.originCountry
+        static let originalLanguage = JSONKeys.originalLanguage
+        static let originalName = JSONKeys.originalName
+        static let overview = JSONKeys.overview
+        static let popularity = JSONKeys.popularity
+        static let posterPath = JSONKeys.posterPath
+        static let productionCompanies = JSONKeys.productionCompanies
+        static let seasons = JSONKeys.seasons
+        static let status = JSONKeys.status
+        static let type = JSONKeys.type
+        static let voteAverage = JSONKeys.voteAverage
+        static let voteCount = JSONKeys.voteCount
         
-        self.firstAirDate = json.first_air_date
-        self.genres = json.genres?.map { Genre(from: $0) } ?? []
-        self.homepage = json.homepage
-        self.id = json.id ?? 0
-        self.inProduction = json.in_production ?? false
-        self.languages = json.languages ?? []
-        self.lastAirDate = json.last_air_date
-        self.name = json.name ?? ""
-        self.networks = json.networks?.map { Network(with: $0) } ?? []
-        self.numberOfEpisodes = json.number_of_episodes ?? 0
-        self.numberOfSeasons = json.number_of_seasons ?? 0
-        self.originCountry = json.origin_country ?? []
-        self.originalLanguage = json.original_language ?? ""
-        self.originalName = json.original_name ?? ""
-        self.overview = json.overview ?? ""
-        self.popularity = json.popularity ?? 0
-        self.posterPath = json.poster_path
-        self.productionCompanies = json.production_companies?.map { Company(from: $0) } ?? []
-        let id = json.id ?? 0
-        self.seasons = json.seasons?.map{ (json) -> Season in
-            let s = Season(short: json)
-            s.tvid = id
-            return s
-        } ?? []
-        self.status = json.status ?? ""
-        self.type = json.type ?? ""
-        self.voteAverage = json.vote_average ?? 0
-        self.voteCount = json.vote_count ?? 0
-        self.cast = json.credits?.cast ?? []
-        self.crew = json.credits?.crew ?? []
-        
+        static let credits = JSONKeys.credits
+        static let cast = JSONKeys.cast
+        static let crew = JSONKeys.crew
+    }
+    
+    init(json: JSON){
+        self.backdropPath = json[TVShowJSONKeys.backdropPath].stringNilIfEmpty
+        self.createdBy = json[TVShowJSONKeys.createdBy].arrayValue.map { Creator(json: $0) }
+        self.episodeRunTime = json[TVShowJSONKeys.episodeRunTime].arrayValue.map { $0.intValue }
+        self.firstAirDate = json[TVShowJSONKeys.firstAirDate].stringNilIfEmpty
+        self.genres = json[TVShowJSONKeys.genres].arrayValue.map { Genre(json: $0) }
+        self.homepage = json[TVShowJSONKeys.homepage].stringNilIfEmpty
+        self.id = json[TVShowJSONKeys.id].intValue
+        self.inProduction = json[TVShowJSONKeys.inProduction].boolValue
+        self.languages = json[TVShowJSONKeys.languages].arrayValue.map { $0.stringValue }
+        self.lastAirDate = json[TVShowJSONKeys.lastAirDate].stringNilIfEmpty
+        self.name = json[TVShowJSONKeys.name].stringValue
+        self.networks = json[TVShowJSONKeys.networks].arrayValue.map { Network(fromTVShow: $0) }
+        self.numberOfEpisodes = json[TVShowJSONKeys.numberOfEpisodes].intValue
+        self.numberOfSeasons = json[TVShowJSONKeys.numberOfSeasons].intValue
+        self.originCountry = json[TVShowJSONKeys.originCountry].arrayValue.map { $0.stringValue }
+        self.originalLanguage = json[TVShowJSONKeys.originalLanguage].stringValue
+        self.originalName = json[TVShowJSONKeys.originalName].stringValue
+        self.overview = json[TVShowJSONKeys.overview].stringNilIfEmpty
+        self.popularity = json[TVShowJSONKeys.popularity].doubleValue
+        self.posterPath = json[TVShowJSONKeys.posterPath].stringNilIfEmpty
+        self.productionCompanies = json[TVShowJSONKeys.productionCompanies].arrayValue.map { Company(json: $0) }
+        let id = json[TVShowJSONKeys.id].intValue
+        self.seasons = json[TVShowJSONKeys.seasons].arrayValue.map { Season(fromTVShow: $0, tvid: id) }
+        self.status = TVShowStatus(rawValue: json[TVShowJSONKeys.status].stringValue)
+        self.type = TVShowType(rawValue: json[TVShowJSONKeys.type].stringValue)
+        self.voteAverage = json[TVShowJSONKeys.voteAverage].doubleValue
+        self.voteCount = json[TVShowJSONKeys.voteCount].intValue
+        self.cast = json[TVShowJSONKeys.credits][TVShowJSONKeys.cast].arrayValue.map { Cast(json: $0) }
+        self.crew = json[TVShowJSONKeys.credits][TVShowJSONKeys.crew].arrayValue.map { Crew(json: $0) }
+
         initDetails()
     }
     
     var details : [(String, String)] = []
     
     func initDetails(){
-        if status != ""{
+        if let status = status{
             let key = "Status"
-            let value = "\(status)"
+            let value = "\(status.rawValue)"
+            details.append((key, value))
+        }
+        if let type = type {
+            let key = "Type"
+            let value = "\(type.rawValue)"
             details.append((key, value))
         }
         if let date = firstDate{
@@ -110,15 +144,34 @@ class TVShow{
     var originCountry : [String]
     var originalLanguage : String
     var originalName : String
-    var overview : String
+    var overview : String?
     var popularity : Double
     var posterPath : String?
     var productionCompanies : [Company]
     var seasons : [Season]
-    var status : String
-    var type : String
+    
+    enum TVShowStatus : String {
+        case returningSeries = "Returning Series"
+        case planned = "Planned"
+        case inProduction = "In Production"
+        case ended = "Ended"
+        case canceled = "Canceled"
+        case pilot = "Pilot"
+    }
+    var status : TVShowStatus?
+    
+    enum TVShowType : String {
+        case scripted = "Scripted"
+        case reality = "Reality"
+        case documentary = "Documentary"
+        case news = "News"
+        case talkShow = "Talk Show"
+        case miniseries = "Miniseries"
+    }
+    var type : TVShowType?
     var voteAverage : Double
     var voteCount : Int
+    
     var cast : [Cast]
     var crew : [Crew]
     
@@ -156,12 +209,12 @@ class TVShow{
         }
     }
     
-    var imageUrl : String{
+    var imageUrl : URL?{
         get{
             if let posterPath = posterPath{
-                return "http://image.tmdb.org/t/p/w185\(posterPath)"
+                return URL(string: "http://image.tmdb.org/t/p/w185\(posterPath)")
             }
-            return ""
+            return nil
         }
     }
     
@@ -170,8 +223,7 @@ class TVShow{
             return cast
                 .sorted { $0.order < $1.order }
                 .prefix(2)
-                .filter{ $0.name != nil }
-                .map{ $0.name! }
+                .map{ $0.name }
                 .joined(separator: ", ")
         }
     }
@@ -184,29 +236,51 @@ class TVShow{
 }
 
 class Creator{
-    init(with json: JSONCreator){
-        self.id = json.id ?? 0
-        self.name = json.name ?? ""
-        self.gender = json.gender ?? 0
-        self.profilePath = json.profile_path
+    struct CreatorJSONKeys{
+        static let id = JSONKeys.id
+        static let name = JSONKeys.name
+        static let gender = JSONKeys.gender
+        static let profilePath = JSONKeys.profilePath
+    }
+    
+    init(json: JSON){
+        self.id = json[CreatorJSONKeys.id].intValue
+        self.name = json[CreatorJSONKeys.name].stringValue
+        self.gender = Gender(json[CreatorJSONKeys.gender].int)
+        self.profilePath = json[CreatorJSONKeys.profilePath].stringNilIfEmpty
     }
     
     var id : Int
     var name : String
-    var gender : Int
+    var gender : Gender
     var profilePath : String?
 }
 
 class Network{
-    init(with json: JSONNetwork){
-        self.name = json.name ?? ""
-        self.id = json.id ?? 0
-        self.logoPath = json.logo_path
-        self.originCountry = json.origin_country
+    struct NetworkJSONKeys {
+        static let name = JSONKeys.name
+        static let id = JSONKeys.id
+        static let logoPath = JSONKeys.logoPath
+        static let originCountry = JSONKeys.originCountry
+        static let headquarters = JSONKeys.headquarters
+    }
+    
+    convenience init(json: JSON){
+        self.init(fromTVShow: json)
+        
+        self.headquarters = json[NetworkJSONKeys.headquarters].stringNilIfEmpty
+    }
+    
+    init(fromTVShow json: JSON){
+        self.name = json[NetworkJSONKeys.name].stringValue
+        self.id = json[NetworkJSONKeys.id].intValue
+        self.logoPath = json[NetworkJSONKeys.logoPath].stringNilIfEmpty
+        self.originCountry = json[NetworkJSONKeys.originCountry].stringNilIfEmpty
     }
     
     var name : String
     var id : Int
     var logoPath : String?
     var originCountry : String?
+    var headquarters : String?
 }

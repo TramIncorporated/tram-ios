@@ -7,13 +7,18 @@
 //
 
 import Foundation
-import Parse
+import SwiftyJSON
 
-class Country : Codable{
-    var code = ""
-    var name = ""
-    init(from json: JSONCountry){
-        code = json.iso_3166_1 ?? ""
-        name = json.name ?? ""
+class Country {
+    struct CountryJSONKeys {
+        static let iso_3166_1 = JSONKeys.iso_3166_1
+        static let name = JSONKeys.name
+    }
+    
+    var iso_3166_1 : String
+    var name : String
+    init(json: JSON){
+        iso_3166_1 = json[CountryJSONKeys.iso_3166_1].stringValue
+        name = json[CountryJSONKeys.name].stringValue
     }
 }

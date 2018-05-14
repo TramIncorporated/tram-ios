@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Parse
 
 enum JobType{
     case Crew

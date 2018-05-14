@@ -196,26 +196,9 @@ extension WatchlistSceneViewController : UICollectionViewDelegate, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as? ListMovieCell else {return UICollectionViewCell()}
             guard let item = user?.movieWatchlist?[indexPath.row] else {return UICollectionViewCell()}
             
-            cell.titleLabel.text = item.title
-            cell.yearLabel.text = item.year
-            cell.ratingLabel.text = item.rating
             cell.watchButton.tag = indexPath.row
             cell.watchButton.addTarget(self, action: #selector(movieWatchedPressed(_:)), for: .touchUpInside)
-            cell.lengthLabel.text = item.cast
-                .sorted {$0.order<$1.order}
-                .prefix(2)
-                .filter { $0.name != nil }
-                .map { $0.name! }
-                .joined(separator: ", ")
-            
-            cell.id = item.id
-            cell.resetImage()
-            ImageCacheManager.getImageInBackground(url: URL(string: item.imageUrl), onComplete: { (image) in
-                cell.imageView.layer.borderWidth = 0
-                if cell.id == item.id{
-                    cell.imageView.image = image
-                }
-            })
+            cell.fill(filler: item)
             return cell
         case .TVShow:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "episodeCell", for: indexPath) as? EpisodeCell else {return UICollectionViewCell()}
@@ -241,24 +224,7 @@ extension WatchlistSceneViewController : UICollectionViewDelegate, UICollectionV
         case .Movie:
             ()
         case .TVShow:
-            cell.titleLabel.text = item.name
-            cell.yearLabel.text = item.year
-            cell.ratingLabel.text = item.rating
-            cell.bottomLabel.text = item.cast
-                .sorted {$0.order<$1.order}
-                .prefix(2)
-                .filter { $0.name != nil }
-                .map { $0.name! }
-                .joined(separator: ", ")
-            
-            cell.id = item.id
-            cell.resetImage()
-            ImageCacheManager.getImageInBackground(url: URL(string: item.imageUrl), onComplete: { (image) in
-                cell.imageView.layer.borderWidth = 0
-                if cell.id == item.id{
-                    cell.imageView.image = image
-                }
-            })
+            cell.fill(filler: item)
             
             cell.hideButton.rotate(hidden: episodes[indexPath.section].hidden, animate: false)
             cell.hideButton.tag = indexPath.section

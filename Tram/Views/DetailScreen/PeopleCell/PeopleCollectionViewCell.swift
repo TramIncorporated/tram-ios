@@ -23,7 +23,7 @@ class PeopleCollectionViewCell: UICollectionViewCell {
         containterWidthConstraint.constant = screenWidth - (8 * 2)
     }
     
-    var people : [Job] = []{
+    var people : [Credit] = []{
         didSet{
             DispatchQueue.main.async {
                 self.peopleCollection.reloadData()
@@ -42,24 +42,7 @@ extension PeopleCollectionViewCell : UICollectionViewDelegate, UICollectionViewD
         
         let job = people[indexPath.row]
         
-        cell.nameLabel.text = job.name
-        cell.roleLabel.text = job.position
-        cell.job = job
-        
-        cell.resetImage()
-        ImageCacheManager.getImageInBackground(url: URL(string: job.imageUrl)) { (image) in
-            if cell.job?.id ?? -1 == job.id{
-                UIView.animate(withDuration: 0.2) {
-                    cell.imageView.alpha = 0
-                }
-                cell.imageView.layer.borderWidth = 0
-                cell.imageView.image = image
-                cell.imageView.contentMode = UIViewContentMode.scaleAspectFill
-                UIView.animate(withDuration: 0.2) {
-                    cell.imageView.alpha = 1
-                }
-            }
-        }
+        cell.fill(credit: job)
         
         return cell
     }

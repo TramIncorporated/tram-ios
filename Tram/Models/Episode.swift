@@ -7,29 +7,47 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Episode : Hashable{
+    struct EpisodeJSONKeys {
+        static let airDate = JSONKeys.airDate
+        static let crew = JSONKeys.crew
+        static let episodeNumber = JSONKeys.episodeNumber
+        static let guestStars = JSONKeys.guestStars
+        static let name = JSONKeys.name
+        static let overview = JSONKeys.overview
+        static let id = JSONKeys.id
+        static let productionCode = JSONKeys.productionCode
+        static let seasonNumber = JSONKeys.seasonNumber
+        static let stillPath = JSONKeys.stillPath
+        static let voteAverage = JSONKeys.voteAverage
+        static let voteCount = JSONKeys.voteCount
+    }
+    
     static func ==(lhs: Episode, rhs: Episode) -> Bool {
         return lhs.id == rhs.id
     }
     
     var hashValue: Int
     
-    init(with json : JSONEpisode){
-        self.airDate = json.air_date
-        self.crew = json.crew ?? []
-        self.episodeNumber = json.episode_number ?? 0
-        self.guestStars = json.guest_stars ?? []
-        self.name = json.name ?? ""
-        self.overview = json.overview ?? ""
-        self.id = json.id ?? 0
-        self.productionCode = json.production_code
-        self.seasonNumber = json.season_number ?? 0
-        self.stillPath = json.still_path
-        self.voteAverage = json.vote_average ?? 0
-        self.voteCount = json.vote_count ?? 0
+    init(json : JSON, tvid: Int){
+        self.tvid = tvid
         
-        self.hashValue = json.id ?? 0
+        self.airDate = json[EpisodeJSONKeys.airDate].stringNilIfEmpty
+        self.crew = json[EpisodeJSONKeys.crew].arrayValue.map { Crew(json: $0) }
+        self.episodeNumber = json[EpisodeJSONKeys.episodeNumber].intValue
+        self.guestStars = json[EpisodeJSONKeys.guestStars].arrayValue.map { Cast(json: $0) }
+        self.name = json[EpisodeJSONKeys.name].stringValue
+        self.overview = json[EpisodeJSONKeys.overview].stringNilIfEmpty
+        self.id = json[EpisodeJSONKeys.id].intValue
+        self.productionCode = json[EpisodeJSONKeys.productionCode].stringNilIfEmpty
+        self.seasonNumber = json[EpisodeJSONKeys.seasonNumber].intValue
+        self.stillPath = json[EpisodeJSONKeys.stillPath].stringNilIfEmpty
+        self.voteAverage = json[EpisodeJSONKeys.voteAverage].doubleValue
+        self.voteCount = json[EpisodeJSONKeys.voteCount].intValue
+        
+        self.hashValue = json[EpisodeJSONKeys.id].intValue
     }
     
     var airDate : String?
@@ -37,7 +55,7 @@ class Episode : Hashable{
     var episodeNumber : Int
     var guestStars : [Cast]
     var name : String
-    var overview : String
+    var overview : String?
     var id : Int
     var productionCode : String?
     var seasonNumber : Int
@@ -45,7 +63,7 @@ class Episode : Hashable{
     var voteAverage : Double
     var voteCount : Int
     
-    var tvid : Int?
+    var tvid : Int
     
     private var date : Date?{
         get{
