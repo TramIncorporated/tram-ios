@@ -31,7 +31,7 @@ class Season{
         self.name = json[SeasonJSONKeys.name].stringValue
         self.overview = json[SeasonJSONKeys.overview].stringNilIfEmpty
         self.posterPath = json[SeasonJSONKeys.posterPath].stringNilIfEmpty
-        self.seasonNumber = json[SeasonJSONKeys.posterPath].intValue
+        self.seasonNumber = json[SeasonJSONKeys.seasonNumber].intValue
         
         self.episodes = []
     }

@@ -45,6 +45,7 @@ class TmdbWorker{
         
         Alamofire
             .request(urlString, method: .get, parameters: parameters)
+            .validate()
             .responseJSON { response in
                 if let error = response.error{
                     print("Error while performing request:\n\t\(urlString)")
@@ -104,6 +105,7 @@ class TmdbWorker{
                           "page": "\(page)"]
         Alamofire
             .request(urlString, method: .get, parameters: parameters)
+            .validate()
             .responseJSON { response in
                 if let error = response.error{
                     print("Error while performing request:\n\t\(urlString)")
@@ -140,6 +142,7 @@ class TmdbWorker{
         
         Alamofire
             .request(urlString, method: .get, parameters: parameters)
+            .validate()
             .responseJSON { response in
                 if let error = response.error{
                     print("Error while performing request:\n\t\(urlString)")

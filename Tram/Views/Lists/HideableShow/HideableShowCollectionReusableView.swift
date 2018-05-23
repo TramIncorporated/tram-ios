@@ -9,7 +9,7 @@
 import UIKit
 
 class HideableShowCollectionReusableView: UICollectionReusableView {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -36,7 +36,7 @@ class HideableShowCollectionReusableView: UICollectionReusableView {
         imageView.layer.borderColor = UIColor(hex: "#d1d1d1").cgColor
         imageView.layer.borderWidth = 1
     }
-
+    
     func fill(filler: SearchCellFiller){
         self.titleLabel.text = filler.searchCellTitle
         self.yearLabel.text = filler.searchCellYear
@@ -44,8 +44,10 @@ class HideableShowCollectionReusableView: UICollectionReusableView {
         self.bottomLabel.text = filler.searchCellStars
         
         resetImageView()
-        imageView.kf.setImage(with: filler.searchCellImage, placeholder: #imageLiteral(resourceName: "poster-search"), options: [.transition(.fade(0.2))], completionHandler: { (_, _, _, _) in
-            self.imageView.layer.borderWidth = 0
+        imageView.kf.setImage(with: filler.searchCellImage, placeholder: #imageLiteral(resourceName: "poster-search"), options: [.transition(.fade(0.2))], completionHandler: { (image, _, _, _) in
+            if let _ = image{
+                self.imageView.layer.borderWidth = 0
+            }
         })
     }
 }

@@ -41,8 +41,10 @@ class ShortCollectionViewCell: UICollectionViewCell {
         self.id = filler.searchCellId
         
         resetImageView()
-        imageView.kf.setImage(with: filler.searchCellImage, placeholder: #imageLiteral(resourceName: "poster-search"), options: [.transition(.fade(0.2))], completionHandler: { (_, _, _, _) in
-            self.imageView.layer.borderWidth = 0
+        imageView.kf.setImage(with: filler.searchCellImage, placeholder: #imageLiteral(resourceName: "poster-search"), options: [.transition(.fade(0.2))], completionHandler: { (image, _, _, _) in
+            if let _ = image{
+                self.imageView.layer.borderWidth = 0
+            }
         })
     }
 }

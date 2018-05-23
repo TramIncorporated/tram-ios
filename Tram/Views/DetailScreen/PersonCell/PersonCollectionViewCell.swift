@@ -34,8 +34,10 @@ class PersonCollectionViewCell: UICollectionViewCell {
         resetImageView()
         imageView.kf.setImage(with: filler.personCellImage, placeholder: #imageLiteral(resourceName: "person-icon"), options: [.transition(.fade(0.2))], completionHandler: {
             (image, error, cacheType, imageUrl) in
-            self.imageView.layer.borderWidth = 0
-            self.imageView.contentMode = .scaleAspectFill
+            if let _ = image{
+                self.imageView.layer.borderWidth = 0
+                self.imageView.contentMode = .scaleAspectFill
+            }
         })
     }
     

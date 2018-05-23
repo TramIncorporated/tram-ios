@@ -46,8 +46,10 @@ class TitleCollectionViewCell: UICollectionViewCell {
         heartLabel.text = filler.titleCellHeart
         
         resetImageView()
-        imageView.kf.setImage(with: filler.titleCellImage, placeholder: #imageLiteral(resourceName: "poster-title"), options: [.transition(.fade(0.2))], completionHandler: { (_, _, _, _) in
-            self.imageView.layer.borderWidth = 0
+        imageView.kf.setImage(with: filler.titleCellImage, placeholder: #imageLiteral(resourceName: "poster-title"), options: [.transition(.fade(0.2))], completionHandler: { (image, _, _, _) in
+            if let _ = image{
+                self.imageView.layer.borderWidth = 0
+            }
         })
     }
 }
